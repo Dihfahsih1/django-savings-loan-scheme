@@ -1,7 +1,7 @@
 from django import forms
 from .models import *
 from django.forms import Textarea, TextInput, ChoiceField
-
+from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, MonthPickerInput  
 
 class MemberForm(forms.ModelForm):
     class Meta:
@@ -11,7 +11,7 @@ class MemberForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model=Attendance
-        fields=('date','name','status','social_fund')
+        fields=('date','full_name','status','social_fund')
         widgets = {
             'date': DatePickerInput(),
 

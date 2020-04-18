@@ -16,6 +16,7 @@ class CustomUser(AbstractUser):
     @property
     def full_name(self):
         return str(self.first_name) + ' ' + str(self.last_name)
+
 class Attendance(models.Model):
     atte =(('Present','Present'),('Absent','Absent'))
     full_name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)

@@ -52,13 +52,13 @@ def pay_loan(request):
 
 def make_attendence(request):
     if request.method=="POST":
-        form=MemberForm(request.POST, request.FILES,)
+        form=AttendanceForm(request.POST, request.FILES,)
         if form.is_valid():
             form.save()
             messages.success(request, f'Members Attendance For Today has been Made')
             return redirect('make-attendence')
     else:
-        form=MemberForm()
+        form=AttendanceForm()
         all_members=CustomUser.objects.all()
         context={'form':form, 'all_members':all_members}
         return render(request,'make_attendance.html',context)
@@ -69,7 +69,7 @@ def attendence_history(request):
     if request.method == 'POST':
         a_year = request.POST['attendance_year']
         a_month = request.POST['attendance_month']
-        all_attendance = CustomUser.objects.filter( date__month=a_month, date__year=a_year)
+        all_attendance = Attendance.objects.filter( date__month=a_month, date__year=a_year)
         mth=int(a_month)
         month=calendar.month_name[mth]
         context = {'all_attendance': all_attendance,'years': years,'today': today,
