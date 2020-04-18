@@ -15,7 +15,8 @@
             <p><a href="index.html">Home</a> / Add Member</p>
             <h2> Add New Member</h2>
             <div class="col-lg-6 align-items-center">
-                <form action="#" method="POST">
+                <form enctype="multipart/form-data" >
+								{% csrf_token %}
                   <div class="form-group">
                     <label for="first_name">First Name:</label>
                     <input type="text" name="first_name"  class="form-control" id="first_name">

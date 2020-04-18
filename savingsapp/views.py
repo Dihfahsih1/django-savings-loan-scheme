@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from .forms import *
 
 def index(request):
     return render(request,'index.html')
