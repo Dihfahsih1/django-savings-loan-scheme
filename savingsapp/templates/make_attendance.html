@@ -29,8 +29,7 @@
                     <tbody>
                       {% for member in all_members %}
                         <tr>
-
-                            <td>{{member.full_name}}</td>
+                            <td><input type="text" id="full_name" name="full_name" value="{{member.full_name}}"></td>
                             <td>{{form.status}}</td>
                             <td>{{form.social_fund}}</td>
 
