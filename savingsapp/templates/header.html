@@ -1,0 +1,88 @@
+<!-- Top Header Area -->
+{% load static %}
+<div class="top-header">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-12 h-100">
+                <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                    <!-- Top Headline -->
+                    <div class="top-headline">
+                        <p style="font-size: 200%">Welcome to <span>Kisajja Kikulu</span></p>
+                    </div>
+                    <!-- Top Login & Faq & Earn Monery btn -->
+                    <div class="login-faq-earn-money">
+                        <p><a href="#">Login </a>| <a href="#"> Register</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navbar Area -->
+<div class="cryptos-main-menu" style=" background-color: #ced4da">
+    <div class="classy-nav-container breakpoint-off">
+        <div class="container">
+            <!-- Menu -->
+            <nav class="classy-navbar justify-content-between" id="cryptosNav">
+
+                <!-- Logo -->
+                <a class="nav-brand" href="{% url 'index' %}"  style="margin-left:-8%">
+                  <img src="{% static 'img/bg-img/ucc.jpg' %}" alt="" width="85%"></a>
+
+                <!-- Navbar Toggler -->
+                <div class="classy-navbar-toggler">
+                    <span class="navbarToggler"><span></span><span></span><span></span></span>
+                </div>
+
+                <!-- Menu -->
+                <div class="classy-menu">
+
+                    <!-- close btn -->
+                    <div class="classycloseIcon">
+                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                    </div>
+
+                    <!-- Nav Start -->
+                    <div class="classynav">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#">Members</a>
+                                <ul class="dropdown">
+                                    <li><a href="add_member.html">Add</a></li>
+                                    <li><a href="members_list.html">View List</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="#">Attendance</a>
+                                <ul class="dropdown">
+                                    <li><a href="make_attendancy.html">Record</a></li>
+                                    <li><a href="view_attendancy.html">History</a></li>
+
+                                </ul>
+                            </li>
+
+                             <li><a href="#" class="active">Savings</a>
+                                 <ul class="dropdown">
+                                    <li><a href="make_saving.html">Make Saving</a></li>
+                                    <li><a href="savings_list.html">List Of Savings</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="social_fund.html">Social Fund</a></li>
+                            <li><a href="#">Loan</a>
+                                <ul class="dropdown">
+                                    <li><a href="loan_application.html">Give Loan</a></li>
+                                    <li><a href="pay_loan.html">Pay Loan</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- Nav End -->
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

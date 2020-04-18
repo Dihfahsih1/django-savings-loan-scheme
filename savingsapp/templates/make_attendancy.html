@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} Savings-Home {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+      <div class="container">
+
+            <form action="#" method="POST">
+                <p><a href="index.html">Home</a> / Attendance</p>
+                <h3>Record Members' Attendance</h3>
+                <div class="col-lg-4 form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" class="form-control" id="date" required="*" >
+                </div>
+                <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                      <tr style="font-weight: bolder;">
+                        <td>Name</td>
+                        <td>Present?</td>
+                        <td>Social fund</td>
+                        <td>Total Social fund</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td></td>
+                          <td><input type="radio" class="form-control" id="check" value="#"></td>
+                          <td> <input type="number" placeholder="Shs. 0.0" class="form-control" id="amount" value="amount"></td>
+                          <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-primary" >Submit</button>
+            </form>
+        </div>
+
+        {% endblock content %}
+
+        {% block javascripts %}
+            {{ block.super }}
+        {% endblock javascripts %}

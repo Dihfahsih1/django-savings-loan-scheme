@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %} Savings-Home {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <section class="hero-area">
+        <!--form area-->
+        <form action="#" method="POST">
+            <div class="container" style="margin-left: 15%">
+                <p><a href="index.html">Home</a> / Loan Application</p>
+                <h2> Loan Application Form</h2>
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" class="form-control" id="date" >
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Applicant Name</label>
+                            <input type="name" class="form-control" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" class="form-control" id="amount">
+                        </div>
+                        <div class="form-group">
+                            <label for="Rate">Interest Rate:</label>
+                            <input type="number" class="form-control" id="Rate">
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label for="cycle">Cycle:</label>
+                            <input type="text" class="form-control" id="cycle">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Collected">Recorded by:</label>
+                            <input type="text" class="form-control" id="Collected">
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Loan Period(Number of Days):</label>
+                            <input type="number" class="form-control" id="period">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" >Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    {% endblock content %}
+
+    {% block javascripts %}
+        {{ block.super }}
+    {% endblock javascripts %}
