@@ -12,10 +12,10 @@ class CustomUser(AbstractUser):
         return self.first_name + ' ' + self.last_name
 
 class Attendance(models.Model):
-    atte =(('P','Present'),('A','Absent'))
+    atte =(('Present','Present'),('Absent','Absent'))
     date = models. DateField(blank=False)
     name = models.ForeignKey(CustomUser,blank=True, on_delete=models.CASCADE)
-    status = models.CharField(max_length=123, blank=False, null=False, choices=atte)
-    social_fund = models.IntegerField(default=0, blank=True, null=True)
+    status = models.CharField(max_length=123, blank=False, null=False, choices=atte, default='Present')
+    social_fund = models.IntegerField(default=1000, blank=True, null=True)
     def __str__(self):
         return self.Name

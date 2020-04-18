@@ -34,7 +34,7 @@ def delete_member(request, pk):
     if request.method == "GET":
         item.delete()
         messages.success(request, "Member successfully deleted!")
-        return redirect("members-list") 
+        return redirect("members-list")
 
 def members_list(request):
     all_members=CustomUser.objects.all()
@@ -49,9 +49,18 @@ def pay_loan(request):
     return render(request,'pay_loan.html')
 
 def make_attendence(request):
-    return render(request,'make_attendancy.html')
+    if request.method=="POST":
+        form=AttendanceForm(request.POST, request.FILES,)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Members Attendance For Today has been Made')
+            return redirect('make-attendence')
+    else:
+        form=AttendanceForm()
+        return render(request,'make_attendance.html',{'form':form})
+
 def attendence_history(request):
-    return render(request,'view_attendancy.html')
+    return render(request,'view_attendance.html')
 
 def make_saving(request):
     return render(request,'make_saving.html')
