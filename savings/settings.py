@@ -17,7 +17,17 @@ INSTALLED_APPS = [
     'bootstrap4',
     'widget_tweaks',
     'crispy_forms',
+    'bootstrap_datepicker_plus',
 ]
+DATE_INPUT_FORMATS = ['%Y-%-m-%d', ]
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
+}
 AUTH_USER_MODEL = "savingsapp.CustomUser"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,3 +89,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 BOOTSTRAP4 = {
     'include_jquery': True,
 }
+TIME_INPUT_FORMATS = ('%I:%M %p', '%I:%M%p', '%H:%M:%S', '%H:%M')
+TIME_FORMAT = 'h:i A'
+DATE_INPUT_FORMATS = ('%m/%d/%Y', '%Y-%m-%d', '%m/%d/%y', '%b %d %Y',
+                      '%b %d, %Y', '%d %b %Y', '%d %b, %Y', '%B %d %Y',
+                      '%B %d, %Y', '%d %B %Y', '%d %B, %Y', '%b. %d, %Y')
+DATE_FORMAT = 'M j, Y'
