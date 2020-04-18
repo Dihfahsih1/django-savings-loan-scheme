@@ -4,7 +4,15 @@ def index(request):
     return render(request,'index.html')
 
 def add_member(request):
-    return render(request,'add_member.html')
+    if request.method=="POST":
+        form=addmemberForm(request.POST, request.FILES,)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Member has been successfully added to the system')
+            return redirect('members-list')
+    else:
+        form=addmemberForm()
+        return render(request,'add_member.html',{'form':form})
 
 def members_list(request):
     return render(request,'members_list.html')
