@@ -27,7 +27,7 @@
                   <td>{{member.telephone}}</td>
                   <td>{{member.email}}</td>
                   <td> <div class="mb-4">
-                        <a href="#"class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit">Edit</span></a>
+                        <a href="{% url 'edit-member' pk=member.id %}"class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit">Edit</span></a>
                   </div>
                  </td>
                 </tr>

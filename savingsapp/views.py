@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .forms import *
 from django.contrib import messages
 
@@ -16,6 +16,18 @@ def add_member(request):
     else:
         form=addmemberForm()
         return render(request,'add_member.html',{'form':form})
+
+def edit_member(request, pk):
+    item = get_object_or_404(CustomUser, pk=pk)
+    if request.method == "POST":
+        form = addmemberForm(request.POST,request.FILES, instance=item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Member Information has been updated')
+            return redirect('members-list')
+    else:
+        form = addmemberForm(instance=item)
+    return render(request, 'edit_members.html', {'form': form})
 
 def members_list(request):
     all_members=CustomUser.objects.all()

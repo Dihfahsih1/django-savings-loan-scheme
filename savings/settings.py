@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'bootstrap4',
     'widget_tweaks',
+    'crispy_forms',
 ]
 AUTH_USER_MODEL = "savingsapp.CustomUser"
 MIDDLEWARE = [
