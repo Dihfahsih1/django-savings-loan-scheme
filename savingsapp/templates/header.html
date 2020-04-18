@@ -46,34 +46,34 @@
                     <!-- Nav Start -->
                     <div class="classynav">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{% url 'index' %}">Home</a></li>
                             <li><a href="#">Members</a>
                                 <ul class="dropdown">
-                                    <li><a href="add_member.html">Add</a></li>
-                                    <li><a href="members_list.html">View List</a></li>
+                                    <li><a href="{% url 'add-member' %}">Add</a></li>
+                                    <li><a href="{% url 'members-list' %}">View List</a></li>
 
                                 </ul>
                             </li>
                             <li><a href="#">Attendance</a>
                                 <ul class="dropdown">
-                                    <li><a href="make_attendancy.html">Record</a></li>
-                                    <li><a href="view_attendancy.html">History</a></li>
+                                    <li><a href="{% url 'make-attendence' %}">Record</a></li>
+                                    <li><a href="{% url 'attendence-history' %}">History</a></li>
 
                                 </ul>
                             </li>
 
                              <li><a href="#" class="active">Savings</a>
                                  <ul class="dropdown">
-                                    <li><a href="make_saving.html">Make Saving</a></li>
-                                    <li><a href="savings_list.html">List Of Savings</a></li>
+                                    <li><a href="{% url 'make-saving' %}">Make Saving</a></li>
+                                    <li><a href="{% url 'savings-list' %}">List Of Savings</a></li>
 
                                 </ul>
                             </li>
-                            <li><a href="social_fund.html">Social Fund</a></li>
+                            <li><a href="{% url 'social-fund' %}">Social Fund</a></li>
                             <li><a href="#">Loan</a>
                                 <ul class="dropdown">
-                                    <li><a href="loan_application.html">Give Loan</a></li>
-                                    <li><a href="pay_loan.html">Pay Loan</a></li>
+                                    <li><a href="{% url 'give-loan' %}">Give Loan</a></li>
+                                    <li><a href="{% url 'pay-loan' %}">Pay Loan</a></li>
 
                                 </ul>
                             </li>
