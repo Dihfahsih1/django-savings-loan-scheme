@@ -29,6 +29,13 @@ def edit_member(request, pk):
         form = addmemberForm(instance=item)
     return render(request, 'edit_members.html', {'form': form})
 
+def delete_member(request, pk):
+    item= get_object_or_404(CustomUser, id=pk)
+    if request.method == "GET":
+        item.delete()
+        messages.success(request, "Member successfully deleted!")
+        return redirect("members-list") 
+
 def members_list(request):
     all_members=CustomUser.objects.all()
     context = {
