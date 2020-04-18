@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'savingsapp',
     'rest_framework',
     'bootstrap4',
+    'widget_tweaks',
 ]
 AUTH_USER_MODEL = "savingsapp.CustomUser"
 MIDDLEWARE = [
