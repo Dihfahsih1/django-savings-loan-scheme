@@ -62,8 +62,19 @@ def make_attendence(request):
         return render(request,'make_attendance.html',context)
 
 def attendence_history(request):
-    
-    return render(request,'view_attendance.html')
+    today = datetime.now()
+    years=today.year
+    if request.method == 'POST':
+        a_year = request.POST['attendance_year']
+        a_month = request.POST['attendance_month']
+        all_attendance = CustomUser.objects.filter( date__month=a_month, date__year=a_year)
+        mth=int(a_month)
+        month=calendar.month_name[mth]
+        context = {'all_attendance': all_attendance,'years': years,'today': today,
+                  'a_year':a_year,'a_month': a_month}
+        return render(request, "view_attendance.html", context)
+    context = {'years': years}
+    return render(request, "view_attendance.html", context)
 
 def make_saving(request):
     return render(request,'make_saving.html')

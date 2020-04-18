@@ -12,6 +12,8 @@ class CustomUser(AbstractUser):
     date = models.DateField(blank=False, null=True)
     status = models.CharField(max_length=123, blank=True, null=True, choices=atte, default='Present')
     social_fund = models.IntegerField(default=1000, blank=True, null=True)
+    attendance_year = models.CharField(max_length=255, blank=True, null=True)
+    attendance_month = models.CharField(max_length=255, blank=True, null=True)
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
