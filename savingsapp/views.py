@@ -15,7 +15,7 @@ def pay_loan(request):
     return render(request,'pay_loan.html')
 
 def make_attendence(request):
-    return render(request,'attendancy.html')
+    return render(request,'make_attendancy.html')
 def attendence_history(request):
     return render(request,'view_attendancy.html')
 
