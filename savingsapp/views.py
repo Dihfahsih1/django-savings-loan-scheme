@@ -20,13 +20,13 @@ def add_member(request):
 def edit_member(request, pk):
     item = get_object_or_404(CustomUser, pk=pk)
     if request.method == "POST":
-        form = addmemberForm(request.POST,request.FILES, instance=item)
+        form = MemberForm(request.POST,request.FILES, instance=item)
         if form.is_valid():
             form.save()
             messages.success(request, f'Member Information has been updated')
             return redirect('members-list')
     else:
-        form = addmemberForm(instance=item)
+        form = MemberForm(instance=item)
     return render(request, 'edit_members.html', {'form': form})
 
 def delete_member(request, pk):
@@ -50,16 +50,19 @@ def pay_loan(request):
 
 def make_attendence(request):
     if request.method=="POST":
-        form=AttendanceForm(request.POST, request.FILES,)
+        form=MemberForm(request.POST, request.FILES,)
         if form.is_valid():
             form.save()
             messages.success(request, f'Members Attendance For Today has been Made')
             return redirect('make-attendence')
     else:
-        form=AttendanceForm()
-        return render(request,'make_attendance.html',{'form':form})
+        form=MemberForm()
+        all_members=CustomUser.objects.all()
+        context={'form':form, 'all_members':all_members}
+        return render(request,'make_attendance.html',context)
 
 def attendence_history(request):
+    
     return render(request,'view_attendance.html')
 
 def make_saving(request):
