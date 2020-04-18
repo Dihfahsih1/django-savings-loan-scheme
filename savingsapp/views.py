@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .forms import *
+from django.contrib import messages
 
 def index(request):
     return render(request,'index.html')
@@ -7,6 +8,7 @@ def index(request):
 def add_member(request):
     if request.method=="POST":
         form=addmemberForm(request.POST, request.FILES,)
+        print(form)
         if form.is_valid():
             form.save()
             messages.success(request, f'Member has been successfully added to the system')
@@ -16,7 +18,11 @@ def add_member(request):
         return render(request,'add_member.html',{'form':form})
 
 def members_list(request):
-    return render(request,'members_list.html')
+    all_members=CustomUser.objects.all()
+    context = {
+    'all_members':all_members
+    }
+    return render(request,'members_list.html', context)
 
 def give_loan(request):
     return render(request,'loan_application.html')

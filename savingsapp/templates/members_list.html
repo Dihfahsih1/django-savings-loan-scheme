@@ -23,14 +23,16 @@
                       </tr>
                     </thead>
                     <tbody>
+                      {% for member in all_members %}
                         <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>{{member.last_name}} {{member.first_name}} </td>
+                          <td>{{member.telephone}}</td>
+                          <td>{{member.email}}</td>
                           <td> <div class="mb-4">
                                 <a href="#"class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit">Edit</span></a>
                           </div></td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
                 <button type="submit" class="btn btn-primary" >Submit</button>
