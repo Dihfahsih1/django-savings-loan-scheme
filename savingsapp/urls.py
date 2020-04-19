@@ -18,4 +18,6 @@ urlpatterns = [
     url(r'^Savings-lookups-list', views.lookups_list, name='lookups-list'),
     url(r'^details', views.add_lookups_details, name='details'),
     url(r'^lookups-list-details', views.lookups_list_details, name='lookups-details-list'),
+    url(r'^Savings-delete-lookup/(?P<pk>\d+)', views.delete_lookup, name='delete-lookup'),
+    url(r'^Savings-edit-lookup/(?P<pk>\d+)', views.edit_lookup, name='edit-lookup'),
     ]

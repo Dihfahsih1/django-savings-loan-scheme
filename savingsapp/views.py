@@ -56,13 +56,32 @@ def add_lookups(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'lookup has been successfully added to the system')
-            return redirect('lookups-list')
+            return redirect('add-lookups')
     else:
         form=LookUpsForm()
         all_lookups=LookUps.objects.all()
         context = {'all_lookups':all_lookups, 'form': form}
         return render(request,'add_lookups.html',context)
 
+def delete_lookup(request, pk):
+    item= get_object_or_404(LookUps, id=pk)
+    if request.method == "GET":
+        item.delete()
+        messages.success(request, "Lookup successfully deleted!")
+        return redirect("add-lookups")
+
+def edit_lookup(request, pk):
+    item = get_object_or_404(LookUps, pk=pk)
+    if request.method == "POST":
+        form = LookUpsForm(request.POST,request.FILES, instance=item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Lookup Information has been updated')
+            return redirect('members-list')
+    else:
+        form = LookUpsForm(instance=item)
+    return render(request, 'edit_lookup.html', {'form': form})
+    
 def lookups_list(request):
     all_lookups=LookUps.objects.all()
     context = {
