@@ -14,4 +14,6 @@ urlpatterns = [
     url(r'^Savings-pay-loan', views.pay_loan, name='pay-loan'),
     url(r'^Savings-give-loan', views.give_loan, name='give-loan'),
     url(r'^Savings-social-fund', views.social_fund, name='social-fund'),
+    url(r'^Savings-add-lookups', views.add_lookups, name='add-lookups'),
+    url(r'^Savings-lookups-list', views.lookups_list, name='lookups-list'),
     ]

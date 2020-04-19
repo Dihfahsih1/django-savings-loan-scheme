@@ -25,3 +25,8 @@ class Attendance(models.Model):
     social_fund = models.IntegerField(default=1000, blank=True, null=True)
     attendance_year = models.CharField(max_length=255, blank=True, null=True)
     attendance_month = models.CharField(max_length=255, blank=True, null=True)
+class LookUps(models.Model):
+    lookup_id = models.IntegerField( blank=False, null=False)
+    name = models.CharField(max_length=255, blank=False, null=False)
+    def __str__(self):
+        return self.name

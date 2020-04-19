@@ -9,14 +9,14 @@ def index(request):
 
 def add_member(request):
     if request.method=="POST":
-        form=addmemberForm(request.POST, request.FILES,)
+        form=MemberForm(request.POST, request.FILES,)
         print(form)
         if form.is_valid():
             form.save()
             messages.success(request, f'Member has been successfully added to the system')
             return redirect('members-list')
     else:
-        form=addmemberForm()
+        form=MemberForm()
         return render(request,'add_member.html',{'form':form})
 
 def edit_member(request, pk):
@@ -49,6 +49,24 @@ def give_loan(request):
     return render(request,'loan_application.html')
 def pay_loan(request):
     return render(request,'pay_loan.html')
+
+def add_lookups(request):
+    if request.method=="POST":
+        form=LookUpsForm(request.POST, request.FILES,)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'lookup has been successfully added to the system')
+            return redirect('lookups-list')
+    else:
+        form=LookUpsForm()
+        return render(request,'add_lookups.html',{'form':form})
+
+def lookups_list(request):
+    all_members=LookUps.objects.all()
+    context = {
+    'all_lookups':all_lookups
+    }
+    return render(request,'all_lookups.html', context)
 
 def make_attendence(request):
     if request.method=="POST":

@@ -9,3 +9,4 @@ class CustomUser(admin.ModelAdmin):
     list_display = ('full_name')
 
 admin.site.register(Attendance)
+admin.site.register(LookUps)

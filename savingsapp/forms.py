@@ -1,12 +1,16 @@
 from django import forms
 from .models import *
 from django.forms import Textarea, TextInput, ChoiceField
-from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, MonthPickerInput  
+from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, MonthPickerInput
 
 class MemberForm(forms.ModelForm):
     class Meta:
         model=CustomUser
         fields=('email','telephone','first_name','last_name','application_fee')
+class LookUpsForm(forms.ModelForm):
+    class Meta:
+        model=LookUps
+        fields=('lookup_id','name')
 
 class AttendanceForm(forms.ModelForm):
     class Meta:
