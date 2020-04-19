@@ -42,7 +42,7 @@
                         <td>{{list.details}}</td>
                         <td> <div class="mb-4">
                               <a href="{% url 'lookup-details-edit' pk=list.id %}"class="btn btn-info btn-sm"><span class="fa fa-edit"> Edit</span></a>
-                              <a href="{% url 'lookup-details-edit' pk=list.id %}"class="btn btn-danger btn-sm"><span class="fa fa-trash"> Delete</span></a>
+                              <a href="{% url 'lookup-details-delete' pk=list.id %}"class="btn btn-danger btn-sm"><span class="fa fa-trash"> Delete</span></a>
                         </div>
                        </td>
                       </tr>
