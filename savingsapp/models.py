@@ -31,6 +31,7 @@ class LookUps(models.Model):
         return self.name
 
 class LookupsDetails(models.Model):
+    lookup_name =  models.ForeignKey(LookUps, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
     details = models.CharField(max_length=255, blank=False, null=False)
     def __str__(self):
         return self.details

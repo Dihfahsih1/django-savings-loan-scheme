@@ -16,4 +16,6 @@ urlpatterns = [
     url(r'^Savings-social-fund', views.social_fund, name='social-fund'),
     url(r'^Savings-add-lookups', views.add_lookups, name='add-lookups'),
     url(r'^Savings-lookups-list', views.lookups_list, name='lookups-list'),
+    url(r'^details', views.add_lookups_details, name='details'),
+    url(r'^lookups-list-details', views.lookups_list_details, name='lookups-details-list'),
     ]

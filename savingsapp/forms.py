@@ -15,7 +15,7 @@ class LookUpsForm(forms.ModelForm):
 class LookUpsDetailsForm(forms.ModelForm):
     class Meta:
         model=LookupsDetails
-        fields=('details',)
+        fields=('details','lookup_name',)
 
 class AttendanceForm(forms.ModelForm):
     class Meta:

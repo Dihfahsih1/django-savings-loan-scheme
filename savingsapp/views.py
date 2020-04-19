@@ -59,14 +59,38 @@ def add_lookups(request):
             return redirect('lookups-list')
     else:
         form=LookUpsForm()
-        return render(request,'add_lookups.html',{'form':form})
+        all_lookups=LookUps.objects.all()
+        context = {'all_lookups':all_lookups, 'form': form}
+        return render(request,'add_lookups.html',context)
 
 def lookups_list(request):
-    all_lookups=LookUps.objects.filter(lookup_id=1)
+    all_lookups=LookUps.objects.all()
     context = {
     'all_lookups':all_lookups
     }
     return render(request,'lookups_list.html', context)
+
+def add_lookups_details(request):
+    if request.method=="POST":
+        form=LookUpsDetailsForm(request.POST, request.FILES,)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'lookup detail has been successfully added to the system')
+            return redirect('details')
+    else:
+        all_lookups=LookupsDetails.objects.all()
+        form=LookUpsDetailsForm()
+        context = {
+        'all_lookups':all_lookups, 'form': form
+        }
+        return render(request,'add_lookups_details.html',context)
+
+def lookups_list_details(request):
+    all_lookups=LookupsDetails.objects.all()
+    context = {
+    'all_lookups':all_lookups
+    }
+    return render(request,'lookups_list_details.html', context)
 
 def make_attendence(request):
     if request.method=="POST":
