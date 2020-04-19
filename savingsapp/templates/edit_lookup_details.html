@@ -12,14 +12,14 @@
         <!--form area-->
 
         <div class="container">
-            <p><a href="{% url 'index' %}">Home</a> / Edit lookup</p>
-            <h2> Edit lookup</h2>
+            <p><a href="{% url 'index' %}">Home</a> / Edit lookup Details</p>
+            <h2> Edit lookup Details</h2>
             <div class="col-lg-3 align-items-center">
               {% load crispy_forms_tags %}
                 <form method="POST" enctype="multipart/form-data" >
-                              {% csrf_token %}
-                  {{ form.name|as_crispy_field}}
-
+                    {% csrf_token %}
+                    {{ form.lookup_name|as_crispy_field}}
+                    {{ form.details|as_crispy_field}}
                   <button type="submit" class="btn btn-primary" >Update</button>
                 </form>
 

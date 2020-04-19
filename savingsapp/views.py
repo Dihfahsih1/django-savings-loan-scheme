@@ -77,11 +77,11 @@ def edit_lookup(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, f'Lookup Information has been updated')
-            return redirect('members-list')
+            return redirect('add-lookups')
     else:
         form = LookUpsForm(instance=item)
     return render(request, 'edit_lookup.html', {'form': form})
-    
+
 def lookups_list(request):
     all_lookups=LookUps.objects.all()
     context = {
@@ -95,7 +95,7 @@ def add_lookups_details(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'lookup detail has been successfully added to the system')
-            return redirect('details')
+            return redirect('lookups-details-list')
     else:
         all_lookups=LookupsDetails.objects.all()
         form=LookUpsDetailsForm()
@@ -110,6 +110,25 @@ def lookups_list_details(request):
     'all_lookups':all_lookups
     }
     return render(request,'lookups_list_details.html', context)
+
+def delete_lookup_details(request, pk):
+    item= get_object_or_404(LookUpsDetails, id=pk)
+    if request.method == "GET":
+        item.delete()
+        messages.success(request, "Lookup Details successfully deleted!")
+        return redirect("lookups-details-list")
+
+def edit_lookup_details(request, pk):
+    item = get_object_or_404(LookUpsDetails, pk=pk)
+    if request.method == "POST":
+        form = LookUpsDetailsForm(request.POST,request.FILES, instance=item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Lookup Details Information has been updated')
+            return redirect('lookups-details-list')
+    else:
+        form = LookUpsDetailsForm(instance=item)
+    return render(request, 'edit_lookup.html', {'form': form})
 
 def make_attendence(request):
     if request.method=="POST":
