@@ -26,12 +26,12 @@ class Attendance(models.Model):
     attendance_year = models.CharField(max_length=255, blank=True, null=True)
     attendance_month = models.CharField(max_length=255, blank=True, null=True)
 class LookUps(models.Model):
-    name = models.CharField(max_length=255, blank=False, null=False)
+    name = models.CharField(max_length=255, blank=False, null=False, unique=True)
     def __str__(self):
         return self.name
 
 class LookupsDetails(models.Model):
     lookup_name =  models.ForeignKey(LookUps, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
-    details = models.CharField(max_length=255, blank=False, null=False)
+    details = models.CharField(max_length=255, blank=False, null=False, unique=True)
     def __str__(self):
         return self.details
