@@ -19,7 +19,7 @@ class CustomUser(AbstractUser):
 
 class Attendance(models.Model):
     atte =(('Present','Present'),('Absent','Absent'))
-    full_name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
+    full_name = models.CharField(max_length=100, null=True, blank=True)
     date = models.DateField(blank=False, null=True)
     status = models.CharField(max_length=123, blank=True, null=True, choices=atte, default='Present')
     social_fund = models.IntegerField(default=1000, blank=True, null=True)

@@ -56,7 +56,7 @@ def make_attendence(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'Members Attendance For Today has been Made')
-            return redirect('make-attendence')
+            return redirect('attendence-history')
     else:
         form=AttendanceForm()
         all_members=CustomUser.objects.all()

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser
+from .models import *
 class CustomUserAdmin(admin.ModelAdmin):
     model = CustomUser
 
@@ -7,3 +7,5 @@ class CustomUserAdmin(admin.ModelAdmin):
 admin.site.register(CustomUser, CustomUserAdmin)
 class CustomUser(admin.ModelAdmin):
     list_display = ('full_name')
+
+admin.site.register(Attendance)
