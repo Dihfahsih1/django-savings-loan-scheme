@@ -10,7 +10,12 @@ class MemberForm(forms.ModelForm):
 class LookUpsForm(forms.ModelForm):
     class Meta:
         model=LookUps
-        fields=('lookup_id','name')
+        fields=('name',)
+
+class LookUpsDetailsForm(forms.ModelForm):
+    class Meta:
+        model=LookupsDetails
+        fields=('details',)
 
 class AttendanceForm(forms.ModelForm):
     class Meta:

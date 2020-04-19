@@ -10,3 +10,4 @@ class CustomUser(admin.ModelAdmin):
 
 admin.site.register(Attendance)
 admin.site.register(LookUps)
+admin.site.register(LookupsDetails)

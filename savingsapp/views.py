@@ -62,11 +62,11 @@ def add_lookups(request):
         return render(request,'add_lookups.html',{'form':form})
 
 def lookups_list(request):
-    all_members=LookUps.objects.all()
+    all_lookups=LookUps.objects.filter(lookup_id=1)
     context = {
     'all_lookups':all_lookups
     }
-    return render(request,'all_lookups.html', context)
+    return render(request,'lookups_list.html', context)
 
 def make_attendence(request):
     if request.method=="POST":

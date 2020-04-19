@@ -18,11 +18,8 @@
               {% load crispy_forms_tags %}
                 <form method="POST" enctype="multipart/form-data" >
                   {% csrf_token %}
-                  {{ form.first_name|as_crispy_field}}
-                  {{ form.last_name|as_crispy_field}}
-                  {{ form.email|as_crispy_field}}
-                  {{ form.telephone|as_crispy_field}}
-                  {{ form.application_fee|as_crispy_field}}
+                  {{ form.lookup_id|as_crispy_field}}
+                  {{ form.name|as_crispy_field}}
                   <button type="submit" class="btn btn-primary" >Submit</button>
                 </form>
 
