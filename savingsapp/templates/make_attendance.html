@@ -10,7 +10,7 @@
       <div class="container">
           <p><a href="{% url 'index'%}">Home</a> / Attendance</p>
            <h3>Record Members' Attendance</h3>
-
+{% for member in all_members %}
           <form  method="POST" enctype="multipart/form-data" >
     								{% csrf_token %}
                     {% load crispy_forms_tags %}
@@ -28,7 +28,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for member in all_members %}
+
 
                         <tr>
                             <td>{{member.full_name}}<input type="hidden" id="full_name" name="full_name" value="{{member.full_name}}"></td>
@@ -36,11 +36,12 @@
                             <td>{{form.social_fund}}</td>
                         </tr>
 
-                        {% endfor %}
                     </tbody>
                 </table>
                 <button type="submit" class="btn btn-primary" >Submit</button>
             </form>
+            {% endfor %}
+            
         </div>
 
         {% endblock content %}
