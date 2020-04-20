@@ -10,7 +10,6 @@ def index(request):
 def add_member(request):
     if request.method=="POST":
         form=MemberForm(request.POST, request.FILES,)
-        print(form)
         if form.is_valid():
             form.save()
             messages.success(request, f'Member has been successfully added to the system')
@@ -153,16 +152,19 @@ def make_attendence(request):
 def attendence_history(request):
     today = datetime.now()
     years=today.year
+    a_month=today.month
     if request.method == 'POST':
-        a_year = request.POST['attendance_year']
+        years = request.POST['attendance_year']
         a_month = request.POST['attendance_month']
-        all_attendance = Attendance.objects.filter( date__month=a_month, date__year=a_year)
+        all_attendance = Attendance.objects.filter( date__month=a_month, date__year=years)
         mth=int(a_month)
         month=calendar.month_name[mth]
         context = {'all_attendance': all_attendance,'years': years,'today': today,
-                  'a_year':a_year,'month': month}
+                  'month': month}
         return render(request, "view_attendance.html", context)
-    context = {'years': years}
+    mth=int(a_month)
+    month=calendar.month_name[mth]
+    context = {'years': years, "month":month}
     return render(request, "view_attendance.html", context)
 
 def make_saving(request):
