@@ -27,6 +27,7 @@
                   <td>{{member.telephone}}</td>
                   <td>{{member.email}}</td>
                   <td> <div class="mb-4">
+                       <a href="{% url 'view-member' pk=member.id %}"class="btn btn-success btn-sm"><span class="fa fa-eye"> View</span></a>
                         <a href="{% url 'edit-member' pk=member.id %}"class="btn btn-info btn-sm"><span class="fa fa-edit"> Edit</span></a>
                         <a href="{% url 'delete-member' pk=member.id %}"class="btn btn-danger btn-sm"><span class="fa fa-trash"> Delete</span></a>
                   </div>
@@ -35,6 +36,46 @@
             {% endfor %}
             </tbody>
         </table>
+        <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+<!-- Modal -->
+<!-- <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <!-- <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Member Information</h4>
+      </div>
+      <div class="modal-body">
+        <table id="tablePreview" class="table table-bordered table-striped">
+                              <!--Table head-->
+                              <!-- <thead>
+                              <tr>
+                                  <th>School Code</th>
+                                  <td>{{ form.instance.school_code }}</td>
+                                  <th>School Name</th>
+                                  <td>{{ form.instance.school_name }}</td>
+                              </tr>
+                              </thead>
+                              <!--Table head-->
+                              <!--Table body-->
+                              <!-- <tbody>
+                              <tr>
+                                  <th>Address</th>
+                                  <td>{{ form.instance.address }}</td>
+                                  <th>Phone</th>
+                                  <td>{{ form.instance.phone }}</td>
+                              </tr>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div> --> --> --> -->
+
+  </div>
+</div>
      </div>
 
         {% endblock content %}

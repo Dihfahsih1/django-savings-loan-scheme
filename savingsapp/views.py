@@ -45,6 +45,13 @@ def members_list(request):
     }
     return render(request,'members_list.html', context)
 
+def view_member(request, pk):
+    all_members=CustomUser.objects.filter(id=pk)
+    context = {
+    'member_details':member_details
+    }
+    return render(request,'view_member.html' context)
+
 def give_loan(request):
     return render(request,'loan_application.html')
 def pay_loan(request):
