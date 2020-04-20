@@ -29,11 +29,15 @@
                     </thead>
                     <tbody>
                       {% for member in all_members %}
+
                         <tr>
-                            <td><input type="text" id="full_name" name="full_name" value="{{member.full_name}}"></td>
+                            <td>{{member.full_name}}<input type="hidden" id="full_name" name="full_name" value="{{member.full_name}}"></td>
+                            {% for lo in form.lo_set.all %}
                             <td>{{form.status}}</td>
                             <td>{{form.social_fund}}</td>
+                            {% endfor %}
                         </tr>
+
                         {% endfor %}
                     </tbody>
                 </table>
