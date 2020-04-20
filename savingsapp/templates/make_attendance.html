@@ -22,6 +22,7 @@
                   </div>
                     <thead>
                       <tr style="font-weight: bolder;">
+                        <td>id</td>
                         <td>Name</td>
                         <td>Attendance</td>
                         <td>Social fund</td>
@@ -31,6 +32,7 @@
                       {% for member in all_members %}
 
                         <tr>
+                            <td>{{member.id}}</td>
                             <td>{{member.full_name}}<input type="hidden" id="full_name" name="full_name" value="{{member.full_name}}"></td>
                             <td id="Status">{{form.status}}</td>
                             <td id="Social">{{form.social_fund}}</td>

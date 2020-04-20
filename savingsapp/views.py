@@ -160,7 +160,7 @@ def attendence_history(request):
         mth=int(a_month)
         month=calendar.month_name[mth]
         context = {'all_attendance': all_attendance,'years': years,'today': today,
-                  'a_year':a_year,'a_month': a_month}
+                  'a_year':a_year,'month': month}
         return render(request, "view_attendance.html", context)
     context = {'years': years}
     return render(request, "view_attendance.html", context)
