@@ -3,6 +3,7 @@ from .forms import *
 from django.contrib import messages
 from datetime import datetime, timedelta
 import calendar
+from django.forms import modelformset_factory
 
 
 def index(request):
@@ -139,21 +140,28 @@ def edit_lookup_details(request, pk):
 
 def make_attendence(request):
     objs=CustomUser.objects.count()
+    AttendanceFormset=modelformset_factory(Attendance, fields=('full_name','date','status','social_fund',), extra=2)
     if request.method=="POST":
         form=AttendanceForm(request.POST)
-        print(form)
-        for f in form:
-            print(f.as_table())
-        print(form)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Members Attendance For Today has been Made')
-            return redirect('make-attendence')
+        formset=AttendanceFormset(request.POST or None, request.FILES or None)
+        if form.is_valid() and formset.is_valid():
+            post=form.save(commit=False)
+            post.save()
+            for f in formset:
+                try:
+                    atte = Attendance(post=post,status=f.cleaned_data['status'],full_name=f.cleaned_data['full_name'],social_fund=f.cleaned_data['social_fund'])
+                    atte.save()
+                    messages.success(request, f'Members Attendance For Today has been Made')
+                    return redirect('make-attendence')
+                except Exception as e:
+                    break
+
     else:
         form=AttendanceForm()
+        formset=AttendanceFormset(queryset=Attendance.objects.none())
         all_members=CustomUser.objects.all()
-        context={'form':form, 'all_members':all_members}
-        return render(request,'make_attendance.html',context)
+    context={'form':form,'formset':formset,'all_members':all_members}
+    return render(request,'make_attendance.html',context)
 
 def attendence_history(request):
     today = datetime.now()

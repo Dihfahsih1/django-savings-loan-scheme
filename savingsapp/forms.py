@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 from django.forms import Textarea, TextInput, ChoiceField
 from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, MonthPickerInput
-from django.forms import formset_factory
+
 class MemberForm(forms.ModelForm):
     class Meta:
         model=CustomUser
@@ -20,9 +20,8 @@ class LookUpsDetailsForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model=Attendance
-        fields='__all__'
+        fields=('full_name','date','status','social_fund')
         widgets = {
             'date': DatePickerInput(),
 
         }
-AttendanceFormset=formset_factory(AttendanceForm),
