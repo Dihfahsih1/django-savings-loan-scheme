@@ -138,9 +138,10 @@ def edit_lookup_details(request, pk):
 
 def make_attendence(request):
     if request.method=="POST":
-        form=AttendanceForm(request.POST, request.FILES,)
+        form=AttendanceForm(request.POST.getlist('instance'))
         if form.is_valid():
-            form.save()
+            for i in form:
+                i.save()
             messages.success(request, f'Members Attendance For Today has been Made')
             return redirect('attendence-history')
     else:
