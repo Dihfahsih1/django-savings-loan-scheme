@@ -140,7 +140,10 @@ def edit_lookup_details(request, pk):
 def make_attendence(request):
     objs=CustomUser.objects.count()
     if request.method=="POST":
-        form=AttendanceFormset(request.POST, request.FILES, objs)
+        form=AttendanceForm(request.POST)
+        print(form)
+        for f in form:
+            print(f.as_table())
         print(form)
         if form.is_valid():
             form.save()
