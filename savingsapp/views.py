@@ -3,7 +3,7 @@ from .forms import *
 from django.contrib import messages
 from datetime import datetime, timedelta
 import calendar
-from itertools import islice
+
 
 def index(request):
     return render(request,'index.html')
@@ -138,8 +138,10 @@ def edit_lookup_details(request, pk):
     return render(request, 'edit_lookup_details.html', {'form': form})
 
 def make_attendence(request):
+    objs=CustomUser.objects.count()
     if request.method=="POST":
-        form=AttendanceForm(request.POST, request.FILES,)
+        form=AttendanceFormset(request.POST, request.FILES, objs)
+        print(form)
         if form.is_valid():
             form.save()
             messages.success(request, f'Members Attendance For Today has been Made')
