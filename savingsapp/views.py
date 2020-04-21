@@ -3,6 +3,7 @@ from .forms import *
 from django.contrib import messages
 from datetime import datetime, timedelta
 import calendar
+from itertools import islice
 
 def index(request):
     return render(request,'index.html')
@@ -138,12 +139,11 @@ def edit_lookup_details(request, pk):
 
 def make_attendence(request):
     if request.method=="POST":
-        form=AttendanceForm(request.POST.getlist('instance'))
+        form=AttendanceForm(request.POST, request.FILES,)
         if form.is_valid():
-            for i in form:
-                i.save()
+            form.save()
             messages.success(request, f'Members Attendance For Today has been Made')
-            return redirect('attendence-history')
+            return redirect('make-attendence')
     else:
         form=AttendanceForm()
         all_members=CustomUser.objects.all()
@@ -165,7 +165,7 @@ def attendence_history(request):
         return render(request, "view_attendance.html", context)
     mth=int(a_month)
     month=calendar.month_name[mth]
-    context = {'years': years, "month":month}
+    context = {'years': years, 'month':month}
     return render(request, "view_attendance.html", context)
 
 def make_saving(request):

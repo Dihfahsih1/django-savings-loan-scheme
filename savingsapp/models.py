@@ -22,7 +22,7 @@ class Attendance(models.Model):
     today = datetime.now()
     years=today.year
     atte =(('Present','Present'),('Absent','Absent'))
-    full_name = models.CharField(max_length=100, null=True, blank=True)
+    full_name = models.CharField(max_length=230, null=True, blank=True)
     date = models.DateField(blank=False, null=True)
     status = models.CharField(max_length=123, blank=True, null=True, choices=atte, default='Present')
     social_fund = models.IntegerField(default=1000, blank=True, null=True)
