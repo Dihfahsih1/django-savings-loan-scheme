@@ -25,8 +25,8 @@ class Attendance(models.Model):
     atte =(('Present','Present'),('Absent','Absent'))
     full_name = models.CharField(max_length=123, null=True, blank=True)
     date = models.DateField(blank=False, null=True)
-    status = models.CharField(max_length=123, blank=True, null=True, choices=atte, default='Present')
-    social_fund = models.IntegerField(default=1000, blank=True, null=True)
+    status = models.BooleanField(blank=True, default=False)
+    social_fund = models.IntegerField(default=0, blank=True, null=True)
     attendance_year = models.CharField(max_length=255, blank=True, null=True, default=years)
     attendance_month = models.CharField(max_length=255, blank=True, null=True)
 class LookUps(models.Model):

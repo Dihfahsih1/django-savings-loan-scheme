@@ -162,11 +162,11 @@ def attendence_history(request):
         all_attendance = Attendance.objects.filter( date__month=a_month, date__year=years)
         mth=int(a_month)
         month=calendar.month_name[mth]
-        context = {'all_attendance': all_attendance,'years': years,'today': today,'month': month}
+        context = {'all_attendance': all_attendance,'a_month':a_month, 'years': years,'today': today,'month': month}
         return render(request, "view_attendance.html", context)
     mth=int(a_month)
     month=calendar.month_name[mth]
-    context = {'years': years, 'month':month, 'a_month':a_month}
+    context = {'years': years, 'month':month,'a_month':a_month}
     return render(request, "view_attendance.html", context)
 
 def make_saving(request):
