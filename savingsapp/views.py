@@ -144,9 +144,8 @@ def make_attendence(request):
         formset=AttendanceForm(request.POST)
         if formset.is_valid():
             instances = formset.save(commit=False)
-            for instance in instances:
-                instance.save()
-                return redirect('make-attendence')
+            instances.save()
+            return redirect('make-attendence')
     else:
         formset=AttendanceForm()
         all_members=CustomUser.objects.all()
