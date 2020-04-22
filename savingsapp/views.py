@@ -148,7 +148,7 @@ def make_attendence(request):
                 instance.save()
                 return redirect('make-attendence')
     else:
-        formset=AttendanceFormset()
+        formset=AttendanceForm()
         context={'formset':formset}
         return render(request,'make_attendance.html',context)
 
