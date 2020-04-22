@@ -139,19 +139,18 @@ def edit_lookup_details(request, pk):
     return render(request, 'edit_lookup_details.html', {'form': form})
 
 def make_attendence(request):
-    objs=CustomUser.objects.count()
     AttendanceFormset=formset_factory(AttendanceForm)
     if request.method=="POST":
-        formset=AttendanceFormset(request.POST, request.FILES)
+        formset=AttendanceFormset(request.POST)
         if formset.is_valid():
-            form.save()
-            messages.success(request, f'Members Attendance For Today has been Made')
-            return redirect('make-attendence')
+            instances = formset.save(commit=False)
+            for instance in instances:
+                instance.save()
+                return redirect('make-attendence')
     else:
         formset=AttendanceFormset()
-    all_members=CustomUser.objects.all()
-    context={'formset':formset, 'all_members':all_members}
-    return render(request,'make_attendance.html',context)
+        context={'formset':formset}
+        return render(request,'make_attendance.html',context)
 
 def attendence_history(request):
     today = datetime.now()

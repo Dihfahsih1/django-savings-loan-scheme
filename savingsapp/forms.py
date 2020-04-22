@@ -20,7 +20,7 @@ class LookUpsDetailsForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model=Attendance
-        fields=('full_name','date','status','social_fund')
+        fields=('date','status','social_fund')
         widgets = {
             'date': DatePickerInput(),
 
