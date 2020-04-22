@@ -19,14 +19,14 @@
                <p style="float:right"> Search Attendance History</p>
               </div>
               <div class="col-lg-4 form-group">
-                  <label for="year">Year:</label>
+                  <label for="year"> Enter Year:</label>
                   <input type="number" class="form-control" id="year" name="attendance_year" value="{{years}}" required="*" >
               </div>
 
               <div class="col-lg-4 form-group">
                  <label for="date">Select Month:</label>
                  <select  name="attendance_month" class="form-control"required="required" style="cursor: pointer">
-                   <<option>{{month}}</option>
+                   <option name="{{a_month}}" value="{{a_month}}">{{month}}</option>
                     <option class="btn-success" name="1" value="1">January</option>
                     <option class="btn-success" name="2" value="2">February</option>
                     <option class="btn-success" name="3" value="3">March</option>
