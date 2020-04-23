@@ -3,7 +3,8 @@ from .forms import *
 from django.contrib import messages
 from datetime import datetime, timedelta
 import calendar
-from django.forms import formset_factory
+from django.forms import modelformset_factory
+
 
 
 def index(request):
@@ -139,18 +140,32 @@ def edit_lookup_details(request, pk):
     return render(request, 'edit_lookup_details.html', {'form': form})
 
 def make_attendence(request):
-    #AttendanceFormset=formset_factory(AttendanceForm)
-    if request.method=="POST":
-        formset=AttendanceForm(request.POST)
+    objs = CustomUser.objects.count()
+    AttendanceFormset=modelformset_factory(Attendance, form=AttendanceForm, extra=0)
+    if request.method == 'POST':
+        formset = AttendanceFormset(request.POST, request.FILES)
         if formset.is_valid():
-            instances = formset.save(commit=False)
-            instances.save()
+            formset.save()
             return redirect('make-attendence')
+
     else:
-        formset=AttendanceForm()
-        all_members=CustomUser.objects.all()
-        context={'formset':formset,'all_members':all_members}
-        return render(request,'make_attendance.html',context)
+        formset =  AttendanceFormset()
+    all_members = CustomUser.objects.all()
+    context={'formset':formset, 'all_members':all_members}
+    return render(request,'make_attendance.html',context)
+
+
+    # if request.method=="POST":
+    #     formset=AttendanceForm(request.POST)
+    #     if formset.is_valid():
+    #         instances = formset.save(commit=False)
+    #         instances.save()
+    #         return redirect('make-attendence')
+    # else:
+    #     formset=AttendanceForm()
+    #     all_members=CustomUser.objects.all()
+    #     context={'formset':formset,'all_members':all_members}
+    #     return render(request,'make_attendance.html',context)
 
 def attendence_history(request):
     today = datetime.now()

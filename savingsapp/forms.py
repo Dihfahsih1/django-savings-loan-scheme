@@ -3,6 +3,7 @@ from .models import *
 from django.forms import Textarea, TextInput, ChoiceField
 from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, MonthPickerInput
 
+
 class MemberForm(forms.ModelForm):
     class Meta:
         model=CustomUser
