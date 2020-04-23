@@ -141,10 +141,11 @@ def edit_lookup_details(request, pk):
 
 def make_attendence(request):
     objs = CustomUser.objects.count()
-    AttendanceFormset=modelformset_factory(Attendance, form=AttendanceForm, extra=objs)
+    AttendanceFormset=modelformset_factory(Attendance, form=AttendanceForm, extra=0)
     if request.method == 'POST':
         formset = AttendanceFormset(request.POST, request.FILES)
         if formset.is_valid():
+            print(formset)
             formset.save()
             return redirect('attendence-history')
         else:
