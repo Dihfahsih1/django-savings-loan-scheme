@@ -13,7 +13,7 @@
 
           <form  method="POST" enctype="multipart/form-data" >
             {% csrf_token %}
-            <!-- {{ formset.management_form }} -->
+            {{ formset.management_form }}
               <!-- <table>
                 {% for form in formset %}
                   {{ form.full_name }}<br>
@@ -29,6 +29,7 @@
                    <tr style="font-weight: bolder;">
 
                      <td>Name</td>
+                     <td>Id</td>
                      <td>Present?</td>
                      <td>Social fund</td>
                    </tr>
@@ -37,8 +38,10 @@
                    {% for member in all_members %}
                      <tr>
                          <td>{{member.full_name}}<input type="hidden" id="full_name" name="full_name" value="{{member.full_name}}"></td>
-                           <td>{{formset.status}}</td>
-                           <td>{{formset.social_fund}}</td>
+                           <td>{{form.id}}</td>
+                           <td>{{form.status}}</td>
+                           <td>{{form.social_fund}}</td>
+                         {% endfor %}
                      </tr>
                      {% endfor %}
                  </tbody>
