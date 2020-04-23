@@ -4,7 +4,7 @@ from django.contrib import messages
 from datetime import datetime, timedelta
 import calendar
 from django.forms import modelformset_factory
-
+from itertools import islice
 
 
 def index(request):
@@ -141,17 +141,16 @@ def edit_lookup_details(request, pk):
 
 def make_attendence(request):
     objs = CustomUser.objects.count()
-    AttendanceFormset=modelformset_factory(Attendance, form=AttendanceForm, extra=0)
+    #AttendanceFormset=modelformset_factory(Attendance, form=AttendanceForm, extra=0)
     if request.method == 'POST':
-        formset = AttendanceFormset(request.POST, request.FILES)
+        formset = AttendanceForm(request.POST, request.FILES)
         if formset.is_valid():
-            print(formset)
             formset.save()
             return redirect('attendence-history')
         else:
             print (formset.errors)
     else:
-        formset =  AttendanceFormset()
+        formset =  AttendanceForm()
     all_members = CustomUser.objects.all()
     context={'formset':formset, 'all_members':all_members}
     return render(request,'make_attendance.html',context)
