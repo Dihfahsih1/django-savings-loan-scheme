@@ -24,7 +24,7 @@ class Attendance(models.Model):
     years=today.year
     atte =(('Present','Present'),('Absent','Absent'))
     full_name = models.CharField(max_length=123, null=True, blank=True)
-    date = models.DateField(blank=False, null=True)
+    date = models.DateField(blank=True, null=True)
     status = models.BooleanField(blank=True, default=False)
     social_fund = models.IntegerField(default=0, blank=True, null=True)
     attendance_year = models.CharField(max_length=255, blank=True, null=True, default=years)

@@ -146,8 +146,9 @@ def make_attendence(request):
         formset = AttendanceFormset(request.POST, request.FILES)
         if formset.is_valid():
             formset.save()
-            return redirect('make-attendence')
-
+            return redirect('attendence-history')
+        else:
+            print (formset.errors)
     else:
         formset =  AttendanceFormset()
     all_members = CustomUser.objects.all()
