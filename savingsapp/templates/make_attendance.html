@@ -38,6 +38,7 @@
                    {% for member in all_members %}
                      <tr>
                          <td>{{member.full_name}}<input type="hidden" id="full_name" name="full_name" value="{{member.full_name}}"></td>
+                         {% for form in formset %}
                            <td>{{form.id}}</td>
                            <td>{{form.status}}</td>
                            <td>{{form.social_fund}}</td>
