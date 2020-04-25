@@ -16,6 +16,8 @@
           <title>Savings | scheme {% block title %}{% endblock %}</title>
           {% block stylesheets %}
               <!-- custom_css -->
+              <!-- added the first dataTables css -->
+              <link href="{% static 'datatables/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
               <link href="{% static 'css/animate.css' %}" rel="stylesheet">
               <link href="{% static 'css/routine.css' %}" rel="stylesheet">
               <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -93,12 +95,12 @@
 
    {{ block.super }}
    <!-- Datatables -->
-   <script src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+   <script src="{% static 'datatables/js/jquery.dataTables.min.js' %}"></script>
    <script src="{% static 'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
    <script src="{% static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
    <script src="{% static 'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
    <!-- added the first dataTables css -->
-   <link href="{% static 'datatables/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
+   <link href="{% static 'datatables/css/dataTables.bootstrap.min.js' %}" rel="stylesheet">
    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
