@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  {% load static  %}
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      {% block head %}
-          {% block meta %}
-              <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-              <link rel="shortcut icon"/>
-              <meta charset="utf-8">
-              <meta charset="ISO-8859-15">
-              <meta http-equiv="X-UA-Compatible" content="IE=edge">
-              <meta name="viewport" content="width=device-width, initial-scale=1">
-          {% endblock meta %}
-          <title>Savings | scheme {% block title %}{% endblock %}</title>
-          {% block stylesheets %}
-              <!-- custom_css -->
-              <!-- added the first dataTables css -->
+
+
+          <!-- added the first dataTables css -->
               <link href="{% static 'datatables/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
               <link href="{% static 'css/animate.css' %}" rel="stylesheet">
               <link href="{% static 'css/routine.css' %}" rel="stylesheet">
@@ -27,48 +12,19 @@
               <link href="{% static 'css/magnific-popups.css' %}" rel="stylesheet">
               <link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet">
               <link href="{% static 'css/style.css' %}" rel="stylesheet">
-              <!-- bootstrap-date picker -->
+            
               <link href="{% static 'vendors/datepicker/datepicker.css' %}" rel="stylesheet">
-              <link href="{% static 'vendors/iCheck/skins/flat/green.css' %}" rel="stylesheet">
-              <link href="{% static 'vendors/bootstrap/dist/css/less/dropdowns.less' %}" rel="stylesheet">
-          {% endblock stylesheets %}
-          <link href="/static/build/css/custom.min.css" rel="stylesheet">
+             <link href="/static/build/css/custom.min.css" rel="stylesheet">
 
-      {% endblock head %}
-   </head>
 
-<body class="{% block body_class %}nav-md {% endblock body_class %}" >
-    {% block body %}
 
-      <div class="container-fluid body" >
 
-        <!--menubar--->
-        {% block header %}
-          <header class="header-area">
-             {% include "header.html" %}
-         </header>
-        {% endblock header %}
 
-         <!--Main Content--->
-        {% block content %}
 
-           <h3 style="color: red">
-             {{ message }}
-           </h3>
-        {% endblock content %}
 
-        <!--- Footer-->
-        {% block footer %}
-            <footer>
-                 {% include "footer.html" %}
-            </footer>
+JS Resources
 
-        {% endblock footer %}
-      </div>
-
-    {% block javascripts %}
-
-      <!-- jQuery-2.2.4 js -->
+ <!-- jQuery-2.2.4 js -->
       <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
       <!-- Popper js -->
       <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
@@ -119,63 +75,3 @@
 
    <!-- also added this build file -->
     <script src="{% static 'static/build/js/custom.min.js' %}"></script>
-   {% endblock javascripts %}
-
-   <script type="text/javascript">$(document).ready(function ()
-     {
-       $('#data-table').DataTable(
-       {
-         dom: 'Bfrtip',
-         iDisplayLength: 10,
-           buttons: [
-                   'copyHtml5',
-                   'excelHtml5',
-                   'csvHtml5',
-                   'pdfHtml5',
-                   'print',
-                   'pageLength',
-
-                   ],
-         search: true,
-         responsive: true
-         }
-         );
-       }
-       );
-       document.getElementById('Rate').readOnly = true;
-       document.getElementById('Collected').readOnly = true;
-       document.getElementById('first_name').readOnly = true;
-
-     </script>
-     
-<script type="text/javascript">
-    $('#myTable').DataTable( {
-    responsive: true
-    } );
-</script>
-     <script>
-        $("#success-alert").delay(6000).fadeOut('slow');
-     </script>
-       {% endblock body %}
-       {% block preloader %}
-       {% endblock %}
-
-       {% block extra_script %}
-       {% endblock extra_script %}
-
-       {% block javascript %}
-       {% endblock %}
-
-       {% block extra_js %}
-       {% endblock extra_js %}
-
-       {% block extra_css %}
-       {% endblock extra_css %}
-
-
-       {% block js %}
-       {% endblock js %}
-
-</body>
-
-</html>
