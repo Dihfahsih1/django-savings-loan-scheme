@@ -9,6 +9,5 @@ class CustomUser(admin.ModelAdmin):
     list_display = ('full_name')
 
 admin.site.register(Attendance)
-admin.site.register(LookUps)
-admin.site.register(LookupsDetails)
+admin.site.register(Cycles)
 admin.site.register(Saving)

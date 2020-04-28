@@ -8,15 +8,11 @@ class MemberForm(forms.ModelForm):
     class Meta:
         model=CustomUser
         fields=('email','telephone','first_name','last_name','application_fee')
-class LookUpsForm(forms.ModelForm):
-    class Meta:
-        model=LookUps
-        fields=('name',)
 
-class LookUpsDetailsForm(forms.ModelForm):
+class CyclesForm(forms.ModelForm):
     class Meta:
-        model=LookupsDetails
-        fields=('lookup_name','details',)
+        model=Cycles
+        fields=('cycle_name','cycle_period_start','cycle_period_end')
 
 class AttendanceForm(forms.ModelForm):
     class Meta:

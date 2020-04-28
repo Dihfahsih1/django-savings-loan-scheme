@@ -59,85 +59,46 @@ def give_loan(request):
 def pay_loan(request):
     return render(request,'pay_loan.html')
 
-def add_lookups(request):
+def add_cycle(request):
     if request.method=="POST":
-        form=LookUpsForm(request.POST, request.FILES,)
+        form=CyclesForm(request.POST, request.FILES,)
         if form.is_valid():
             form.save()
-            messages.success(request, f'lookup has been successfully added to the system')
-            return redirect('add-lookups')
+            messages.success(request, f'Cycle has been successfully added to the system')
+            return redirect('add-cycle')
     else:
-        form=LookUpsForm()
-        all_lookups=LookUps.objects.all()
-        context = {'all_lookups':all_lookups, 'form': form}
-        return render(request,'add_lookups.html',context)
+        form=CyclesForm()
+        all_cycle=Cycles.objects.all()
+        context = {'all_cycle':all_cycle, 'form': form}
+        return render(request,'add_cycle.html',context)
 
-def delete_lookup(request, pk):
-    item= get_object_or_404(LookUps, id=pk)
+def delete_cycle(request, pk):
+    item= get_object_or_404(Cycles, id=pk)
     if request.method == "GET":
         item.delete()
-        messages.success(request, "Lookup successfully deleted!")
-        return redirect("add-lookups")
+        messages.success(request, "Cycle successfully deleted!")
+        return redirect("add-cycle")
 
-def edit_lookup(request, pk):
-    item = get_object_or_404(LookUps, pk=pk)
+def edit_cycle(request, pk):
+    item = get_object_or_404(Cycles, pk=pk)
     if request.method == "POST":
-        form = LookUpsForm(request.POST,request.FILES, instance=item)
+        form = CyclesForm(request.POST,request.FILES, instance=item)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Lookup Information has been updated')
-            return redirect('add-lookups')
+            messages.success(request, f'Cycle Information has been updated')
+            return redirect('add-cycle')
     else:
-        form = LookUpsForm(instance=item)
-    return render(request, 'edit_lookup.html', {'form': form})
+        form = CyclesForm(instance=item)
+    return render(request, 'edit_cycle.html', {'form': form})
 
-def lookups_list(request):
-    all_lookups=LookUps.objects.all()
+def cycle_list(request):
+    all_cycle=Cycles.objects.all()
     context = {
-    'all_lookups':all_lookups
+    'all_cycle':all_cycle
     }
-    return render(request,'lookups_list.html', context)
+    return render(request,'cycle_list.html', context)
 
-def add_lookups_details(request):
-    if request.method=="POST":
-        form=LookUpsDetailsForm(request.POST, request.FILES,)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'lookup detail has been successfully added to the system')
-            return redirect('details')
-    else:
-        all_lookups=LookupsDetails.objects.all()
-        form=LookUpsDetailsForm()
-        context = {
-        'all_lookups':all_lookups, 'form': form
-        }
-        return render(request,'add_lookups_details.html',context)
 
-def lookups_list_details(request):
-    all_lookups=LookupsDetails.objects.all()
-    context = {
-    'all_lookups':all_lookups
-    }
-    return render(request,'lookups_list_details.html', context)
-
-def delete_lookup_details(request, pk):
-    item= get_object_or_404(LookupsDetails, id=pk)
-    if request.method == "GET":
-        item.delete()
-        messages.success(request, "Lookup Details successfully deleted!")
-        return redirect("details")
-
-def edit_lookup_details(request, pk):
-    item = get_object_or_404(LookupsDetails, pk=pk)
-    if request.method == "POST":
-        form = LookUpsDetailsForm(request.POST,request.FILES, instance=item)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Lookup Details Information has been updated')
-            return redirect('details')
-    else:
-        form = LookUpsDetailsForm(instance=item)
-    return render(request, 'edit_lookup_details.html', {'form': form})
 
 def make_attendence(request):
     objs = CustomUser.objects.count()
@@ -187,13 +148,15 @@ def attendence_history(request):
     return render(request, "view_attendance.html", context)
 
 def make_saving(request):
-    if method == 'POST':
+    if request.method == 'POST':
         form = SavingsForm(request.POST, request.FILES)
         if form.is_valid:
             savings = form.save(commit=False)
-            savings.save()
-        return errors    
-    return render(request,'make_saving.html')
+            savings.save() 
+    cycle=Cycles.objects.all()
+    form =SavingsForm()        
+    context={'cycle':cycle,'form':form}         
+    return render(request,'make_saving.html', context)
 def savings_list(request):
     return render(request,'savings_list.html')
 

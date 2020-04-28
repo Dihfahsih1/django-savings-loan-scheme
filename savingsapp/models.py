@@ -29,20 +29,20 @@ class Attendance(models.Model):
     social_fund = models.IntegerField(default=0, blank=True, null=True)
     attendance_year = models.CharField(max_length=255, blank=True, null=True, default=years)
     attendance_month = models.CharField(max_length=255, blank=True, null=True)
-class LookUps(models.Model):
-    name = models.CharField(max_length=255, blank=False, null=False, unique=True)
-    def __str__(self):
-        return self.name
 
-class LookupsDetails(models.Model):
-    lookup_name =  models.ForeignKey(LookUps, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
-    details = models.CharField(max_length=255, blank=False, null=False, unique=True)
+
+class Cycles(models.Model):
+    cycle_name =  models.CharField( max_length=100, null=True, blank=True)
+    cycle_period_start = models.DateField(max_length=255, blank=False, null=False, unique=True)
+    cycle_period_end = models.DateField(max_length=255, blank=False, null=False, unique=True)
     def __str__(self):
-        return self.details
+        return self.cycle_period_start + "-" + self.cycle_period_end
 class Saving(models.Model):
-    cycle =  models.ForeignKey(LookUps, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
+    cycle =  models.ForeignKey(Cycles, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
     date = models.DateField(max_length=100, blank=True, null=True)
-    name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
+    name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, max_length=100, null=True, blank=True)
     amount = models.IntegerField(default=0)
     def __str__(self):
         return self.name
+
+        

@@ -8,27 +8,37 @@
 {% endblock stylesheets %}
 
 {% block content %}
+{% load crispy_forms_tags %}
       <div class="container">
             <h3>Record Members' Saving</h3><br>
             <form action="#" method="POST">
+                {% csrf_token %}
                 <div class="row">
-                    <div class="col-lg-4 form-group">
-                        <label for="cycle">Cycle:</label>
-                        <input type="text" class="form-control" placeholder="dropdown from db" id="cycle" value="" required="*" name="cycle" >
-                    </div>
-                    <div class="col-lg-4 form-group">
-                        <label for="date">Date:</label>
-                        <input type="date" class="form-control" id="date" name="date" required="*" >
-                    </div>
+                    <div class="col-lg-6 align-items-center">
+                        {{form.date|as_crispy_field}}
+                        {{form.cycle|as_crispy_field}}
+                        {{form.name|as_crispy_field}}
+                        {{form.amount|as_crispy_field}}
 
-                     <div class="col-lg-4 form-sgroup">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" required="*" >
-                    </div>
 
-                     <div class="col-lg-4 form-group">
-                        <label for="amount">Amount:</label>
-                        <input type="number" class="form-control" id="amount" name="amount" required="*" >
+                        <!-- <div class="col-lg-4 form-group">
+                            <label for="cycle">Cycle:</label>
+                            <input type="text" class="form-control" id="cycle" value="{{cycle.cycle}}" required="*" name="cycle" >
+                        </div>
+                        <div class="col-lg-4 form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" class="form-control" id="date" name="date" required="*" >
+                        </div>
+
+                         <div class="col-lg-4 form-sgroup">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required="*" >
+                        </div>
+
+                         <div class="col-lg-4 form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount" required="*" >
+                        </div> -->
                     </div>
                 </div>
                 <hr>
