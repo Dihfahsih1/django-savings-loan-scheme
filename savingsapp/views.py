@@ -187,6 +187,12 @@ def attendence_history(request):
     return render(request, "view_attendance.html", context)
 
 def make_saving(request):
+    if method == 'POST':
+        form = SavingsForm(request.POST, request.FILES)
+        if form.is_valid:
+            savings = form.save(commit=False)
+            savings.save()
+        return errors    
     return render(request,'make_saving.html')
 def savings_list(request):
     return render(request,'savings_list.html')

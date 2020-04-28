@@ -23,3 +23,8 @@ class AttendanceForm(forms.ModelForm):
         model=Attendance
         fields=('full_name','date','status','social_fund')
         status = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
+
+class SavingsForm(forms.ModelForm):
+    class Meta:
+        model=Saving
+        fields=('name','cycle','date','amount')

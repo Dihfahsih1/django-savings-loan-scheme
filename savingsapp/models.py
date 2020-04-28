@@ -39,3 +39,10 @@ class LookupsDetails(models.Model):
     details = models.CharField(max_length=255, blank=False, null=False, unique=True)
     def __str__(self):
         return self.details
+class Saving(models.Model):
+    cycle =  models.ForeignKey(LookUps, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
+    date = models.DateField(max_length=100, blank=True, null=True)
+    name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
+    amount = models.IntegerField(default=0)
+    def __str__(self):
+        return self.name
