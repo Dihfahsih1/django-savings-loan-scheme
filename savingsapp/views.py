@@ -1,10 +1,9 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import *
 from django.contrib import messages
-from datetime import datetime, timedelta
+from datetime import date
 import calendar
 from django.forms import modelformset_factory
-from datetime import datetime, timedelta 
 
 
 
@@ -92,6 +91,18 @@ def edit_cycle(request, pk):
         form = CyclesForm(instance=item)
     return render(request, 'edit_cycle.html', {'form': form})
 
+#archive the saving at exactly the end    
+def archiving_cycle(request):
+    all_cycle=SavingCycle.objects.all()
+    today = date.today()
+    for i in all_cycle:
+        end_cycle = i.cycle_period_end
+        if(today >= end_cycle):
+            i.is_active ='False'
+            i.save()
+            return redirect('cycle-list')
+        return redirect('cycle-list')   
+          
 def cycle_list(request):
     all_cycle=SavingCycle.objects.all()
     context = {
@@ -160,16 +171,17 @@ def make_saving(request):
     return render(request,'make_saving.html', context)
 
 
-def savings_list(request):
-
-    
-    
-    try:
+def savings_list(request):    
+    try: 
         all_members=CustomUser.objects.all()
         current_cycle=SavingCycle.objects.get(is_active=True)
+        context={}
+        if current_cycle:
+            all_savings =Savings.objects.aggregate(totals=models.Sum("amount"))
+            total_amount = total["totals"]
+            context={'total_amount':total_amount}
         context={'current_cycle':current_cycle, 'all_members':all_members}
         return render(request,'savings_list.html',context)
-    
     except:
         all_members=CustomUser.objects.all()
         context={'all_members':all_members}

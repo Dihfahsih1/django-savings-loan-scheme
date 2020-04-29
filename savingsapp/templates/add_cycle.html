@@ -70,6 +70,7 @@
                             <a href="{% url 'edit-cycle' pk=list.id %}"class="btn btn-info btn-sm"><span class="fa fa-edit"> Edit</span></a>
                             <a href="#" class="btn btn-warning btn-sm">
                               <span class="glyphicon glyphicon-ok"></span> Active</a>
+                               <a href="{% url 'archive-cycle' %}"class="btn btn-danger btn-sm"><span class="fa fa-ok"> ARCHIVE CYCLE</span></a>
                             {% else %}
                             <a href="#" class="btn btn-danger btn-sm">
                               <span class="glyphicon glyphicon-ok"></span> Archived</a>

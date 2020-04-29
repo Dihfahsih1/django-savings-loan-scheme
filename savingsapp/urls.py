@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^Savings-social-fund', views.social_fund, name='social-fund'),
     url(r'^Savings-add-cycle', views.add_cycle, name='add-cycle'),
     url(r'^Savings-cycle-list', views.cycle_list, name='cycle-list'),
+    url(r'^archiving-cycles', views.archiving_cycle, name='archive-cycle'),
     url(r'^Savings-edit-cycle/(?P<pk>\d+)', views.edit_cycle, name='edit-cycle'),
     url(r'^Savings-delete-cycle/(?P<pk>\d+)', views.delete_cycle, name='delete-cycle'),
     ]
