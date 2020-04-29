@@ -19,8 +19,14 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'username'
     REQUIRED_FILEDS = []
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
-
+        return str(self.first_name)  + ' ' + str(self.last_name)
+    @property 
+    def total_saving(self):
+        results=Saving.objects.filter(name=self.id).aggregate(totals=models.Sum("amount"))
+        if (results['totals']):
+            return results["totals"]
+        else:
+            return 0 
     @property
     def full_name(self):
         return str(self.first_name) + ' ' + str(self.last_name)
@@ -41,8 +47,9 @@ class SavingCycle(models.Model):
     cycle_name =  models.CharField( max_length=200, null=True, blank=True)
     cycle_period_start = models.DateField(max_length=255, blank=False, null=False, unique=True)
     cycle_period_end = models.DateField(max_length=255, blank=False, null=False, unique=True)
+    is_active = models.BooleanField(default=True) 
     def __str__(self):
-        return self.cycle_name
+        return str(self.cycle_period_start) + "/" + str(self.cycle_period_end)
 class Saving(models.Model):
     cycle =  models.ForeignKey(SavingCycle, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
     date = models.DateField(max_length=100, blank=True, null=True)
@@ -50,5 +57,4 @@ class Saving(models.Model):
     amount = models.IntegerField(default=0)
     def __str__(self):
         return self.name
-
         

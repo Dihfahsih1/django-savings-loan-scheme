@@ -6,7 +6,7 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 admin.site.register(CustomUser, CustomUserAdmin)
 class CustomUser(admin.ModelAdmin):
-    list_display = ('full_name')
+    list_display = ('full_name','total_saving')
 
 admin.site.register(Attendance)
 admin.site.register(SavingCycle)
