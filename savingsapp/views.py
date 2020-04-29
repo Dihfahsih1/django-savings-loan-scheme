@@ -158,7 +158,15 @@ def make_saving(request):
     context={'cycle':cycle,'form':form}         
     return render(request,'make_saving.html', context)
 def savings_list(request):
-    return render(request,'savings_list.html')
+    get_member=CustomUser.objects.all()
+    context = {}
+    for i in get_member:   
+        savings_list=Saving.objects.filter(name_id=i.id).values('name','cycle','amount')\
+        .annotate(total=Sum('amount'))
+        total_amount = total["totals"]
+        print(total_amount)
+        context={'total_amount':total_amount}
+    return render(request,'savings_list.html',context)
 
 def social_fund(request):
     return render(request,'social_fund.html')

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import datetime
+from django.db.models import Sum
 
 class CustomUser(AbstractUser):
     roles =(('Admin','Admin'),('Ordinary','Ordinary'))
