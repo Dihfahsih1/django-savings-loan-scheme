@@ -174,14 +174,13 @@ def make_saving(request):
 def savings_list(request):    
     try: 
         all_members=CustomUser.objects.all()
-        current_cycle=SavingCycle.objects.get(is_active=True)
-        context={}
-        if current_cycle:
-            all_savings =Savings.objects.aggregate(totals=models.Sum("amount"))
-            total_amount = total["totals"]
-            context={'total_amount':total_amount}
-        context={'current_cycle':current_cycle, 'all_members':all_members}
+        current_cycle=SavingCycle.objects.get(is_active=True)   
+        all_savings =Saving.objects.filter(cycle=current_cycle).aggregate(totals=models.Sum("amount"))
+        total_amount = all_savings["totals"]
+
+        context={'total_amount':total_amount,'current_cycle':current_cycle, 'all_members':all_members}
         return render(request,'savings_list.html',context)
+        print(total_amount)
     except:
         all_members=CustomUser.objects.all()
         context={'all_members':all_members}

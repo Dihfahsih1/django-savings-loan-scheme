@@ -60,4 +60,13 @@ class Saving(models.Model):
     amount = models.IntegerField(default=0)
     def __str__(self):
         return self.name
-        
+
+    # @property    
+    # def total_amount(self):
+    #     current_cycle=SavingCycle.objects.get(is_active=True)   
+    #     results =Savings.objects.filter(cycle=current_cycle).aggregate(totals=models.Sum("amount"))
+    #     if (results['totals']):
+    #         return results["totals"]
+    #         print(results)
+    #     else:
+    #         return 0 
