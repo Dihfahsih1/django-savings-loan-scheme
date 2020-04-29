@@ -22,11 +22,12 @@ class CustomUser(AbstractUser):
         return str(self.first_name)  + ' ' + str(self.last_name)
     @property 
     def total_saving(self):
-        results=Saving.objects.filter(name=self.id).aggregate(totals=models.Sum("amount"))
-        if (results['totals']):
-            return results["totals"]
-        else:
-            return 0 
+        if(SavingCycle.objects.get(is_active=True)):
+            results=Saving.objects.filter(name=self.id).aggregate(totals=models.Sum("amount"))
+            if (results['totals']):
+                return results["totals"]
+            else:
+                return 0 
     @property
     def full_name(self):
         return str(self.first_name) + ' ' + str(self.last_name)
@@ -44,6 +45,8 @@ class Attendance(models.Model):
 
 
 class SavingCycle(models.Model):
+    status =(('ARCHIVED','ARCHIVED'),('UNARCHIVED','UNARCHIVED' ))
+    archive_status = models.CharField(max_length=200, choices=status,blank=True, null=True)
     cycle_name =  models.CharField( max_length=200, null=True, blank=True, unique=True)
     cycle_period_start = models.DateField(max_length=255, blank=False, null=False, unique=True)
     cycle_period_end = models.DateField(max_length=255, blank=False, null=False, unique=True)

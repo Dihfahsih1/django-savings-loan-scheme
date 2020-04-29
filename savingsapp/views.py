@@ -4,6 +4,7 @@ from django.contrib import messages
 from datetime import datetime, timedelta
 import calendar
 from django.forms import modelformset_factory
+from datetime import datetime, timedelta 
 
 
 
@@ -158,11 +159,21 @@ def make_saving(request):
     context={'cycle':cycle,'form':form}         
     return render(request,'make_saving.html', context)
 
+
 def savings_list(request):
-    all_members=CustomUser.objects.all()
-    current_cycle=SavingCycle.objects.get(is_active=True)
-    context={'current_cycle':current_cycle, 'all_members':all_members}
-    return render(request,'savings_list.html',context)
+
+    
+    
+    try:
+        all_members=CustomUser.objects.all()
+        current_cycle=SavingCycle.objects.get(is_active=True)
+        context={'current_cycle':current_cycle, 'all_members':all_members}
+        return render(request,'savings_list.html',context)
+    
+    except:
+        all_members=CustomUser.objects.all()
+        context={'all_members':all_members}
+        return render(request,'savings_list.html',context)
 
 def social_fund(request):
     return render(request,'social_fund.html')

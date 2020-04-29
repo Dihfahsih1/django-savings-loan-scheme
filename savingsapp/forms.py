@@ -12,7 +12,7 @@ class MemberForm(forms.ModelForm):
 class CyclesForm(forms.ModelForm):
     class Meta:
         model=SavingCycle
-        fields=('cycle_name','cycle_period_start','cycle_period_end','is_active')
+        fields=('cycle_name','cycle_period_start','cycle_period_end','is_active','archive_status')
         # widgets = {
         #     'cycle_period_start': DatePickerInput(),
         #     'cycle_period_end': DatePickerInput(),
