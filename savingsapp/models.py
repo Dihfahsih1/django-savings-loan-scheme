@@ -3,7 +3,7 @@ from django.db import models
 from datetime import datetime
 
 class CustomUser(AbstractUser):
-
+    roles =(('Admin','Admin'),('Ordinary','Ordinary'))
     email = models.EmailField(max_length=255, unique=True, blank=True, null=True)
     username = models.CharField(max_length=30, unique=True,blank=True, null=True)
     telephone = models.IntegerField(default=0, blank=True, null=True)
@@ -11,7 +11,12 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=255, blank=True, null=True)
     username = models.CharField(max_length=30, unique=True, blank=True, null=True)
     application_fee = models.IntegerField(default=10000, blank=True, null=True)
-
+    Role = models.CharField(max_length=250, choices=roles)
+    is_active = models.BooleanField(default=True)   # can login
+    is_staff = models.BooleanField(default=False)  # staff user non superuser
+    is_superuser = models.BooleanField(default=False)
+    USERNAME_FIELD = 'username'
+    REQUIRED_FILEDS = []
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
@@ -36,7 +41,7 @@ class SavingCycle(models.Model):
     cycle_period_start = models.DateField(max_length=255, blank=False, null=False, unique=True)
     cycle_period_end = models.DateField(max_length=255, blank=False, null=False, unique=True)
     def __str__(self):
-        return self.cycle_period_start + "-" + self.cycle_period_end
+        return self.cycle_name
 class Saving(models.Model):
     cycle =  models.ForeignKey(SavingCycle, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
     date = models.DateField(max_length=100, blank=True, null=True)
