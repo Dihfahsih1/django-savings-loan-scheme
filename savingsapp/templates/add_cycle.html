@@ -52,6 +52,7 @@
                     <td>Cycle Name</td>
                     <td>Cycle Start</td>
                     <td>Cycle End</td>
+                    <td>Is Active?</td>
                     <td>Action</td>
                   </tr>
                 </thead>
@@ -62,10 +63,19 @@
                       <td>{{list.cycle_name}}</td>
                       <td>{{list.cycle_period_start}}</td>
                       <td>{{list.cycle_period_end}}</td>
+                      <td>{{list.is_active}}</td>
 
                       <td> <div class="mb-4">
+                            {% if list.is_active == True %}
                             <a href="{% url 'edit-cycle' pk=list.id %}"class="btn btn-info btn-sm"><span class="fa fa-edit"> Edit</span></a>
-                            <a href="{% url 'delete-cycle' pk=list.id %}"class="btn btn-danger btn-sm"><span class="fa fa-trash"> Delete</span></a>
+                            <a href="#" class="btn btn-warning btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span> Active</a>
+                            {% else %}
+                            <a href="#" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span> Archived</a>
+                            {% endif %}
+                            <!-- <a href="{% url 'delete-cycle' pk=list.id %}"class="btn btn-danger btn-sm"><span class="fa fa-trash"> Delete</span></a> -->
+                            
                       </div>
                      </td>
                     </tr>
