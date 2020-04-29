@@ -31,14 +31,14 @@ class Attendance(models.Model):
     attendance_month = models.CharField(max_length=255, blank=True, null=True)
 
 
-class Cycles(models.Model):
-    cycle_name =  models.CharField( max_length=100, null=True, blank=True)
+class SavingCycle(models.Model):
+    cycle_name =  models.CharField( max_length=200, null=True, blank=True)
     cycle_period_start = models.DateField(max_length=255, blank=False, null=False, unique=True)
     cycle_period_end = models.DateField(max_length=255, blank=False, null=False, unique=True)
     def __str__(self):
         return self.cycle_period_start + "-" + self.cycle_period_end
 class Saving(models.Model):
-    cycle =  models.ForeignKey(Cycles, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
+    cycle =  models.ForeignKey(SavingCycle, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
     date = models.DateField(max_length=100, blank=True, null=True)
     name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, max_length=100, null=True, blank=True)
     amount = models.IntegerField(default=0)

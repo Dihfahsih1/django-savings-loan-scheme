@@ -68,7 +68,7 @@ def add_cycle(request):
             return redirect('add-cycle')
     else:
         form=CyclesForm()
-        all_cycle=Cycles.objects.all()
+        all_cycle=SavingCycle.objects.all()
         context = {'all_cycle':all_cycle, 'form': form}
         return render(request,'add_cycle.html',context)
 
@@ -80,7 +80,7 @@ def delete_cycle(request, pk):
         return redirect("add-cycle")
 
 def edit_cycle(request, pk):
-    item = get_object_or_404(Cycles, pk=pk)
+    item = get_object_or_404(SavingCycle, pk=pk)
     if request.method == "POST":
         form = CyclesForm(request.POST,request.FILES, instance=item)
         if form.is_valid():
@@ -92,7 +92,7 @@ def edit_cycle(request, pk):
     return render(request, 'edit_cycle.html', {'form': form})
 
 def cycle_list(request):
-    all_cycle=Cycles.objects.all()
+    all_cycle=SavingCycle.objects.all()
     context = {
     'all_cycle':all_cycle
     }
@@ -153,7 +153,7 @@ def make_saving(request):
         if form.is_valid:
             savings = form.save(commit=False)
             savings.save() 
-    cycle=Cycles.objects.all()
+    cycle=SavingCycle.objects.all()
     form =SavingsForm()        
     context={'cycle':cycle,'form':form}         
     return render(request,'make_saving.html', context)
