@@ -22,8 +22,11 @@ class CustomUser(AbstractUser):
         return str(self.first_name)  + ' ' + str(self.last_name)
     @property 
     def total_saving(self):
-        if(SavingCycle.objects.get(is_active=True)):
-            results=Saving.objects.filter(name=self.id).aggregate(totals=models.Sum("amount"))
+        cycles = SavingCycle.objects.filter(is_active=True)
+        for i in cycles:
+            startdate= i.cycle_period_start
+            enddate= i.cycle_period_end
+            results=Saving.objects.filter(date__range=(startdate, enddate),name=self.id).aggregate(totals=models.Sum("amount"))
             if (results['totals']):
                 return results["totals"]
             else:

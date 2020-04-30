@@ -168,19 +168,25 @@ def make_saving(request):
             savings = form.save(commit=False)
             savings.save() 
     cycle=SavingCycle.objects.all()
+    current_cycle=SavingCycle.objects.get(is_active=True)
+    all_savings=Saving.objects.filter(cycle=current_cycle)
     form =SavingsForm()        
-    context={'cycle':cycle,'form':form}         
+    context={'cycle':cycle,'form':form, 'all_savings':all_savings}         
     return render(request,'make_saving.html', context)
 
 
 def savings_list(request):    
     try: 
         all_members=CustomUser.objects.all()
-        current_cycle=SavingCycle.objects.get(is_active=True)   
-        all_savings =Saving.objects.filter(cycle=current_cycle).aggregate(totals=models.Sum("amount"))
-        total_amount = all_savings["totals"]
-        context={'total_amount':total_amount,'current_cycle':current_cycle, 'all_members':all_members}
-        return render(request,'savings_list.html',context)
+        current_cycle=SavingCycle.objects.get(is_active=True)
+        cycles = SavingCycle.objects.filter(is_active=True)
+        for i in cycles:
+            startdate= i.cycle_period_start
+            enddate= i.cycle_period_end
+            all_savings =Saving.objects.filter(date__range=(startdate, enddate)).aggregate(totals=models.Sum("amount"))
+            total_amount = all_savings["totals"]
+            context={'total_amount':total_amount,'current_cycle':current_cycle, 'all_members':all_members}
+            return render(request,'savings_list.html',context)
     except:
         all_members=CustomUser.objects.all()
         context={'all_members':all_members}
@@ -188,7 +194,14 @@ def savings_list(request):
 def view_savings(request,pk):
     get_member = CustomUser.objects.get(id=pk)
     get_all_members=CustomUser.objects.all()
-    get_savings = Saving.objects.filter(name=pk)
+    current_cycle=SavingCycle.objects.get(is_active=True) 
+    cycles = SavingCycle.objects.filter(is_active=True)
+    for i in cycles:
+        startdate= i.cycle_period_start
+        enddate= i.cycle_period_end 
+    get_savings = Saving.objects.filter(name=pk, date__range=(startdate, enddate))
+    all_savings =get_savings.aggregate(totals=models.Sum("amount"))
+    total_amount = all_savings["totals"]
 
     paginator = Paginator(get_all_members, 10)  # 10 members on each page
     page = request.GET.get('page')
@@ -200,8 +213,20 @@ def view_savings(request,pk):
     except EmptyPage:
         # If page is out of range deliver last page of results
         members_list = paginator.page(paginator.num_pages) 
-    context={'get_savings':get_savings, 'get_member':get_member, 'page':page, 'members_list': members_list}
+    context={'current_cycle':current_cycle,'total_amount':total_amount,'get_savings':get_savings, 'get_member':get_member, 'page':page, 'members_list': members_list}
     return render (request, 'view_savings.html', context)
 
+def edit_saving(request, pk):
+    item = get_object_or_404(Saving, pk=pk)
+    if request.method == "POST":
+        form = SavingsForm(request.POST,request.FILES, instance=item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Saving has been updated')
+            return redirect('make-saving')
+    else:
+        form = SavingsForm(instance=item)
+        context={'form':form}
+        return render(request, 'edit_saving.html', context)
 def social_fund(request):
     return render(request,'social_fund.html')

@@ -6,72 +6,65 @@
 {% block stylesheets %}
     {{ block.super }}
 {% endblock stylesheets %}
-
+{% load humanize %}
 {% block content %}
 {% load crispy_forms_tags %}
       <div class="container">
-            <h3>Record Members' Saving</h3><br>
-            <form action="#" method="POST">
+        <div class="row">
+            <div class="col-lg-4 align-items-center">
+                <h3>Record Members' Saving</h3><br>
+                <form action="#" method="POST">
                 {% csrf_token %}
-                <div class="row">
-                    <div class="col-lg-6 align-items-center">
-                        {{form.date|as_crispy_field}}
-                        {{form.cycle|as_crispy_field}}
-                        {{form.name|as_crispy_field}}
-                        {{form.amount|as_crispy_field}}
-
-
-                        <!-- <div class="col-lg-4 form-group">
-                            <label for="cycle">Cycle:</label>
-                            <input type="text" class="form-control" id="cycle" value="{{cycle.cycle}}" required="*" name="cycle" >
-                        </div>
-                        <div class="col-lg-4 form-group">
+                    
+                           {{form.cycle|as_crispy_field}}
+                        <div class="form-group">
                             <label for="date">Date:</label>
                             <input type="date" class="form-control" id="date" name="date" required="*" >
                         </div>
 
-                         <div class="col-lg-4 form-sgroup">
-                            <label for="name">Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" required="*" >
-                        </div>
+                         {{form.name|as_crispy_field}}
 
-                         <div class="col-lg-4 form-group">
+                         <div class="form-group">
                             <label for="amount">Amount:</label>
                             <input type="number" class="form-control" id="amount" name="amount" required="*" >
-                        </div> -->
-                    </div>
-                </div>
-                <hr>
+                        </div>
+                         <hr>
+                         <button type="submit" class="btn btn-primary" >Submit</button>
+                </form>
+            </div>
+
+            <div class="col-lg-8">
+                <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                      <tr style="font-weight: bolder;">
+                        <td>Date</td>
+                         <td>Name</td>
+                        <td>Amount</td>
+                        <td>Action</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for savings in all_savings %}
+                        <tr>
+                            <td>{{savings.date}}</td>
+                          <td>{{savings.name}}</td>
+                          <td>{{savings.amount|intcomma}}</td>
+                            
+                          <td>
+                            <div class="mb-4">
+                              <a href="{% url 'edit-saving' savings.id %}"class="btn btn-success btn-sm"><span class="fa fa-edit"> Edit Saving</span></a>
+                            </div>
+                         </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+            </div>    
                 
-                <button type="submit" class="btn btn-primary" >Submit</button>
-            </form>
         </div>
 
-    <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area">
-        <!-- Main Footer Area -->
-        <div class="main-footer-area section-padding-100-0 bg-img bg-overlay" style="background-image: url(img/bg-img/bg-1.jpg);">
-            <div class="container">
-                <div class="row">
-                    <!-- Footer Widget Area -->
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="footer-widget mb-100">
-                            <div class="widget-title">
-                                <h6>Quick Links</h6>
-                            </div>
-                            <nav>
-                                <ul class="useful-links d-flex justify-content-between flex-wrap">
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Savings</a></li>
-                                    <li><a href="#">Users</a></li>
-                                    <li><a href="#">Social Fund</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    </div>
         {% endblock content %}
 
         {% block javascripts %}

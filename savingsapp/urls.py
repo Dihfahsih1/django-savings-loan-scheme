@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^Savings-add-member', views.add_member, name='add-member'),
     url(r'^Savings-edit-member/(?P<pk>\d+)', views.edit_member, name='edit-member'),
     url(r'^Savings-view-member/(?P<pk>\d+)', views.view_member, name='view-member'),
+    url(r'^Savings-edit-saving/(?P<pk>\d+)', views.edit_saving, name='edit-saving'),
     url(r'^Savings-delete-member/(?P<pk>\d+)', views.delete_member, name='delete-member'),
     url(r'^view-savings/(?P<pk>\d+)', views.view_savings, name='view-savings'),
     url(r'^Savings-members-list', views.members_list, name='members-list'),
