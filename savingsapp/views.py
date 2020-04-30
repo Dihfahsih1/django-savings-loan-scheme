@@ -6,12 +6,10 @@ import calendar
 from django.forms import modelformset_factory
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-
-
-
 def index(request):
     return render(request,'index.html')
 
+#record member
 def add_member(request):
     if request.method=="POST":
         form=MemberForm(request.POST, request.FILES,)
@@ -23,6 +21,7 @@ def add_member(request):
         form=MemberForm()
         return render(request,'add_member.html',{'form':form})
 
+#edit member
 def edit_member(request, pk):
     item = get_object_or_404(CustomUser, pk=pk)
     if request.method == "POST":
@@ -35,6 +34,7 @@ def edit_member(request, pk):
         form = MemberForm(instance=item)
     return render(request, 'edit_members.html', {'form': form})
 
+#delete Member
 def delete_member(request, pk):
     item= get_object_or_404(CustomUser, id=pk)
     if request.method == "GET":
@@ -56,11 +56,7 @@ def view_member(request, pk):
     }
     return render(request,'view_member.html', context)
 
-def give_loan(request):
-    return render(request,'loan_application.html')
-def pay_loan(request):
-    return render(request,'pay_loan.html')
-
+#add new cycle
 def add_cycle(request):
     if request.method=="POST":
         form=CyclesForm(request.POST, request.FILES,)
@@ -74,6 +70,7 @@ def add_cycle(request):
         context = {'all_cycle':all_cycle, 'form': form}
         return render(request,'add_cycle.html',context)
 
+#deleting cycle
 def delete_cycle(request, pk):
     item= get_object_or_404(Cycles, id=pk)
     if request.method == "GET":
@@ -81,6 +78,7 @@ def delete_cycle(request, pk):
         messages.success(request, "Cycle successfully deleted!")
         return redirect("add-cycle")
 
+#editting cycle
 def edit_cycle(request, pk):
     item = get_object_or_404(SavingCycle, pk=pk)
     if request.method == "POST":
@@ -104,7 +102,8 @@ def archiving_cycle(request):
             i.save()
             return redirect('cycle-list')
         return redirect('cycle-list')   
-          
+
+#list of cycles          
 def cycle_list(request):
     all_cycle=SavingCycle.objects.all()
     context = {
@@ -113,7 +112,7 @@ def cycle_list(request):
     return render(request,'cycle_list.html', context)
 
 
-
+#record member attendance
 def make_attendence(request):
     objs = CustomUser.objects.count()
     AttendanceFormset=modelformset_factory(Attendance, form=AttendanceForm, extra=0)
@@ -131,19 +130,7 @@ def make_attendence(request):
     context={'formset':formset, 'all_members':all_members}
     return render(request,'make_attendance.html',context)
 
-
-    # if request.method=="POST":
-    #     formset=AttendanceForm(request.POST)
-    #     if formset.is_valid():
-    #         instances = formset.save(commit=False)
-    #         instances.save()
-    #         return redirect('make-attendence')
-    # else:
-    #     formset=AttendanceForm()
-    #     all_members=CustomUser.objects.all()
-    #     context={'formset':formset,'all_members':all_members}
-    #     return render(request,'make_attendance.html',context)
-
+#attendance history
 def attendence_history(request):
     today = datetime.now()
     years=today.year
@@ -161,6 +148,7 @@ def attendence_history(request):
     context = {'years': years, 'month':month,'a_month':a_month}
     return render(request, "view_attendance.html", context)
 
+#record member savings
 def make_saving(request):
     if request.method == 'POST':
         form = SavingsForm(request.POST, request.FILES)
@@ -174,7 +162,7 @@ def make_saving(request):
     context={'cycle':cycle,'form':form, 'all_savings':all_savings}         
     return render(request,'make_saving.html', context)
 
-
+#list of all member savings
 def savings_list(request):    
     try: 
         all_members=CustomUser.objects.all()
@@ -191,6 +179,8 @@ def savings_list(request):
         all_members=CustomUser.objects.all()
         context={'all_members':all_members}
         return render(request,'savings_list.html',context)
+
+ #savings for a single member       
 def view_savings(request,pk):
     get_member = CustomUser.objects.get(id=pk)
     get_all_members=CustomUser.objects.all()
@@ -202,7 +192,6 @@ def view_savings(request,pk):
     get_savings = Saving.objects.filter(name=pk, date__range=(startdate, enddate))
     all_savings =get_savings.aggregate(totals=models.Sum("amount"))
     total_amount = all_savings["totals"]
-
     paginator = Paginator(get_all_members, 10)  # 10 members on each page
     page = request.GET.get('page')
     try:
@@ -228,5 +217,10 @@ def edit_saving(request, pk):
         form = SavingsForm(instance=item)
         context={'form':form}
         return render(request, 'edit_saving.html', context)
+
 def social_fund(request):
     return render(request,'social_fund.html')
+def give_loan(request):
+    return render(request,'loan_application.html')
+def pay_loan(request):
+    return render(request,'pay_loan.html')
