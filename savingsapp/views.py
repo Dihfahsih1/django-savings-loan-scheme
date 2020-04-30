@@ -177,14 +177,16 @@ def savings_list(request):
         current_cycle=SavingCycle.objects.get(is_active=True)   
         all_savings =Saving.objects.filter(cycle=current_cycle).aggregate(totals=models.Sum("amount"))
         total_amount = all_savings["totals"]
-
         context={'total_amount':total_amount,'current_cycle':current_cycle, 'all_members':all_members}
         return render(request,'savings_list.html',context)
-        print(total_amount)
     except:
         all_members=CustomUser.objects.all()
         context={'all_members':all_members}
         return render(request,'savings_list.html',context)
+def view_savings(request,pk):
+    get_savings = Saving.objects.filter(name=pk)
+    context={'get_savings':get_savings}
+    return render (request, 'view_savings.html', context)
 
 def social_fund(request):
     return render(request,'social_fund.html')
