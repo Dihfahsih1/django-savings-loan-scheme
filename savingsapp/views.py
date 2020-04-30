@@ -4,6 +4,8 @@ from django.contrib import messages
 from datetime import date
 import calendar
 from django.forms import modelformset_factory
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 
 
 
@@ -184,8 +186,21 @@ def savings_list(request):
         context={'all_members':all_members}
         return render(request,'savings_list.html',context)
 def view_savings(request,pk):
+    get_member = CustomUser.objects.get(id=pk)
+    get_all_members=CustomUser.objects.all()
     get_savings = Saving.objects.filter(name=pk)
-    context={'get_savings':get_savings}
+
+    paginator = Paginator(get_all_members, 10)  # 10 members on each page
+    page = request.GET.get('page')
+    try:
+        members_list = paginator.page(page)
+    except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+        members_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        members_list = paginator.page(paginator.num_pages) 
+    context={'get_savings':get_savings, 'get_member':get_member, 'page':page, 'members_list': members_list}
     return render (request, 'view_savings.html', context)
 
 def social_fund(request):
