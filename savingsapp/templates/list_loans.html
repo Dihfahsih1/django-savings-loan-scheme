@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %} Savings-Home {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+
+      <div class="container">
+        <p><a href="{% url 'index'%}">Home</a> / Loans-List</p>
+        <h3>List of Loans</h3>
+        <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <thead>
+              <tr style="font-weight: bolder;">
+                <td>Loan Date</td>
+                <td>Name</td>
+                <td>Period</td>
+                <td>Amount Loaned</td>
+                <td>Amount Paid</td>
+                <td>Balance</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for details in loan_list %}
+                <tr>
+                  <td>{{details.date}}</td>
+                  <td>{{details.name}}</td>
+                  <td>{{details.loan_period}}</td>
+                  <td>{{details.amount}}</td>
+                  <td>{{details.Loan_Paid}}</td>
+                  <td>{{details.balance}}</td>
+                  <td> <div class="mb-4">
+                        <a href="{% url 'pay-loan' details.id %}"class="btn btn-info btn-sm"><span class="fa fa-dollar"> Pay Loan</span></a>
+                        <a href="{% url 'edit-loan' details.id %}"class="btn btn-warning btn-sm"><span class="fa fa-edit"> Edit</span></a>
+                        <a href="{% url 'delete-loan' details.id %}"class="btn btn-danger btn-sm"><span class="fa fa-trash"> Delete</span></a>
+                  </div>
+                 </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+     </div>
+
+        {% endblock content %}
+        {% block javascripts %}
+            {{ block.super }}
+        {% endblock javascripts %}

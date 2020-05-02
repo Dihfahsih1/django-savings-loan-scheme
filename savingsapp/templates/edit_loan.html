@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %} Savings-Home {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+    <section class="hero-area">
+        <!--form area-->
+        <form action="#" method="POST">
+            {% csrf_token %}
+            <div class="container" style="margin-left: 15%">
+                <p><a href="index.html">Home</a> / Loan Application</p>
+                <h2> Edit Loan Details</h2>
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" class="form-control" id="date" name="date" >
+                        </div>
+                        {{form.name|as_crispy_field}}
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" >Update</button>
+        </form>
+    </section>
+    <script type="text/javascript">
+    </script>
+
+    {% endblock content %}
+
+    {% block javascripts %}
+        {{ block.super }}
+    {% endblock javascripts %}
