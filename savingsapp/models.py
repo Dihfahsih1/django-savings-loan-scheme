@@ -73,3 +73,9 @@ class Loan(models.Model):
     recorded_by =models.CharField(max_length=220, blank=True, null=True)
     def __str__(self):
         return self.name
+
+class PayingLoan(models.Model):
+    loan_id = models.DateField(max_length=100, blank=True, null=True)
+    date = models.DateField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    amount = models.IntegerField(null=True, blank=True)

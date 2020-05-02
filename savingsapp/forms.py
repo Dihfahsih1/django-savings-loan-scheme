@@ -29,3 +29,7 @@ class LoanForm(forms.ModelForm):
     class Meta:
         model=Loan
         fields= ('name','cycle','date','amount','interest_rate', 'loan_period','recorded_by')
+class PayingLoanForm(forms.ModelForm):
+    class Meta:
+        model=PayingLoan
+        fields=('name','date','amount')

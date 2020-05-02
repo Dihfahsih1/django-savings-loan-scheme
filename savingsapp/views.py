@@ -237,7 +237,16 @@ def list_loans(request):
     loan_list = Loan.objects.all()
     context={'loan_list':loan_list}
     return render(request, 'list_loans.html', context)
-def pay_loan(request, pk):
-    get_loan_details = get_object_or_404(pk=pk)
 
-    return render(request,'pay_loan.html')
+def pay_loan(request, pk):
+    items = get_object_or_404(Loan,pk=pk)
+    if request.method == "POST":
+        form = PayingLoanForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('loan-list')
+    else:
+        form = LoanForm(instance=items)
+        print(items.name)
+        context={'form':form, 'items':items}
+        return render(request,'pay_loan.html',context)

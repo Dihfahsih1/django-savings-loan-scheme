@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^Savings-edit-cycle/(?P<pk>\d+)', views.edit_cycle, name='edit-cycle'),
     url(r'^Savings-delete-cycle/(?P<pk>\d+)', views.delete_cycle, name='delete-cycle'),
     url(r'^List-of-loans', views.list_loans, name='loan-list'),
+    url(r'^Paying-Loan/(?P<pk>\d+)', views.pay_loan, name='pay-loan'),
     ]
