@@ -232,6 +232,18 @@ def give_loan(request):
     form =LoanForm()        
     context={'current_cycle':current_cycle,'form':form} 
     return render(request,'loan_application.html', context)
+def edit_loan(request, pk):
+    item = get_object_or_404(Saving, pk=pk)
+    if request.method == "POST":
+        form = LoanForm(request.POST,request.FILES, instance=item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Loan Details have been updated')
+            return redirect('loan-list')
+    else:
+        form = LoanForm(instance=item)
+        context={'form':form}
+        return render(request, 'loan_application.html', context)
 
 def list_loans(request):
     loan_list = Loan.objects.all()
@@ -247,6 +259,6 @@ def pay_loan(request, pk):
             return redirect('loan-list')
     else:
         form = LoanForm(instance=items)
-        print(items.name)
-        context={'form':form, 'items':items}
+        name=(items.name)
+        context={'form':form, 'name':name}
         return render(request,'pay_loan.html',context)

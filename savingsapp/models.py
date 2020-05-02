@@ -66,13 +66,25 @@ class Saving(models.Model):
 class Loan(models.Model):
     cycle =  models.CharField(max_length=100, null=True, blank=True)
     date = models.DateField(max_length=100, blank=True, null=True)
-    name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, max_length=100, null=True, blank=True)
+    name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, default="kim",max_length=100, null=True, blank=True)
     amount = models.IntegerField(default=1000)
     interest_rate = models.IntegerField(default=0)
     loan_period = models.IntegerField(default=0)
     recorded_by =models.CharField(max_length=220, blank=True, null=True)
-    def __str__(self):
-        return self.name
+    # @property
+    # def Loan_Paid(self):
+    #     results = PayingLoan.objects.filter(loan_id=self.id).aggregate(totals=models.Sum("amount"))
+    #     if (results['totals']):
+    #         return results["totals"]
+    #     else:
+    #         return 0 
+    # @property
+    # def balance(self):
+    #     cal = self.amount - self.Loan_Paid
+    #     return cal
+    # def __str__(self):
+    #     return self.name
+    
 
 class PayingLoan(models.Model):
     loan_id = models.DateField(max_length=100, blank=True, null=True)
