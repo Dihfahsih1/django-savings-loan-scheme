@@ -68,7 +68,7 @@ class Loan(models.Model):
     cycle =  models.CharField(max_length=100, null=True, blank=True)
     date = models.DateField(max_length=100, blank=True, null=True)
     name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, default="kim",max_length=100, null=True, blank=True)
-    amount = models.IntegerField(default=1000)
+    amount = models.IntegerField(default=0)
     interest_rate = models.IntegerField(default=0)
     loan_period = models.IntegerField(default=0)
     recorded_by =models.CharField(max_length=220, blank=True, null=True)
@@ -78,7 +78,7 @@ class Loan(models.Model):
         if (results['totals']):
             return results["totals"]
         else:
-            return 100
+            return 0
     @property
     def balance(self):
         #Rate=self.interest_rate(0.01), 
@@ -97,3 +97,5 @@ class PayingLoan(models.Model):
     date = models.DateField(max_length=100, blank=True, null=True)
     name = models.CharField(max_length=100, null=True, blank=True)
     amount = models.IntegerField(null=True, blank=True, default=0)
+    def __str__(self):
+        return str(self.date)

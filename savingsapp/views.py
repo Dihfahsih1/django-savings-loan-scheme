@@ -232,8 +232,10 @@ def give_loan(request):
     current_cycle=SavingCycle.objects.get(is_active=True)
     context['current_cycle']=current_cycle
     if current_cycle:
-        rate=SavingCycle.objects.get('interest_rate')
-        context['rate']=rate
+        rates=SavingCycle.objects.all()
+        for i in rates:
+            rate=i.interest_rate
+            context['rate']=rate
     form =LoanForm()
     context['form']=form        
     return render(request,'loan_application.html', context)
