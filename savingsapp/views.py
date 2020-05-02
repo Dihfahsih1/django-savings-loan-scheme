@@ -222,6 +222,7 @@ def social_fund(request):
     return render(request,'social_fund.html')
 
 def give_loan(request):
+    context={}
     if request.method == 'POST':
         form = LoanForm(request.POST, request.FILES)
         if form.is_valid:
@@ -229,11 +230,15 @@ def give_loan(request):
             loan.save() 
             return redirect('loan-list')
     current_cycle=SavingCycle.objects.get(is_active=True)
-    form =LoanForm()        
-    context={'current_cycle':current_cycle,'form':form} 
+    context['current_cycle']=current_cycle
+    if current_cycle:
+        rate=SavingCycle.objects.get('interest_rate')
+        context['rate']=rate
+    form =LoanForm()
+    context['form']=form        
     return render(request,'loan_application.html', context)
 def edit_loan(request, pk):
-    item = get_object_or_404(Saving, pk=pk)
+    item = get_object_or_404(Loan, pk=pk)
     if request.method == "POST":
         form = EditLoanForm(request.POST,request.FILES, instance=item)
         if form.is_valid():
@@ -242,7 +247,11 @@ def edit_loan(request, pk):
             return redirect('loan-list')
     else:
         form = EditLoanForm(instance=item)
-        context={'form':form}
+        rate = item.interest_rate
+        date = item.date
+        period = item.loan_period
+        amount = item.amount
+        context={'form':form, 'amount':amount, 'rate':rate, 'date':date, 'period':period}
         return render(request, 'edit_loan.html', context)
 #deleting cycle
 def delete_loan(request, pk):

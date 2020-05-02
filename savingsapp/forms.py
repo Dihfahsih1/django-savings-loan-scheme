@@ -12,7 +12,7 @@ class MemberForm(forms.ModelForm):
 class CyclesForm(forms.ModelForm):
     class Meta:
         model=SavingCycle
-        fields=('cycle_name','cycle_period_start','cycle_period_end','is_active','archive_status')
+        fields=('cycle_name','cycle_period_start','cycle_period_end','interest_rate','is_active','archive_status')
         
 class AttendanceForm(forms.ModelForm):
     class Meta:
@@ -37,4 +37,4 @@ class PayingLoanForm(forms.ModelForm):
 class EditLoanForm(forms.ModelForm):
     class Meta:
         model=Loan
-        fields=('name','date','amount')        
+        fields=('name','date','amount','interest_rate','loan_period')        

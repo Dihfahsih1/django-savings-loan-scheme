@@ -50,6 +50,7 @@ class Attendance(models.Model):
 class SavingCycle(models.Model):
     status =(('ARCHIVED','ARCHIVED'),('UNARCHIVED','UNARCHIVED' ))
     archive_status = models.CharField(max_length=200, choices=status,blank=True, null=True)
+    interest_rate =  models.IntegerField(default=5, null=True, blank=True)
     cycle_name =  models.CharField( max_length=200, null=True, blank=True, unique=True)
     cycle_period_start = models.DateField(max_length=255, blank=False, null=False, unique=True)
     cycle_period_end = models.DateField(max_length=255, blank=False, null=False, unique=True)

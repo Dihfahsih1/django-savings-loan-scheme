@@ -23,11 +23,15 @@
                         </div>
                         {{form.name|as_crispy_field}}
                         <div class="form-group">
-                            <label for="amount">Amount:</label>
+                            <label for="amount">Amount(Principal):</label>
                             <input type="number" class="form-control" id="amount" name="amount">
                         </div>
+                         <div class="form-group">
+                            <label for="rate">Interest Rate:</label>
+                            <input type="number" class="form-control" id="interest_rate" name="interest_rate" value={{rate}}>
+                        </div>
                         <div class="form-group">
-                            <label for="loan_period">Loan Period(Number of Days):</label>
+                            <label for="loan_period">Loan Period(Number of Months):</label>
                             <input type="number" class="form-control" id="loan_period" name="loan_period" value=45>
                         </div>
                         
