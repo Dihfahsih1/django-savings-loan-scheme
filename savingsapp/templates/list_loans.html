@@ -14,10 +14,11 @@
         <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
             <thead>
               <tr style="font-weight: bolder;">
-                <td>Loan Date</td>
+                <td>Date</td>
                 <td>Name</td>
                 <td>Period</td>
-                <td>Amount Loaned</td>
+                <td>Rate</td>
+                <td>Principal</td>
                 <td>Repayment</td>
                 <td>Balance</td>
                 <td>Action</td>
@@ -28,7 +29,8 @@
                 <tr>
                   <td>{{details.date}}</td>
                   <td>{{details.name}}</td>
-                  <td>{{details.loan_period}}</td>
+                  <td>{{details.loan_period}} Months</td>
+                  <td>{{details.interest_rate}}%</td>
                   <td>{{details.amount|intcomma}}</td>
                   <td>{{details.Loan_Paid|intcomma}}</td>
                   <td>{{details.balance|intcomma}}</td>

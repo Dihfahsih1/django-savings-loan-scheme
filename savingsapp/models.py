@@ -81,8 +81,13 @@ class Loan(models.Model):
             return 100
     @property
     def balance(self):
-        cal = self.amount - self.Loan_Paid
-        return cal
+        #Rate=self.interest_rate(0.01), 
+        #I =R*P*T
+        #P = self.amount
+        #T = self.loan_period
+        interest=((self.interest_rate /100)* self.loan_period * self.amount)
+        bala = (self.amount + interest) - self.Loan_Paid
+        return bala
     def __str__(self):
         return self.name
     
