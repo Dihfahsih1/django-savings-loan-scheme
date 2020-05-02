@@ -11,3 +11,4 @@ class CustomUser(admin.ModelAdmin):
 admin.site.register(Attendance)
 admin.site.register(SavingCycle)
 admin.site.register(Saving)
+admin.site.register(Loan)

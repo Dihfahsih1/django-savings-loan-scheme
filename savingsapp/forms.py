@@ -24,3 +24,8 @@ class SavingsForm(forms.ModelForm):
     class Meta:
         model=Saving
         fields=('name','cycle','date','amount')
+
+class LoanForm(forms.ModelForm):
+    class Meta:
+        model=Loan
+        fields= ('name','cycle','date','amount','interest_rate', 'loan_period','recorded_by')

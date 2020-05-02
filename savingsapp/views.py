@@ -221,6 +221,14 @@ def edit_saving(request, pk):
 def social_fund(request):
     return render(request,'social_fund.html')
 def give_loan(request):
-    return render(request,'loan_application.html')
+    if request.method == 'POST':
+        form = LoanForm(request.POST, request.FILES)
+        if form.is_valid:
+            loan = form.save(commit=False)
+            loan.save() 
+    current_cycle=SavingCycle.objects.get(is_active=True)
+    form =LoanForm()        
+    context={'current_cycle':current_cycle,'form':form} 
+    return render(request,'loan_application.html', context)
 def pay_loan(request):
     return render(request,'pay_loan.html')

@@ -7,9 +7,11 @@
 {% endblock stylesheets %}
 
 {% block content %}
+{% load crispy_forms_tags %}
     <section class="hero-area">
         <!--form area-->
         <form action="#" method="POST">
+            {% csrf_tokken %}
             <div class="container" style="margin-left: 15%">
                 <p><a href="index.html">Home</a> / Loan Application</p>
                 <h2> Loan Application Form</h2>
@@ -29,22 +31,22 @@
                         </div>
                         <div class="form-group">
                             <label for="Rate">Interest Rate:</label>
-                            <input type="number" class="form-control" id="Rate">
+                            <input type="number" class="form-control" id="Rate" value="interest_rate">
                         </div>
                     </div>
                     <div class="col-lg-5">
                         <div class="form-group">
                             <label for="cycle">Cycle:</label>
-                            <input type="text" class="form-control" id="cycle">
+                            <input type="text" class="form-control" id="cycle" value="cycle">
                         </div>
 
                         <div class="form-group">
                             <label for="Collected">Recorded by:</label>
-                            <input type="text" class="form-control" id="Collected">
+                            <input type="text" class="form-control" id="Collected" value="recorded_by">
                         </div>
                         <div class="form-group">
                             <label for="telephone">Loan Period(Number of Days):</label>
-                            <input type="number" class="form-control" id="period">
+                            <input type="number" class="form-control" id="period" value="loan_period">
                         </div>
 
                         <button type="submit" class="btn btn-primary" >Submit</button>

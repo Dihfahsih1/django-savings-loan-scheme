@@ -63,13 +63,13 @@ class Saving(models.Model):
     amount = models.IntegerField(default=0)
     def __str__(self):
         return self.name
-
-    # @property    
-    # def total_amount(self):
-    #     current_cycle=SavingCycle.objects.get(is_active=True)   
-    #     results =Savings.objects.filter(cycle=current_cycle).aggregate(totals=models.Sum("amount"))
-    #     if (results['totals']):
-    #         return results["totals"]
-    #         print(results)
-    #     else:
-    #         return 0 
+class Loan(models.Model):
+    cycle =  models.CharField(max_length=100, null=True, blank=True)
+    date = models.DateField(max_length=100, blank=True, null=True)
+    name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, max_length=100, null=True, blank=True)
+    amount = models.IntegerField(default=0)
+    interest_rate = models.IntegerField(default=0)
+    loan_period = models.IntegerField(default=0)
+    recorded_by =models.CharField(max_length=220, blank=True, null=True)
+    def __str__(self):
+        return self.name
