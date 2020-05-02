@@ -220,15 +220,24 @@ def edit_saving(request, pk):
 
 def social_fund(request):
     return render(request,'social_fund.html')
+
 def give_loan(request):
     if request.method == 'POST':
         form = LoanForm(request.POST, request.FILES)
         if form.is_valid:
             loan = form.save(commit=False)
             loan.save() 
+            return redirect('loan-list')
     current_cycle=SavingCycle.objects.get(is_active=True)
     form =LoanForm()        
     context={'current_cycle':current_cycle,'form':form} 
     return render(request,'loan_application.html', context)
-def pay_loan(request):
+
+def list_loans(request):
+    loan_list = Loan.objects.all()
+    context={'loan_list':loan_list}
+    return render(request, 'list_loans.html', context)
+def pay_loan(request, pk):
+    get_loan_details = get_object_or_404(pk=pk)
+
     return render(request,'pay_loan.html')
