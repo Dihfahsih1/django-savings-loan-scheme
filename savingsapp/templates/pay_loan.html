@@ -19,7 +19,7 @@
                 <form action="#" method="POST">
                   {% csrf_token %}
                   <div class="form-group" id='loan_id'>
-                    <input type="hidden" class="form-control" id="loan_id" name="loan_id" value="{{items.id}}">
+                    <input type="hidden" class="form-control" id="loan_id" name="loan_id" value={{loan_id}}>
                   </div>
                   <div class="form-group">
                     <label for="name">Member's Name:</label>
@@ -31,7 +31,7 @@
                   </div>
                   <div class="form-group">
                     <label for="amount">Amount Paid:</label>
-                    <input type="amount" class="form-control" id="amount" name="amount" value="{{items.amount}}">
+                    <input type="amount" class="form-control" id="amount" name="amount" value={{items.amount}}>
                   </div>
                   <button type="submit" class="btn btn-primary" >Submit</button>
                 </form>

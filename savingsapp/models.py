@@ -71,23 +71,23 @@ class Loan(models.Model):
     interest_rate = models.IntegerField(default=0)
     loan_period = models.IntegerField(default=0)
     recorded_by =models.CharField(max_length=220, blank=True, null=True)
-    # @property
-    # def Loan_Paid(self):
-    #     results = PayingLoan.objects.filter(loan_id=self.id).aggregate(totals=models.Sum("amount"))
-    #     if (results['totals']):
-    #         return results["totals"]
-    #     else:
-    #         return 0 
-    # @property
-    # def balance(self):
-    #     cal = self.amount - self.Loan_Paid
-    #     return cal
-    # def __str__(self):
-    #     return self.name
+    @property
+    def Loan_Paid(self):
+        results = PayingLoan.objects.filter(loan_id=self.id).aggregate(totals=models.Sum("amount"))
+        if (results['totals']):
+            return results["totals"]
+        else:
+            return 100
+    @property
+    def balance(self):
+        cal = self.amount - self.Loan_Paid
+        return cal
+    def __str__(self):
+        return self.name
     
 
 class PayingLoan(models.Model):
-    loan_id = models.DateField(max_length=100, blank=True, null=True)
+    loan_id = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateField(max_length=100, blank=True, null=True)
     name = models.CharField(max_length=100, null=True, blank=True)
-    amount = models.IntegerField(null=True, blank=True)
+    amount = models.IntegerField(null=True, blank=True, default=0)

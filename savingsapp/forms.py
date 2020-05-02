@@ -32,4 +32,9 @@ class LoanForm(forms.ModelForm):
 class PayingLoanForm(forms.ModelForm):
     class Meta:
         model=PayingLoan
-        fields=('name','date','amount')
+        fields=('loan_id','name','date','amount')
+
+class EditLoanForm(forms.ModelForm):
+    class Meta:
+        model=Loan
+        fields=('name','date','amount')        
