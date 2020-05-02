@@ -5,7 +5,7 @@
 {% block stylesheets %}
     {{ block.super }}
 {% endblock stylesheets %}
-
+{% load humanize %}
 {% block content %}
 
       <div class="container">
@@ -29,14 +29,21 @@
                   <td>{{details.date}}</td>
                   <td>{{details.name}}</td>
                   <td>{{details.loan_period}}</td>
-                  <td>{{details.amount}}</td>
-                  <td>{{details.Loan_Paid}}</td>
-                  <td>{{details.balance}}</td>
-                  <td> <div class="mb-4">
+                  <td>{{details.amount|intcomma}}</td>
+                  <td>{{details.Loan_Paid|intcomma}}</td>
+                  <td>{{details.balance|intcomma}}</td>
+
+                  <td>
+                    {% if details.balance > 0 %}
+                      <div class="mb-4">
                         <a href="{% url 'pay-loan' details.id %}"class="btn btn-info btn-sm"><span class="fa fa-dollar"> Pay Loan</span></a>
                         <a href="{% url 'edit-loan' details.id %}"class="btn btn-warning btn-sm"><span class="fa fa-edit"> Edit</span></a>
                         <a href="{% url 'delete-loan' details.id %}"class="btn btn-danger btn-sm"><span class="fa fa-trash"> Delete</span></a>
-                  </div>
+                      </div>
+                      {% else %}
+                      <a href="#"class="btn btn-success btn-sm"><span class="fa fa-dollar"> Fully Paid</span></a>
+
+                    {% endif %}  
                  </td>
                 </tr>
             {% endfor %}
