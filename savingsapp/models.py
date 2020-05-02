@@ -67,7 +67,7 @@ class Loan(models.Model):
     cycle =  models.CharField(max_length=100, null=True, blank=True)
     date = models.DateField(max_length=100, blank=True, null=True)
     name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, max_length=100, null=True, blank=True)
-    amount = models.IntegerField(default=0)
+    amount = models.IntegerField(default=1000)
     interest_rate = models.IntegerField(default=0)
     loan_period = models.IntegerField(default=0)
     recorded_by =models.CharField(max_length=220, blank=True, null=True)

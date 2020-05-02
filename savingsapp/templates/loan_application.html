@@ -11,7 +11,7 @@
     <section class="hero-area">
         <!--form area-->
         <form action="#" method="POST">
-            {% csrf_tokken %}
+            {% csrf_token %}
             <div class="container" style="margin-left: 15%">
                 <p><a href="index.html">Home</a> / Loan Application</p>
                 <h2> Loan Application Form</h2>
@@ -19,34 +19,32 @@
                     <div class="col-lg-5">
                         <div class="form-group">
                             <label for="date">Date:</label>
-                            <input type="date" class="form-control" id="date" >
+                            <input type="date" class="form-control" id="date" name="date" >
                         </div>
-                        <div class="form-group">
-                            <label for="name">Applicant Name</label>
-                            <input type="name" class="form-control" id="name">
-                        </div>
+                        {{form.name|as_crispy_field}}
                         <div class="form-group">
                             <label for="amount">Amount:</label>
-                            <input type="number" class="form-control" id="amount">
+                            <input type="number" class="form-control" id="amount" name="amount">
                         </div>
                         <div class="form-group">
-                            <label for="Rate">Interest Rate:</label>
-                            <input type="number" class="form-control" id="Rate" value="interest_rate">
+                            <label for="loan_period">Loan Period(Number of Days):</label>
+                            <input type="number" class="form-control" id="loan_period" name="loan_period" value=45>
                         </div>
+                        
                     </div>
                     <div class="col-lg-5">
-                        <div class="form-group">
+                        <div class="form-group" id="cycle">
                             <label for="cycle">Cycle:</label>
-                            <input type="text" class="form-control" id="cycle" value="cycle">
+                            <input type="text" class="form-control"  name="cycle" id="cycle" value="{{current_cycle}}">
                         </div>
 
                         <div class="form-group">
-                            <label for="Collected">Recorded by:</label>
-                            <input type="text" class="form-control" id="Collected" value="recorded_by">
+                            <label for="recorded_by">Recorded by:</label>
+                            <input type="text" class="form-control" id="recorded_by" name="recorded_by" value="logged in user">
                         </div>
                         <div class="form-group">
-                            <label for="telephone">Loan Period(Number of Days):</label>
-                            <input type="number" class="form-control" id="period" value="loan_period">
+                            <label for="interest_rate">Interest Rate:</label>
+                            <input type="number" class="form-control" id="interest_rate"  name="interest_rate" value=50>
                         </div>
 
                         <button type="submit" class="btn btn-primary" >Submit</button>
@@ -55,6 +53,12 @@
             </div>
         </form>
     </section>
+    <script type="text/javascript">
+        document.getElementById('Rate').readOnly = true;
+        document.getElementById('current_cycle').readOnly = true;
+       document.getElementById('Collected').readOnly = true;
+       document.getElementById('first_name').readOnly = true;
+    </script>
 
     {% endblock content %}
 
