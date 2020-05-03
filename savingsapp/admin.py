@@ -10,7 +10,7 @@ class CustomUser(admin.ModelAdmin):
 
 admin.site.register(Loan)
 class Loan(admin.ModelAdmin):
-    list_display = ('Loan_Paid','balance')
+    list_display = ('Loan_Paid','balance','status')
     
 admin.site.register(Attendance)
 admin.site.register(SavingCycle)

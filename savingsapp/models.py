@@ -76,6 +76,7 @@ class Loan(models.Model):
     @property
     def Loan_Paid(self):
         results = PayingLoan.objects.filter(loan_id=self.id).aggregate(totals=models.Sum("amount"))
+        print(results)
         if (results['totals']):
             return results["totals"]
         else:
@@ -89,6 +90,16 @@ class Loan(models.Model):
         interest=((self.interest_rate /100)* self.loan_period * self.amount)
         bala = (self.amount + interest) - self.Loan_Paid
         return bala
+        
+    @property
+    def status(self):
+        if (self.Loan_Paid > self.amount):
+            self.is_loanee = False
+            print(self.is_loanee)
+            return self.is_loanee
+        else:
+            self.is_loanee = True
+            return self.is_loanee
     def __str__(self):
         return self.name
     
