@@ -236,7 +236,7 @@ def give_loan(request):
         for i in rates:
             rate=i.interest_rate
             context['rate']=rate
-    form =LoanForm()
+    form = LoanForm()
     context['form']=form        
     return render(request,'loan_application.html', context)
 def edit_loan(request, pk):

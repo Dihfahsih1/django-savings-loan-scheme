@@ -71,6 +71,7 @@ class Loan(models.Model):
     amount = models.IntegerField(default=0)
     interest_rate = models.IntegerField(default=0)
     loan_period = models.IntegerField(default=0)
+    is_loanee = models.BooleanField(default=True, null=True, blank=True) 
     recorded_by =models.CharField(max_length=220, blank=True, null=True)
     @property
     def Loan_Paid(self):
