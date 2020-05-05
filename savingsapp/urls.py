@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^delete-loan-details/(?P<pk>\d+)', views.delete_loan, name='delete-loan'),
     url(r'^add-lookup', views.add_lookup, name='add-lookup'),
     url(r'^details-of-lookup', views.add_lookup_details, name='add-lookup-details'),
+    url(r'^look-details-list', views.list_lookup_details, name='list-lookup-details'),
     url(r'^stocks/', views.StockList.as_view()),
     ]
 urlpatterns= format_suffix_patterns(urlpatterns)

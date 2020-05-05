@@ -305,7 +305,8 @@ def add_lookup(request):
             return redirect('add-cycle')
     else:
         form=LookupForm()
-        context = {'form': form}
+        all_lookups=Lookup.objects.all()
+        context = {'form': form, 'all_lookups':all_lookups}
         return render(request,'add_lookup.html',context)
 
 #add new lookup Details
@@ -318,5 +319,14 @@ def add_lookup_details(request):
             return redirect('add-cycle')
     else:
         form=LookupDetailsForm()
-        context = {'form': form}
+        all_lookups_details=LookupDetails.objects.all()
+        context = {'form': form, 'all_lookups_details':all_lookups_details}
         return render(request,'add_lookup_details.html',context)        
+
+#list of cycles          
+def list_lookup_details(request):
+    all_lookups_details=LookupDetails.objects.all()
+    context = {
+    'all_lookups_details':all_lookups_details
+    }
+    return render(request,'list_lookup_details.html', context)        
