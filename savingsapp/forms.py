@@ -38,3 +38,13 @@ class EditLoanForm(forms.ModelForm):
     class Meta:
         model=Loan
         fields=('name','date','amount','interest_rate','loan_period','is_loanee')        
+
+class LookupForm(forms.ModelForm):
+    class Meta:
+        model=Lookup
+        fields=('name',)
+
+class LookupDetailsForm(forms.ModelForm):
+    class Meta:
+        model=LookupDetails
+        fields=('Lookup_Name','Details')

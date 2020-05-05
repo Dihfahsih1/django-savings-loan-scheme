@@ -76,7 +76,6 @@ class Loan(models.Model):
     @property
     def Loan_Paid(self):
         results = PayingLoan.objects.filter(loan_id=self.id).aggregate(totals=models.Sum("amount"))
-        print(results)
         if (results['totals']):
             return results["totals"]
         else:
@@ -95,11 +94,11 @@ class Loan(models.Model):
     def status(self):
         if (self.Loan_Paid > self.amount):
             self.is_loanee = False
-            print(self.is_loanee)
             return self.is_loanee
         else:
             self.is_loanee = True
             return self.is_loanee
+
     def __str__(self):
         return self.name
     
@@ -111,3 +110,22 @@ class PayingLoan(models.Model):
     amount = models.IntegerField(null=True, blank=True, default=0)
     def __str__(self):
         return str(self.date)
+
+class Stock(models.Model):
+    ticker = models.CharField(max_length=10)
+    openn = models.FloatField()
+    close = models.FloatField()
+    volume = models.IntegerField()
+
+    def __str__(self):
+        return self.ticker
+class Lookup(models.Model):
+    name = models.CharField(max_length=220, blank=False, null=False)
+    def __str__(self):
+        return self.name
+
+class LookupDetails(models.Model):
+    Lookup_Name = models.ForeignKey(Lookup, on_delete=models.CASCADE, max_length=220, blank=False, null=False)
+    Details = models.CharField(max_length=220, blank=False, null=False)
+    def __str__(self):
+        return self.Lookup_Name

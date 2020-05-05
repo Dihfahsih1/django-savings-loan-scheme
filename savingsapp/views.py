@@ -5,6 +5,19 @@ from datetime import date
 import calendar
 from django.forms import modelformset_factory
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+#rest api
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Stock
+from .serializers import StockSerializer
+
+class StockList(APIView):
+    def get(self, request):
+        stocks = Stock.objects.all()
+        serializer = StockSerializer(stocks, many=True)
+        return Response(serializer.data)
+
 
 def index(request):
     return render(request,'index.html')
@@ -281,3 +294,29 @@ def pay_loan(request, pk):
         loan_id=(items.id)
         context={'form':form, 'name':name, 'loan_id':loan_id}
         return render(request,'pay_loan.html',context)
+
+#add new lookup
+def add_lookup(request):
+    if request.method=="POST":
+        form=LookupForm(request.POST, request.FILES,)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'look up has been successfully added to the system')
+            return redirect('add-cycle')
+    else:
+        form=LookupForm()
+        context = {'form': form}
+        return render(request,'add_lookup.html',context)
+
+#add new lookup Details
+def add_lookup_details(request):
+    if request.method=="POST":
+        form=LookupDetailsForm(request.POST, request.FILES,)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'look up details has been successfully added to the system')
+            return redirect('add-cycle')
+    else:
+        form=LookupDetailsForm()
+        context = {'form': form}
+        return render(request,'add_lookup_details.html',context)        

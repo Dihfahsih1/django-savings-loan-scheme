@@ -1,5 +1,6 @@
 from django.conf.urls import url
-from . import views
+from rest_framework.urlpatterns import format_suffix_patterns
+from savingsapp import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -26,4 +27,8 @@ urlpatterns = [
     url(r'^Paying-Loan/(?P<pk>\d+)', views.pay_loan, name='pay-loan'),
     url(r'^edit-loan/(?P<pk>\d+)', views.edit_loan, name='edit-loan'),
     url(r'^delete-loan-details/(?P<pk>\d+)', views.delete_loan, name='delete-loan'),
+    url(r'^add-lookup', views.add_lookup, name='add-lookup'),
+    url(r'^details-of-lookup', views.add_lookup_details, name='add-lookup-details'),
+    url(r'^stocks/', views.StockList.as_view()),
     ]
+urlpatterns= format_suffix_patterns(urlpatterns)
