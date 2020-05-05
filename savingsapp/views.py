@@ -302,7 +302,7 @@ def add_lookup(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'look up has been successfully added to the system')
-            return redirect('add-cycle')
+            return redirect('add-lookup')
     else:
         form=LookupForm()
         all_lookups=Lookup.objects.all()
@@ -316,7 +316,7 @@ def add_lookup_details(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'look up details has been successfully added to the system')
-            return redirect('add-cycle')
+            return redirect('add-lookup-details')
     else:
         form=LookupDetailsForm()
         all_lookups_details=LookupDetails.objects.all()
