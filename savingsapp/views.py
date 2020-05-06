@@ -303,6 +303,7 @@ def add_lookup(request):
             form.save()
             messages.success(request, f'look up has been successfully added to the system')
             return redirect('add-lookup')
+            
     else:
         form=LookupForm()
         all_lookups=Lookup.objects.all()
