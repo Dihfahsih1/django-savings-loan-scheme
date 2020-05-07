@@ -94,7 +94,7 @@ class Loan(models.Model):
 	def status(self):
 		if (self.Loan_Paid > self.amount):
 			get_id=Loan.objects.filter(id=self.id)
-		    print(self.amount)
+		    
 			self.is_loanee = False
 			return self.is_loanee
 		else:
