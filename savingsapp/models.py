@@ -86,7 +86,6 @@ class Loan(models.Model):
 		#I =R*P*T
 		#P = self.amount
 		#T = self.loan_period
-	
 		interest=((self.interest_rate /100)* self.loan_period * self.amount)
 		bala = (self.amount + interest) - self.Loan_Paid
 		return bala
@@ -94,15 +93,15 @@ class Loan(models.Model):
 	@property
 	def status(self):
 		if (self.Loan_Paid > self.amount):
+			get_id=Loan.objects.get(self.id)
+		    print(get_id)
 			self.is_loanee = False
 			return self.is_loanee
 		else:
 			self.is_loanee = True
 			return self.is_loanee
-
 	def __str__(self):
 		return self.name
-	
 
 class PayingLoan(models.Model):
 	loan_id = models.CharField(max_length=100, blank=True, null=True)
