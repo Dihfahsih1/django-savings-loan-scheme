@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Stock
+from .models import *
 from .serializers import StockSerializer
 
 class StockList(APIView):
@@ -250,8 +250,8 @@ def give_loan(request):
             rate=i.interest_rate
             context['rate']=rate
     form = LoanForm()
-    context['form']=form 
-    members_without_loan = Loan.objects.filter(is_loanee=True)       
+    context['form']=form
+
     return render(request,'loan_application.html', context)
 def edit_loan(request, pk):
     item = get_object_or_404(Loan, pk=pk)

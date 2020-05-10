@@ -1,6 +1,8 @@
 
-from datetime import timedelta
 import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
+import django
+from datetime import timedelta
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '9innrqw6-#7w$8#dkbyqj1m(f=52l-f9&12yw42#g7-*so#lci'
 DEBUG = True

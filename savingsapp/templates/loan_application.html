@@ -32,19 +32,19 @@
                         </div>
                         <div class="form-group">
                             <label for="loan_period">Loan Period(Number of Months):</label>
-                            <input type="number" class="form-control" id="loan_period" name="loan_period" value=45>
+                            <input type="number" class="form-control" id="loan_period" name="loan_period" value=45 readonly="True">
                         </div>
                         
                     </div>
                     <div class="col-lg-5">
                         <div class="form-group" id="cycle">
                             <label for="cycle">Cycle:</label>
-                            <input type="text" class="form-control"  name="cycle" id="cycle" value="{{current_cycle}}">
+                            <input type="text" class="form-control" readonly="True"  name="cycle" id="cycle" value="{{current_cycle}}">
                         </div>
 
                         <div class="form-group">
                             <label for="recorded_by">Recorded by:</label>
-                            <input type="text" class="form-control" id="recorded_by" name="recorded_by" value="logged in user">
+                            <input type="text" class="form-control" id="recorded_by" readonly="True" name="recorded_by" value="logged in user">
                         </div>
                         {{form.is_loanee|as_crispy_field }}
                         <button type="submit" class="btn btn-primary" >Submit</button>
