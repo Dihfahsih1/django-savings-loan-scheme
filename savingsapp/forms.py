@@ -28,7 +28,8 @@ class SavingsForm(forms.ModelForm):
 class LoanForm(forms.ModelForm):
     class Meta:
         model=Loan
-        fields= ('name','cycle','date','amount','interest_rate', 'loan_period','recorded_by','is_loanee')
+        fields = ('name', 'cycle', 'date', 'amount', 'interest_rate',
+                  'loan_period', 'recorded_by', 'loan_status')
 class PayingLoanForm(forms.ModelForm):
     class Meta:
         model=PayingLoan
@@ -37,7 +38,8 @@ class PayingLoanForm(forms.ModelForm):
 class EditLoanForm(forms.ModelForm):
     class Meta:
         model=Loan
-        fields=('name','date','amount','interest_rate','loan_period','is_loanee')        
+        fields = ('name', 'date', 'amount', 'interest_rate',
+                  'loan_period', 'loan_status')
 
 class LookupForm(forms.ModelForm):
     class Meta:

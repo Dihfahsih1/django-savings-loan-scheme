@@ -68,7 +68,7 @@
                             <label for="recorded_by">Recorded by:</label>
                             <input type="text" class="form-control" id="recorded_by" readonly="True" name="recorded_by" value="logged in user">
                         </div>
-                        {{form.is_loanee|as_crispy_field }}
+                        {{form.loan_status|as_crispy_field }}
                         <button type="submit" class="btn btn-primary" >Submit</button>
                     </form>
                 </div>
