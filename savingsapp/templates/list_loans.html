@@ -16,11 +16,12 @@
               <tr style="font-weight: bolder;">
                 <td>Date</td>
                 <td>Name</td>
-                <td>Period</td>
+                <!-- <td>Period</td> -->
                 <td>Rate</td>
                 <td>Principal</td>
-                <td>Repayment</td>
+                <td>Paid</td>
                 <td>Balance</td>
+                <td>st</td>
                 <td>Action</td>
               </tr>
             </thead>
@@ -29,11 +30,13 @@
                 <tr>
                   <td>{{details.date}}</td>
                   <td>{{details.name}}</td>
-                  <td>{{details.loan_period}} Months</td>
+                  <!-- <td>{{details.loan_period}} Months</td> -->
                   <td>{{details.interest_rate}}%</td>
                   <td>{{details.amount|intcomma}}</td>
                   <td>{{details.Loan_Paid|intcomma}}</td>
+                  
                   <td>{{details.balance|intcomma}}</td>
+                  <td>{{details.status}}</td>
 
                   <td>
                     {% if details.balance > 0 %}
