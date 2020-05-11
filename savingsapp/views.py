@@ -250,8 +250,8 @@ def give_loan(request):
             rate=i.interest_rate
             context['rate']=rate
     form = LoanForm()
+    get_member = Saving.objects.all()
     context['form']=form
-
     return render(request,'loan_application.html', context)
 def edit_loan(request, pk):
     item = get_object_or_404(Loan, pk=pk)
