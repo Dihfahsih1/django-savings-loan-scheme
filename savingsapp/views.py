@@ -234,6 +234,8 @@ def edit_saving(request, pk):
 def social_fund(request):
     return render(request,'social_fund.html')
 
+
+    
 def give_loan(request):
     context={}
     if request.method == 'POST':
@@ -250,7 +252,6 @@ def give_loan(request):
             rate=i.interest_rate
             context['rate']=rate
     form = LoanForm()
-    get_member = Saving.objects.all()
     context['form']=form
     return render(request,'loan_application.html', context)
 def edit_loan(request, pk):

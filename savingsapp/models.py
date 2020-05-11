@@ -31,6 +31,20 @@ class CustomUser(AbstractUser):
 				return results["totals"]
 			else:
 				return 0 
+
+	@property
+	def maximum_loan_amount(self):
+		cycles = SavingCycle.objects.filter(is_active=True)
+		for i in cycles:
+			startdate = i.cycle_period_start
+			enddate = i.cycle_period_end
+			results = Saving.objects.filter(date__range=(
+					startdate, enddate), name=self.id).aggregate(totals=models.Sum("amount"))
+			if (results['totals']):
+				x=(results["totals"]/2)
+				return x
+			else:
+				return 0
 	@property
 	def full_name(self):
 		return str(self.first_name) + ' ' + str(self.last_name)
@@ -89,6 +103,7 @@ class Loan(models.Model):
 		interest=((self.interest_rate /100)* self.loan_period * self.amount)
 		bala = (self.amount + interest) - self.Loan_Paid
 		return bala
+
 		
 	@property
 	def status(self):

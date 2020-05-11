@@ -6,7 +6,7 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 admin.site.register(CustomUser, CustomUserAdmin)
 class CustomUser(admin.ModelAdmin):
-    list_display = ('full_name','total_saving')
+    list_display = ('full_name', 'total_saving', 'maximum_loan_amount')
 
 admin.site.register(Loan)
 class Loan(admin.ModelAdmin):
