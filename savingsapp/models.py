@@ -79,13 +79,14 @@ class Saving(models.Model):
 	def __str__(self):
 		return self.name
 class Loan(models.Model):
+	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))
 	cycle =  models.CharField(max_length=100, null=True, blank=True)
 	date = models.DateField(max_length=100, blank=True, null=True)
 	name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, default="kim",max_length=100, null=True, blank=True)
 	amount = models.IntegerField(default=0)
 	interest_rate = models.IntegerField(default=0)
 	loan_period = models.IntegerField(default=0)
-	is_loanee = models.BooleanField(default=True) 
+	loan_status = models.CharField(max_length=100,choices=status, default=RUNNING) 
 	recorded_by =models.CharField(max_length=220, blank=True, null=True)
 	@property
 	def Loan_Paid(self):
@@ -105,14 +106,15 @@ class Loan(models.Model):
 		return bala
 
 		
-	@property
-	def status(self):
-		if (self.Loan_Paid > self.amount):
-			self.is_loanee = False
-			return self.is_loanee
-		else:
-			self.is_loanee = True
-			return self.is_loanee
+	# @property
+	# def status(self):
+	# 	if (self.Loan_Paid > self.amount):
+	# 		self.is_loanee = False
+	# 		# self.is_loanee.save()
+	# 		return self.is_loanee
+	# 	else:
+	# 		self.is_loanee = True
+	# 		return self.is_loanee
 	def __str__(self):
 		return self.name
 
