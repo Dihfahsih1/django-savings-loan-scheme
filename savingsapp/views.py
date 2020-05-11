@@ -253,6 +253,8 @@ def give_loan(request):
             context['rate']=rate
     form = LoanForm()
     context['form']=form
+    all_members=CustomUser.objects.all()
+    context['all_members']=all_members
     return render(request,'loan_application.html', context)
 def edit_loan(request, pk):
     item = get_object_or_404(Loan, pk=pk)

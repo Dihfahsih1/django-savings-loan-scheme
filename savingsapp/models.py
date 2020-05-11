@@ -41,7 +41,7 @@ class CustomUser(AbstractUser):
 			results = Saving.objects.filter(date__range=(
 					startdate, enddate), name=self.id).aggregate(totals=models.Sum("amount"))
 			if (results['totals']):
-				x=(results["totals"]/2)
+				x=(results["totals"]*2)
 				return x
 			else:
 				return 0
