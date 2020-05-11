@@ -104,17 +104,19 @@ class Loan(models.Model):
 		interest=((self.interest_rate /100)* self.loan_period * self.amount)
 		bala = (self.amount + interest) - self.Loan_Paid
 		return bala
-
-		
-	# @property
-	# def status(self):
-	# 	if (self.Loan_Paid > self.amount):
-	# 		self.is_loanee = False
-	# 		# self.is_loanee.save()
-	# 		return self.is_loanee
-	# 	else:
-	# 		self.is_loanee = True
-	# 		return self.is_loanee
+	@property
+	def status(self):
+		# if(self.Loan_Paid > self.amount):
+		# 	self.loan_status = 'SETTLED'
+		# 	super(Loan, self).save(*args, **kwargs)
+		# print("else")	
+		if (self.Loan_Paid > self.amount):
+			self.loan_status = 'SETTLED'
+			self.loan_status
+			return self.loan_status
+		else:
+			self.loan_status = 'RUNNING'
+			return self.loan_status
 	def __str__(self):
 		return self.name
 
