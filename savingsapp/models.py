@@ -78,6 +78,7 @@ class Saving(models.Model):
 	amount = models.IntegerField(default=0)
 	def __str__(self):
 		return self.name
+		
 class Loan(models.Model):
 	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))
 	cycle =  models.CharField(max_length=100, null=True, blank=True)
