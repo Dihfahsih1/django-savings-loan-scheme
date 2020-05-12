@@ -48,7 +48,7 @@
                       </div>
                       {% else %}
                       <!-- <a href="{% url 'edit-loan' details.id %}" class="btn btn-warning btn-sm"><span class="fa fa-edit"> Edit</span></a> -->
-                      <a href="#"class="btn btn-success btn-sm"><span class="fa fa-dollar"> Fully Paid</span></a>
+                      <a href="{% url 'loan-repayments' details.id %}"class="btn btn-success btn-sm"><span class="fa fa-dollar"> Fully Paid</span></a>
 
                     {% endif %}  
                  </td>

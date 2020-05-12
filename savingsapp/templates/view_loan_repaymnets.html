@@ -3,7 +3,8 @@
 {% block content %}
 
 <p><a href="{% url 'index' %}">Home</a> / Loan</p>
-<!-- <h4>All Savings of <b style="color: red">{{get_member}}</b> for the cyle of {{current_cycle}}</h4> -->
+<h4>Loan Repayment of <b style="color: red">{{name}}</b>.  </h4>
+<h5>Amount Loaned is {{loaned_amount|intcomma}}</h5>
 <section class="page-news-details-area">
     <div class="container">
         <div class="row">
@@ -31,8 +32,9 @@
             <div class="col-lg-4 offset-lg-0 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-12">
                 <div class="sidebar">
                     <div class="sidebar-widget">
-                        <h2 class="sidebar-title">All Members</h2>
+                        <h2 class="sidebar-title"><u>All People Loaned</u></h2>
                         <ul class="widget-news">
+                            
                             <style type="text/css">
                                 img {
                                     border-radius: 30%;
@@ -48,22 +50,21 @@
 
                                 }
                             </style>
-                            <!-- <i>{{ forloop.counter }}</i>
                             {% for details in members_list %}
                             <li>
-                                <a href="{% url 'view-savings' details.pk %}">
+                                <a href="{% url 'loan-repayments' details.pk %}">
                                     <span class="content">
                                         <span class="meta">
                                             <span class="info"><span class="icon"><i
-                                                        class="fa fa-user"></i></span>{{ details.full_name }}</span>
+                                                        class="fa fa-user"></i></span>{{ details.name }}</span>
 
                                         </span>
                                 </a>
                             </li>
-                            {% endfor %} -->
+                            {% endfor %}
                         </ul>
                     </div>
-                    <!-- {% if members_list.has_other_pages %}
+                     {% if members_list.has_other_pages %} 
                     <nav aria-label="Page navigation conatiner" style="text-align: center">
                         <ul class="pagination justify-content-center">
                             {% if members_list.has_previous %}
@@ -76,7 +77,7 @@
                             {% endif %}
                         </ul>
                     </nav>
-                    {% endif %} -->
+                    {% endif %} 
                 </div>
             </div>
         </div>

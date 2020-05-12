@@ -299,16 +299,43 @@ def pay_loan(request, pk):
         loan_id=(items.id)
         context={'form':form, 'name':name, 'loan_id':loan_id}
         return render(request,'pay_loan.html',context)
+
+#view single loan repayments        
 def view_loan_repaymnets(request, pk):
-    get_loan_id=PayingLoan.filter(loan_id=pk)
+    context = {}
+    al=CustomUser.objects.all()
+    get_loan_id=PayingLoan.objects.filter(loan_id=pk)
+    for i in al:
+        nam = i.first_name + " " + i.last_name
+        for k in get_loan_id:
+            name = k.name
+            if (name == nam):
+                get_loan = Loan.objects.get(id=k.loan_id)
+                loaned_amount = get_loan.amount
+                context['loaned_amount'] = loaned_amount
+                context['name']=name
     sum_repayments = get_loan_id.aggregate(totals=models.Sum("amount"))
     total_amount = sum_repayments["totals"]
-    context={'get_loan_id':get_loan_id,'total_amount': total_amount}
+    loan_list = Loan.objects.all()
+    paginator = Paginator(loan_list, 10)  # 10 members on each page
+    page = request.GET.get('page')
+    try:
+        members_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        members_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        members_list = paginator.page(paginator.num_pages)
+    context['page']=page
+    context['members_list']=members_list
+    context['get_loan_id']=get_loan_id
+    context['total_amount']= total_amount
     return render(request, 'view_loan_repaymnets.html', context)
 
 #add new lookup
 def add_lookup(request):
-    if request.method=="POST":
+    if request.method == "POST":
         form=LookupForm(request.POST, request.FILES,)
         if form.is_valid():
             form.save()
