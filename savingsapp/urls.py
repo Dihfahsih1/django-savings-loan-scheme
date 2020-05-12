@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^add-lookup', views.add_lookup, name='add-lookup'),
     url(r'^details-of-lookup', views.add_lookup_details, name='add-lookup-details'),
     url(r'^look-details-list', views.list_lookup_details, name='list-lookup-details'),
-    url(r'^stocks/', views.StockList.as_view()),
+    url(r'^stocks/', views.StockList.as_view()), 
+    url(r'^view-loan-repayment/(?P<pk>\d+)', views.view_loan_repaymnets, name='loan-repayments'),
     ]
 urlpatterns= format_suffix_patterns(urlpatterns)
