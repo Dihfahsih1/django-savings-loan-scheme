@@ -299,6 +299,10 @@ def pay_loan(request, pk):
         loan_id=(items.id)
         context={'form':form, 'name':name, 'loan_id':loan_id}
         return render(request,'pay_loan.html',context)
+def view_loan_repaymnets(request, pk):
+    get_loan_id=PayingLoan.filter(loan_id=pk)
+    context={'get_loan_id':get_loan_id}
+    return render(request, 'view_loan_repaymnets.html', context)
 
 #add new lookup
 def add_lookup(request):
