@@ -317,7 +317,7 @@ def view_loan_repaymnets(request, pk):
     sum_repayments = get_loan_id.aggregate(totals=models.Sum("amount"))
     total_amount = sum_repayments["totals"]
     loan_list = Loan.objects.all()
-    paginator = Paginator(loan_list, 10)  # 10 members on each page
+    paginator = Paginator(loan_list, 10)  # 10 loanees on each page
     page = request.GET.get('page')
     try:
         members_list = paginator.page(page)
