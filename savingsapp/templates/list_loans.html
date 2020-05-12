@@ -30,7 +30,7 @@
               {% for details in loan_list %}
                 <tr>
                   <td>{{details.date}}</td>
-                  <td>{{details.name}}</td>
+                  <td><a href="{% url 'loan-repayments' details.id %}">{{details.name}} </a></td>
                   <!-- <td>{{details.loan_period}} Months</td> -->
                   <td>{{details.interest_rate}}%</td>
                   <td>{{details.amount|intcomma}}</td>

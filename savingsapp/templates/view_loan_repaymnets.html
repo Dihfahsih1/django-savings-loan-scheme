@@ -29,36 +29,24 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-4 offset-lg-0 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-12">
+            <div class="col-lg-4 offset-lg-0 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-12" style='border-left: 3px solid royalblue;'>
+                <h2 class="sidebar-title"><u>All People Loaned</u></h2>
                 <div class="sidebar">
                     <div class="sidebar-widget">
-                        <h2 class="sidebar-title"><u>All People Loaned</u></h2>
                         <ul class="widget-news">
-                            
-                            <style type="text/css">
-                                img {
-                                    border-radius: 30%;
-
-                                }
-
-                                .center {
-                                    display: block;
-                                    margin-top: 13px;
-                                    margin-left: auto;
-                                    margin-right: auto;
-                                    width: 70%;
-
-                                }
-                            </style>
+                            <style type="text/css">img { border-radius: 30%;}.center {display: block;margin-top: 13px;margin-left: auto;
+                                    margin-right: auto;width: 70%;}</style>
                             {% for details in members_list %}
                             <li>
                                 <a href="{% url 'loan-repayments' details.pk %}">
                                     <span class="content">
                                         <span class="meta">
-                                            <span class="info"><span class="icon"><i
-                                                        class="fa fa-user"></i></span>{{ details.name }}</span>
-
+                                            <span class="info">
+                                                <span class="icon"><i class="fa fa-user"></i></span>
+                                                {{ details.name }}
+                                            </span>
                                         </span>
+                                    </span>    
                                 </a>
                             </li>
                             {% endfor %}
