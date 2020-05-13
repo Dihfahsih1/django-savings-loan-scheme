@@ -44,12 +44,13 @@
                       <div class="mb-4">
                         <a href="{% url 'pay-loan' details.id %}"class="btn btn-info btn-sm"><span class="fa fa-dollar"> Pay Loan</span></a>
                         <a href="{% url 'edit-loan' details.id %}"class="btn btn-warning btn-sm"><span class="fa fa-edit"> Edit</span></a>
-                        <a href="{% url 'delete-loan' details.id %}"class="btn btn-danger btn-sm"><span class="fa fa-trash"> Delete</span></a>
+                        <!-- <a href="{% url 'delete-loan' details.id %}"class="btn btn-danger btn-sm"><span class="fa fa-trash"> Delete</span></a>
+                      -->
                       </div>
                       {% else %}
-                      <!-- <a href="{% url 'edit-loan' details.id %}" class="btn btn-warning btn-sm"><span class="fa fa-edit"> Edit</span></a> -->
-                      <a href="{% url 'loan-repayments' details.id %}"class="btn btn-success btn-sm"><span class="fa fa-dollar"> Fully Paid</span></a>
-
+                    
+                      <a href="{% url 'loan-repayments' details.id %}"class="btn btn-success btn-sm"><span class="fa fa-home"> Fully Paid</span></a>
+                      <a href="{% url 'give-loan' %}" class="btn btn-primary btn-sm"><span class="fa fa-share"> Get New Loan</span></a>
                     {% endif %}  
                  </td>
                 </tr>

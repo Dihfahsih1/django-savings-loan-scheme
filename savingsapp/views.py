@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import *
+from django.http import HttpResponse
 from django.contrib import messages
 from datetime import date
 import calendar
@@ -305,15 +306,6 @@ def view_loan_repaymnets(request, pk):
     context = {}
     al=CustomUser.objects.all()
     get_loan_id=PayingLoan.objects.filter(loan_id=pk)
-    for i in al:
-        nam = i.first_name + " " + i.last_name
-        for k in get_loan_id:
-            name = k.name
-            if (name == nam):
-                get_loan = Loan.objects.get(id=k.loan_id)
-                loaned_amount = get_loan.amount
-                context['loaned_amount'] = loaned_amount
-                context['name']=name
     sum_repayments = get_loan_id.aggregate(totals=models.Sum("amount"))
     total_amount = sum_repayments["totals"]
     loan_list = Loan.objects.all()
@@ -327,10 +319,20 @@ def view_loan_repaymnets(request, pk):
     except EmptyPage:
         # If page is out of range deliver last page of results
         members_list = paginator.page(paginator.num_pages)
-    context['page']=page
-    context['members_list']=members_list
-    context['get_loan_id']=get_loan_id
-    context['total_amount']= total_amount
+    context['page'] = page
+    context['members_list'] = members_list
+    context['get_loan_id'] = get_loan_id
+    context['total_amount'] = total_amount
+    for i in al:
+        if(i.first_name !=None and i.last_name !=None):
+            nam = i.first_name + " " + i.last_name
+            for k in get_loan_id:
+                name = k.name
+                if (name == nam):
+                    get_loan = Loan.objects.get(id=k.loan_id)
+                    loaned_amount = get_loan.amount
+                    context['loaned_amount'] = loaned_amount
+                    context['name']=name
     return render(request, 'view_loan_repaymnets.html', context)
 
 #add new lookup
