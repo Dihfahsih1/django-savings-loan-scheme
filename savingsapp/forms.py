@@ -11,8 +11,8 @@ class MemberForm(forms.ModelForm):
 
 class CyclesForm(forms.ModelForm):
     class Meta:
-        model=SavingCycle
-        fields=('cycle_name','cycle_period_start','cycle_period_end','interest_rate','is_active','archive_status')
+        model=Cycle
+        fields=('cycle_name','cycle_period_start','cycle_period_end','rate','is_active')
         
 class AttendanceForm(forms.ModelForm):
     class Meta:

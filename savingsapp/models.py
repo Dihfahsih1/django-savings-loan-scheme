@@ -21,7 +21,7 @@ class CustomUser(AbstractUser):
 		return str(self.first_name)  + ' ' + str(self.last_name)
 	@property 
 	def total_saving(self):
-		cycles = SavingCycle.objects.filter(is_active=True)
+		cycles = Cycle.objects.filter(is_active=True)
 		for i in cycles:
 			startdate= i.cycle_period_start
 			enddate= i.cycle_period_end
@@ -33,7 +33,7 @@ class CustomUser(AbstractUser):
 
 	@property
 	def maximum_loan_amount(self):
-		cycles = SavingCycle.objects.filter(is_active=True)
+		cycles = Cycle.objects.filter(is_active=True)
 		for i in cycles:
 			startdate = i.cycle_period_start
 			enddate = i.cycle_period_end
@@ -60,18 +60,16 @@ class Attendance(models.Model):
 	attendance_month = models.CharField(max_length=255, blank=True, null=True)
 
 
-class SavingCycle(models.Model):
-	status =(('ARCHIVED','ARCHIVED'),('UNARCHIVED','UNARCHIVED' ))
-	archive_status = models.CharField(max_length=200, choices=status,blank=True, null=True)
-	interest_rate =  models.IntegerField(default=5, null=True, blank=True)
-	cycle_name =  models.CharField( max_length=200, null=True, blank=True, unique=True)
+class Cycle(models.Model):
+	cycle_name =  models.CharField( max_length=220, null=True, blank=True, unique=True)
+	rate = models.IntegerField(default=15, null=True, blank=True)
 	cycle_period_start = models.DateField(max_length=255, blank=False, null=False, unique=True)
 	cycle_period_end = models.DateField(max_length=255, blank=False, null=False, unique=True)
 	is_active = models.BooleanField(default=True) 
 	def __str__(self):
 		return str(self.cycle_period_start) + "/" + str(self.cycle_period_end)
 class Saving(models.Model):
-	cycle =  models.ForeignKey(SavingCycle, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
+	cycle =  models.ForeignKey(Cycle, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
 	date = models.DateField(max_length=100, blank=True, null=True)
 	name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, max_length=100, null=True, blank=True)
 	amount = models.IntegerField(default=0)

@@ -62,7 +62,7 @@
                     <tr>
                       <td>{{list.id}}</td>
                       <td>{{list.cycle_name}}</td>
-                      <td>{{list.interest_rate}}</td>
+                      <td>{{list.rate}}</td>
                       <td>{{list.cycle_period_start}}</td>
                       <td>{{list.cycle_period_end}}</td>
                       <td>{{list.is_active}}</td>
@@ -74,6 +74,7 @@
                               <span class="glyphicon glyphicon-ok"></span> Active</a>
                                <a href="{% url 'archive-cycle' %}"class="btn btn-danger btn-sm"><span class="fa fa-ok"> ARCHIVE CYCLE</span></a>
                             {% else %}
+                            <a href="{% url 'edit-cycle' pk=list.id %}" class="btn btn-info btn-sm"><span class="fa fa-edit"> Edit</span></a>
                             <a href="#" class="btn btn-danger btn-sm">
                               <span class="glyphicon glyphicon-ok"></span> Archived</a>
                             {% endif %}

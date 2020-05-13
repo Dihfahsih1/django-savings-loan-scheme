@@ -80,7 +80,7 @@ def add_cycle(request):
             return redirect('add-cycle')
     else:
         form=CyclesForm()
-        all_cycle=SavingCycle.objects.all()
+        all_cycle=Cycle.objects.all()
         context = {'all_cycle':all_cycle, 'form': form}
         return render(request,'add_cycle.html',context)
 
@@ -94,7 +94,7 @@ def delete_cycle(request, pk):
 
 #editting cycle
 def edit_cycle(request, pk):
-    item = get_object_or_404(SavingCycle, pk=pk)
+    item = get_object_or_404(Cycle, pk=pk)
     if request.method == "POST":
         form = CyclesForm(request.POST,request.FILES, instance=item)
         if form.is_valid():
@@ -107,7 +107,7 @@ def edit_cycle(request, pk):
 
 #archive the saving at exactly the end    
 def archiving_cycle(request):
-    all_cycle=SavingCycle.objects.all()
+    all_cycle=Cycle.objects.all()
     today = date.today()
     for i in all_cycle:
         end_cycle = i.cycle_period_end
@@ -119,7 +119,7 @@ def archiving_cycle(request):
 
 #list of cycles          
 def cycle_list(request):
-    all_cycle=SavingCycle.objects.all()
+    all_cycle=Cycle.objects.all()
     context = {
     'all_cycle':all_cycle
     }
@@ -169,8 +169,8 @@ def make_saving(request):
         if form.is_valid:
             savings = form.save(commit=False)
             savings.save() 
-    cycle=SavingCycle.objects.all()
-    current_cycle=SavingCycle.objects.get(is_active=True)
+    cycle=Cycle.objects.all()
+    current_cycle=Cycle.objects.get(is_active=True)
     all_savings=Saving.objects.filter(cycle=current_cycle)
     form =SavingsForm()        
     context={'cycle':cycle,'form':form, 'all_savings':all_savings}         
@@ -180,8 +180,8 @@ def make_saving(request):
 def savings_list(request):    
     try: 
         all_members=CustomUser.objects.all()
-        current_cycle=SavingCycle.objects.get(is_active=True)
-        cycles = SavingCycle.objects.filter(is_active=True)
+        current_cycle=Cycle.objects.get(is_active=True)
+        cycles = Cycle.objects.filter(is_active=True)
         for i in cycles:
             startdate= i.cycle_period_start
             enddate= i.cycle_period_end
@@ -198,8 +198,8 @@ def savings_list(request):
 def view_savings(request,pk):
     get_member = CustomUser.objects.get(id=pk)
     get_all_members=CustomUser.objects.all()
-    current_cycle=SavingCycle.objects.get(is_active=True) 
-    cycles = SavingCycle.objects.filter(is_active=True)
+    current_cycle=Cycle.objects.get(is_active=True) 
+    cycles = Cycle.objects.filter(is_active=True)
     for i in cycles:
         startdate= i.cycle_period_start
         enddate= i.cycle_period_end 
@@ -245,10 +245,10 @@ def give_loan(request):
             loan = form.save(commit=False)
             loan.save() 
             return redirect('loan-list')
-    current_cycle=SavingCycle.objects.get(is_active=True)
+    current_cycle=Cycle.objects.get(is_active=True)
     context['current_cycle']=current_cycle
     if current_cycle:
-        rates=SavingCycle.objects.all()
+        rates=Cycle.objects.all()
         for i in rates:
             rate=i.interest_rate
             context['rate']=rate
