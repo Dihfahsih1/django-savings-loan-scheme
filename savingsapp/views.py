@@ -135,7 +135,12 @@ def make_attendence(request):
         for i in tofullname:
             if(request.POST.get('status') == 'on'):
                 tostate = request.POST.get('status')
+                print(tostate)
                 Attendance.objects.create(date=todate, status=tostate, full_name=i)
+            else:
+                tostate = request.POST.get('status')
+                Attendance.objects.create(date=todate, status=tostate, full_name=i)
+
     all_members = CustomUser.objects.all()
     context={'all_members':all_members}
     return render(request,'make_attendance.html',context)
