@@ -28,8 +28,10 @@
                  <tbody>
                    {% for member in all_members %}
                      <tr>
-                         <td>{{member.full_name}}<input type="hidden" id="{{member.id}}" name="full_name" value="{{member.full_name}}"></td>
-                         <td><input type="checkbox" id="{{member.id}}" name="status"></td>
+                         <td>{{member.full_name}}
+                          <!-- <input type="hidden" id="{{member.id}}" name="full_name" value="{{member.full_name}}"> -->
+                         </td>
+                         <td><input type="checkbox" id="{{member.id}}" name="status" value="{{member.id}}"></td>
                      </tr>
                      {% endfor %}
                  </tbody>
