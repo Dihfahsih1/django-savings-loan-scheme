@@ -30,16 +30,18 @@
                 </thead>
                 <tbody>
                   {% for member in all_members %}
+                  {% if member.total_saving != 0 %}
                     <tr>
                       <td>{{member.full_name}}</td>
                       <td>{{member.total_saving|intcomma}}</td>
                         
                       <td>
                         <div class="mb-4">
-                          <a href="{% url 'view-savings' member.id %}"class="btn btn-info btn-sm"><span class="fa fa-list"> View Saving</span></a>
+                          <a href="{% url 'view-savings' member.id %}"class="btn btn-info btn-sm"><span class="fa fa-list"> View Saving Routine</span></a>
                         </div>
                      </td>
                     </tr>
+                   {% endif %} 
                   {% endfor %}
                 </tbody>
             </table>

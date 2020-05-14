@@ -246,6 +246,7 @@ def give_loan(request):
     if request.method == 'POST':
         form = LoanForm(request.POST, request.FILES)
         if form.is_valid:
+            print(form.errors)
             loan = form.save(commit=False)
             loan.save() 
             return redirect('loan-list')

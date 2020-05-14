@@ -17,7 +17,6 @@
                 <form method="POST" enctype="multipart/form-data" >
                     {% csrf_token %}
                   {{ form.date|as_crispy_field}}
-                  {{ form.cycle|as_crispy_field}}
                   {{ form.amount|as_crispy_field}}
                   {{form.name|as_crispy_field}}          
 
