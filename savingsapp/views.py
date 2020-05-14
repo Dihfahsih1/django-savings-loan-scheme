@@ -30,12 +30,11 @@ def add_member(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'Member has been successfully added to the system')
-            return redirect('members-list')
-    else:
-        all_members = CustomUser.objects.all()
-        form=MemberForm()
-        context={'form':form, 'all_members':all_members}
-        return render(request,'add_member.html',context)
+            return redirect('add-member')
+    all_members = CustomUser.objects.all()
+    form=MemberForm()
+    context={'form':form, 'all_members':all_members}
+    return render(request,'add_member.html',context)
 
 #edit member
 def edit_member(request, pk):
