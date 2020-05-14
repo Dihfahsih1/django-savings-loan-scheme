@@ -139,6 +139,7 @@ def make_attendence(request):
                 tostatus='Present'
                 tofullname = str(i.first_name )+ " " + str(i.last_name)
                 Attendance.objects.create(date=todate, status=tostatus, full_name=tofullname)
+        return redirect('attendence-history')
     all_members = CustomUser.objects.all()
     context={'all_members':all_members}
     return render(request,'make_attendance.html',context)
