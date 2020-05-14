@@ -60,6 +60,7 @@ class Attendance(models.Model):
 	social_fund = models.IntegerField(default=0, blank=True, null=True)
 	attendance_year = models.CharField(max_length=255, blank=True, null=True, default=years)
 	attendance_month = models.CharField(max_length=255, blank=True, null=True)
+	attendance_day = models.CharField(max_length=255, blank=True, null=True)
 
 
 class Cycle(models.Model):

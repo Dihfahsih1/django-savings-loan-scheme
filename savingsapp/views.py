@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from datetime import date
 import calendar
+from django.db.models import Q
 from django.forms import modelformset_factory
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 #rest api
@@ -149,13 +150,15 @@ def attendence_history(request):
     today = datetime.now()
     years=today.year
     a_month=today.month
+    a_day=today.day
     if request.method == 'POST':
         years = request.POST['attendance_year']
         a_month = request.POST['attendance_month']
-        all_attendance = Attendance.objects.filter( date__month=a_month, date__year=years)
+        a_day = request.POST['attendance_day']
+        all_attendance = Attendance.objects.filter(date__month=a_month, date__year=years)
         mth=int(a_month)
         month=calendar.month_name[mth]
-        context = {'all_attendance': all_attendance,'a_month':a_month, 'years': years,'today': today,'month': month}
+        context = {'all_attendance': all_attendance,'a_day':a_day,'a_month':a_month, 'years': years,'today': today,'month': month}
         return render(request, "view_attendance.html", context)
     mth=int(a_month)
     month=calendar.month_name[mth]
