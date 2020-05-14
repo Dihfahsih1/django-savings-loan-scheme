@@ -84,7 +84,7 @@ class Loan(models.Model):
 	amount = models.IntegerField(default=0)
 	interest_rate = models.IntegerField(default=0)
 	loan_period = models.IntegerField(default=0)
-	loan_status = models.CharField(max_length=100,choices=status, default='RUNNING') 
+	loan_status = models.CharField(max_length=100,choices=status, default='RUNNING', null=True, blank=True)
 	recorded_by =models.CharField(max_length=220, blank=True, null=True)
 	@property
 	def Loan_Paid(self):
@@ -134,13 +134,13 @@ class Stock(models.Model):
 	def __str__(self):
 		return str(self.ticker)
 
-class Lookup(models.Model):
+class LookUp(models.Model):
 	name = models.CharField(unique=True, max_length=220, blank=False, null=False)
 	def __str__(self):
 		return self.name
 
-class LookupDetails(models.Model):
-	Lookup_Name = models.ForeignKey(Lookup, on_delete=models.CASCADE, max_length=220, blank=False, null=False)
+class LookupDetail(models.Model):
+	Lookup_Name = models.ForeignKey(LookUp, on_delete=models.CASCADE, max_length=220, blank=False, null=False)
 	Details = models.CharField(max_length=220, blank=False, null=False)
 	def __str__(self):
 		return self.Lookup_Name
