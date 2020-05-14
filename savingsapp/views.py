@@ -129,20 +129,15 @@ def cycle_list(request):
 
 #record member attendance
 def make_attendence(request):
-    objs = CustomUser.objects.count()
-    AttendanceFormset=modelformset_factory(Attendance, form=AttendanceForm, extra=0)
     if request.method == 'POST':
-        formset = AttendanceFormset(request.POST, request.FILES)
-        if formset.is_valid():
-            print(formset)
-            formset.save()
-            return redirect('attendence-history')
-        else:
-            print (formset.errors)
-    else:
-        formset =  AttendanceFormset()
+        todate = request.POST.get('date')
+        tofullname = request.POST.getlist('full_name')
+        for i in tofullname:
+            if(request.POST.get('status') == 'on'):
+                tostate = request.POST.get('status')
+                Attendance.objects.create(date=todate, status=tostate, full_name=i)
     all_members = CustomUser.objects.all()
-    context={'formset':formset, 'all_members':all_members}
+    context={'all_members':all_members}
     return render(request,'make_attendance.html',context)
 
 #attendance history
@@ -176,8 +171,9 @@ def make_saving(request):
         startdate = i.cycle_period_start
         enddate = i.cycle_period_end
     all_savings = Saving.objects.filter(date__range=(startdate, enddate))
-    form =SavingsForm()        
-    context={'form':form, 'all_savings':all_savings}         
+    form =SavingsForm()
+    cycle = Cycle.objects.get(is_active=True)
+    context={'form':form, 'all_savings':all_savings,'cycle':cycle}         
     return render(request,'make_saving.html', context)
 
 #list of all member savings

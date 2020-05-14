@@ -5,6 +5,8 @@ from django.db.models import Sum
 
 class CustomUser(AbstractUser):
 	roles =(('Admin','Admin'),('Ordinary','Ordinary'))
+	atte = (('Present', 'Present'), ('Absent', 'Absent'))
+	status = models.CharField(max_length=30,choices=atte,default='Absent', blank=True, null=True)
 	email = models.EmailField(max_length=255, unique=True, blank=True, null=True)
 	telephone = models.IntegerField(default=0, blank=True, null=True)
 	first_name = models.CharField(max_length=30, blank=True, null=True)
@@ -54,7 +56,7 @@ class Attendance(models.Model):
 	atte =(('Present','Present'),('Absent','Absent'))
 	full_name = models.CharField(max_length=123, null=True, blank=True)
 	date = models.DateField(blank=True, null=True)
-	status = models.BooleanField(blank=True, default=False)
+	status = models.CharField(max_length=100, null=True, blank=True)
 	social_fund = models.IntegerField(default=0, blank=True, null=True)
 	attendance_year = models.CharField(max_length=255, blank=True, null=True, default=years)
 	attendance_month = models.CharField(max_length=255, blank=True, null=True)
