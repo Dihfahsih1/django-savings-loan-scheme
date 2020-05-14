@@ -169,7 +169,7 @@ def make_saving(request):
         form = SavingsForm(request.POST, request.FILES)
         if form.is_valid:
             savings = form.save(commit=False)
-            savings.save() 
+            savings.save()
     cycle=Cycle.objects.all()
     current_cycle=Cycle.objects.get(is_active=True)
     all_savings=Saving.objects.filter(cycle=current_cycle)
