@@ -78,7 +78,6 @@ class Saving(models.Model):
 		
 class Loan(models.Model):
 	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))
-	cycle =  models.CharField(max_length=100, null=True, blank=True)
 	date = models.DateField(max_length=100, blank=True, null=True)
 	name = models.ForeignKey(
 		CustomUser, on_delete=models.CASCADE, max_length=100, null=True, blank=True)

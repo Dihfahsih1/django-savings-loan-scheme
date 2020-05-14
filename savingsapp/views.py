@@ -170,7 +170,7 @@ def make_saving(request):
         print(form.errors)
         if form.is_valid:
             form.save()
-            return redirect('add-member')
+            return redirect('make-saving')
     current_cycle = Cycle.objects.filter(is_active=True)
     for i in current_cycle:
         startdate = i.cycle_period_start
@@ -287,7 +287,11 @@ def delete_loan(request, pk):
         return redirect("loan-list")
 
 def list_loans(request):
-    loan_list = Loan.objects.all()
+    current_cycle = Cycle.objects.filter(is_active=True)
+    for i in current_cycle:
+        startdate = i.cycle_period_start
+        enddate = i.cycle_period_end
+    loan_list = Loan.objects.filter(date__range=(startdate, enddate))
     context={'loan_list':loan_list}
     return render(request, 'list_loans.html', context)
 
