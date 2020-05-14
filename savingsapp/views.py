@@ -131,12 +131,14 @@ def cycle_list(request):
 def make_attendence(request):
     if request.method == 'POST':
         todate = request.POST.get('date')
-        
         tostate = request.POST.getlist('status')
-        tofullname = request.POST.getlist('full_name')
-        Attendance.objects.create(
-            date=todate, status=tostate, full_name=tofullname)
-
+        for i in tostate:
+            status_id = i
+            member_id=CustomUser.objects.filter(id=status_id)
+            for i in member_id:
+                tostatus='Present'
+                tofullname = str(i.first_name )+ " " + str(i.last_name)
+                Attendance.objects.create(date=todate, status=tostatus, full_name=tofullname)
     all_members = CustomUser.objects.all()
     context={'all_members':all_members}
     return render(request,'make_attendance.html',context)
