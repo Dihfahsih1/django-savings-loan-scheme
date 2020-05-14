@@ -69,9 +69,9 @@ class Cycle(models.Model):
 	def __str__(self):
 		return str(self.cycle_period_start) + "/" + str(self.cycle_period_end)
 class Saving(models.Model):
-	cycle =  models.ForeignKey(Cycle, on_delete=models.SET_NULL,  max_length=100, null=True, blank=True)
 	date = models.DateField(max_length=100, blank=True, null=True)
-	name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, max_length=100, null=True, blank=True)
+	name = models.ForeignKey(
+		CustomUser, on_delete=models.CASCADE, max_length=100, null=True, blank=True)
 	amount = models.IntegerField(default=0)
 	def __str__(self):
 		return self.name
@@ -80,7 +80,8 @@ class Loan(models.Model):
 	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))
 	cycle =  models.CharField(max_length=100, null=True, blank=True)
 	date = models.DateField(max_length=100, blank=True, null=True)
-	name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL,max_length=100, null=True, blank=True)
+	name = models.ForeignKey(
+		CustomUser, on_delete=models.CASCADE, max_length=100, null=True, blank=True)
 	amount = models.IntegerField(default=0)
 	interest_rate = models.IntegerField(default=0)
 	loan_period = models.IntegerField(default=0)

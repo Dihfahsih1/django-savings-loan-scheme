@@ -166,15 +166,18 @@ def attendence_history(request):
 #record member savings
 def make_saving(request):
     if request.method == 'POST':
-        form = SavingsForm(request.POST, request.FILES)
+        form = SavingsForm(request.POST or None, request.FILES or None)
+        print(form.errors)
         if form.is_valid:
-            savings = form.save(commit=False)
-            savings.save()
-    cycle=Cycle.objects.all()
-    current_cycle=Cycle.objects.get(is_active=True)
-    all_savings=Saving.objects.filter(cycle=current_cycle)
+            form.save()
+            return redirect('add-member')
+    current_cycle = Cycle.objects.filter(is_active=True)
+    for i in current_cycle:
+        startdate = i.cycle_period_start
+        enddate = i.cycle_period_end
+    all_savings = Saving.objects.filter(date__range=(startdate, enddate))
     form =SavingsForm()        
-    context={'current_cycle':current_cycle,'cycle':cycle,'form':form, 'all_savings':all_savings}         
+    context={'form':form, 'all_savings':all_savings}         
     return render(request,'make_saving.html', context)
 
 #list of all member savings

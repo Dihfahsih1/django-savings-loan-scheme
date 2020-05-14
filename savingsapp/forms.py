@@ -23,7 +23,7 @@ class AttendanceForm(forms.ModelForm):
 class SavingsForm(forms.ModelForm):
     class Meta:
         model=Saving
-        fields=('name','cycle','date','amount')
+        fields=('name','date','amount')
 
 class LoanForm(forms.ModelForm):
     class Meta:
