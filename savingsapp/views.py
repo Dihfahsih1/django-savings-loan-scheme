@@ -174,7 +174,7 @@ def make_saving(request):
     current_cycle=Cycle.objects.get(is_active=True)
     all_savings=Saving.objects.filter(cycle=current_cycle)
     form =SavingsForm()        
-    context={'cycle':cycle,'form':form, 'all_savings':all_savings}         
+    context={'current_cycle':current_cycle,'cycle':cycle,'form':form, 'all_savings':all_savings}         
     return render(request,'make_saving.html', context)
 
 #list of all member savings
