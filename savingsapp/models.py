@@ -67,12 +67,14 @@ class Cycle(models.Model):
 	cycle_period_end = models.DateField(max_length=255, blank=False, null=False, unique=True)
 	is_active = models.BooleanField(default=True) 
 	def __str__(self):
-		return str(self.cycle_period_start) + "/" + str(self.cycle_period_end)
+		x=self.cycle_period_start.year
+		y=self.cycle_period_end.year
+		return str(x) + "/" + str(y)
 class Saving(models.Model):
 	date = models.DateField(max_length=100, blank=True, null=True)
 	name = models.ForeignKey(
 		CustomUser, on_delete=models.CASCADE, max_length=100, null=True, blank=True)
-	amount = models.IntegerField(default=0)
+	amount = models.IntegerField(default=0, null=True, blank=True)
 	def __str__(self):
 		return self.name
 		
@@ -81,9 +83,9 @@ class Loan(models.Model):
 	date = models.DateField(max_length=100, blank=True, null=True)
 	name = models.ForeignKey(
 		CustomUser, on_delete=models.CASCADE, max_length=100, null=True, blank=True)
-	amount = models.IntegerField(default=0)
+	amount = models.IntegerField(default=0, null=True, blank=True)
 	interest_rate = models.IntegerField(default=0)
-	loan_period = models.IntegerField(default=0)
+	loan_period = models.IntegerField(default=0, null=True, blank=True)
 	loan_status = models.CharField(max_length=100,choices=status, default='RUNNING', null=True, blank=True)
 	recorded_by =models.CharField(max_length=220, blank=True, null=True)
 	@property
