@@ -250,7 +250,7 @@ def give_loan(request):
     if current_cycle:
         rates=Cycle.objects.all()
         for i in rates:
-            rate=i.interest_rate
+            rate=i.rate
             context['rate']=rate
     form = LoanForm()
     context['form']=form
