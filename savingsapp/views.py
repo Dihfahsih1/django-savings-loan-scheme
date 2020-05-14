@@ -131,15 +131,17 @@ def cycle_list(request):
 def make_attendence(request):
     if request.method == 'POST':
         todate = request.POST.get('date')
+        toall= request.POST.get('date')
+        tostate = request.POST.getlist('status')
+        for j in tostate:
+            print(j)
         tofullname = request.POST.getlist('full_name')
         for i in tofullname:
-            if(request.POST.get('status') == 'on'):
-                tostate = request.POST.get('status')
-                print(tostate)
-                Attendance.objects.create(date=todate, status=tostate, full_name=i)
+            if j == 'on':
+                Attendance.objects.create(date=todate, status=j, full_name=i)
             else:
-                tostate = request.POST.get('status')
-                Attendance.objects.create(date=todate, status=tostate, full_name=i)
+                j == 'off'
+                Attendance.objects.create(date=todate, status=k, full_name=m)
 
     all_members = CustomUser.objects.all()
     context={'all_members':all_members}
