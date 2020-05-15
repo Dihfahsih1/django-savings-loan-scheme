@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^Savings-give-loan', views.give_loan, name='give-loan'),
     url(r'^Savings-social-fund', views.record_social_fund, name='record-social-fund'),
     url(r'^Social-fund-list', views.social_fund_list, name='social-fund-list'),
+    url(r'^Social-Funds-Routine/(?P<pk>\d+)', views.social_fund_routine, name='social-fund-routine'),
     url(r'^Savings-add-cycle', views.add_cycle, name='add-cycle'),
     url(r'^Savings-cycle-list', views.cycle_list, name='cycle-list'),
     url(r'^archiving-cycles', views.archiving_cycle, name='archive-cycle'),
