@@ -396,8 +396,9 @@ def record_social_fund(request):
     return render(request,'record_social_fund.html',context)
 
 def social_fund_list(request):
-    all_members=CustomUser.objects.all()
-    context={'all_members':all_members}
+    current_cycle = Cycle.objects.get(is_active=True)
+    all_members = CustomUser.objects.all()
+    context = {'all_members': all_members, 'current_cycle': current_cycle}
     return render(request, 'social_fund_list.html', context)
 
  
@@ -408,7 +409,7 @@ def social_fund_routine(request, pk):
     name=(get_member.first_name + " " + get_member.last_name)
     get_all_members = CustomUser.objects.all()
     current_cycle = Cycle.objects.get(is_active=True)
-    
+
     cycles = Cycle.objects.filter(is_active=True)
     for i in cycles:
         startdate = i.cycle_period_start

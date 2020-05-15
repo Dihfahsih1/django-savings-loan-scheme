@@ -3,7 +3,7 @@
 {% block content %}
 
 <p><a href="{% url 'social-fund-list' %}">Member Contribution</a> | {{get_member}}</p>
-<h4>Social Funds Contributions for the cycle of {{current_cycle}}</h4>
+<h4>Social Funds Contributions for the cycle of <b style="color: slateblue;">{{current_cycle}}</b></h4>
 <p>All contributions made by <b style="color: red"> {{get_member}}</b></p>
 <section class="page-news-details-area">
     <div class="container">
@@ -15,7 +15,7 @@
                         <thead>
                             <tr>
                                 <td>Date</td>
-                                <td>Social Fund.<b style="color: red">(Total Contributions:{{total_amount|intcomma}})</b></td>
+                                <td>Social Fund.<b style="color: red">(Total Contributions: Shs.{{total_amount|intcomma}})</b></td>
                             </tr>
                         </thead>
                         <tbody>
