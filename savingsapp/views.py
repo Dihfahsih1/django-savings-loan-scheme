@@ -177,7 +177,7 @@ def make_saving(request):
     for i in current_cycle:
         startdate = i.cycle_period_start
         enddate = i.cycle_period_end
-    all_savings = Saving.objects.filter(date__range=(startdate, enddate))
+    all_savings = Saving.objects.filter(date__range=(startdate, enddate)).order_by('-date')
     form =SavingsForm()
     cycle = Cycle.objects.get(is_active=True)
     context={'form':form, 'all_savings':all_savings,'cycle':cycle}         
