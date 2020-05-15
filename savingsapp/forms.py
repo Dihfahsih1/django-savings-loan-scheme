@@ -7,7 +7,7 @@ from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, MonthPic
 class MemberForm(forms.ModelForm):
     class Meta:
         model=CustomUser
-        fields = ('status', 'email', 'telephone', 'first_name', 'last_name',
+        fields = ('status', 'email', 'telephone', 'first_name', 'last_name', 'social_fund',
                   'application_fee', 'is_active', 'is_staff', 'is_superuser', 'Role')
 
 class CyclesForm(forms.ModelForm):
@@ -18,7 +18,7 @@ class CyclesForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model=Attendance
-        fields=('full_name','date','status','social_fund')
+        fields=('full_name','date','status')
         status = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
 
 class SavingsForm(forms.ModelForm):

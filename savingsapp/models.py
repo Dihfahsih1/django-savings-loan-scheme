@@ -14,6 +14,7 @@ class CustomUser(AbstractUser):
 	username = models.CharField(max_length=30, unique=True, blank=True, null=True)
 	application_fee = models.IntegerField(default=10000, blank=True, null=True)
 	Role = models.CharField(max_length=250, choices=roles)
+	social_fund = models.IntegerField(default=0, blank=True, null=True)
 	is_active = models.BooleanField(default=True)   # can login
 	is_staff = models.BooleanField(default=False)  # staff user non superuser
 	is_superuser = models.BooleanField(default=False)
@@ -53,11 +54,9 @@ class CustomUser(AbstractUser):
 class Attendance(models.Model):
 	today = datetime.now()
 	years=today.year
-	atte =(('Present','Present'),('Absent','Absent'))
 	full_name = models.CharField(max_length=123, null=True, blank=True)
 	date = models.DateField(blank=True, null=True)
 	status = models.CharField(max_length=100, null=True, blank=True)
-	social_fund = models.IntegerField(default=0, blank=True, null=True)
 	attendance_year = models.CharField(max_length=255, blank=True, null=True, default=years)
 	attendance_month = models.CharField(max_length=255, blank=True, null=True)
 	attendance_day = models.CharField(max_length=255, blank=True, null=True)
