@@ -9,7 +9,9 @@
 
 {% block content %}
       <div class="container-fluid">
-          <p><a href="index.html">Home</a> / Attendance</p>
+          <p><a href="{% url 'make-attendence' %}">Make Attendance</a> | Attendance History</p>
+          <h3>Member Attendance History for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
+          <hr />
           <form  method="POST" enctype="multipart/form-data" >
           {% csrf_token %}
 

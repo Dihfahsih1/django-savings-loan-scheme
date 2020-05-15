@@ -136,6 +136,7 @@ def cycle_list(request):
 
 #record member attendance
 def make_attendence(request):
+    current_cycle = Cycle.objects.get(is_active=True)
     if request.method == 'POST':
         todate = request.POST.get('date')
         tostate = request.POST.getlist('status')
@@ -146,14 +147,15 @@ def make_attendence(request):
                 tostatus='Present'
                 tofullname = str(j.first_name )+ " " + str(j.last_name)
                 Attendance.objects.create(date=todate, status=tostatus, full_name=tofullname)
-                messages.success(request, f'Attendance has been succefully recorded')
+        messages.success(request, f'Attendance has been succefully recorded')
         return redirect('attendence-history')
     all_members = CustomUser.objects.all()
-    context={'all_members':all_members}
+    context={'all_members':all_members, 'current_cycle':current_cycle}
     return render(request,'make_attendance.html',context)
 
 #attendance history
 def attendence_history(request):
+    current_cycle = Cycle.objects.get(is_active=True)
     today = datetime.now()
     years=today.year
     a_month=today.month
@@ -165,11 +167,11 @@ def attendence_history(request):
         all_attendance = Attendance.objects.filter(date__month=a_month, date__year=years)
         mth=int(a_month)
         month=calendar.month_name[mth]
-        context = {'all_attendance': all_attendance,'a_day':a_day,'a_month':a_month, 'years': years,'today': today,'month': month}
+        context = {'current_cycle':current_cycle, 'all_attendance': all_attendance,'a_day':a_day,'a_month':a_month, 'years': years,'today': today,'month': month}
         return render(request, "view_attendance.html", context)
     mth=int(a_month)
     month=calendar.month_name[mth]
-    context = {'years': years, 'month':month,'a_month':a_month}
+    context = {'years': years, 'month':month,'a_month':a_month, 'current_cycle':current_cycle}
     return render(request, "view_attendance.html", context)
 
 #record member savings
