@@ -10,6 +10,7 @@
 <div class="container">
     <p><a href="{% url 'index'%}">Home</a> / Attendance</p>
     <h3>Record Members' Social Fund</h3>
+    <p>Tick only those who paid 1000 as the contribution to the fund</p>
 
     <form method="POST" enctype="multipart/form-data" name="atte">
         {% csrf_token %}
@@ -23,7 +24,7 @@
                 <tr style="font-weight: bolder;">
                     <td>id</td>
                     <td>Name</td>
-                    <td>Amount</td>
+                    <td>Paid ?<span style="color: tomato;">(Amount: Shs.1000)</span></td>
                 </tr>
             </thead>
             <tbody>

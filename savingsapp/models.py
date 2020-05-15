@@ -51,12 +51,21 @@ class CustomUser(AbstractUser):
 		return str(self.first_name) + ' ' + str(self.last_name)
 
 class SocialFund(models.Model):
-	full_name=models.ForeignKey(CustomUser, on_delete=models.CASCADE, max_length=220, blank=True, null=True)
+	full_name = models.CharField(max_length=220, blank=True, null=True)
 	date = models.DateField(max_length=100, blank=True, null=True)
-	amount = models.IntegerField(default=0, blank=True, null=True)
-	def __str__(self):
-		return self.full_name
-    
+	social_fund = models.IntegerField(default=0, blank=True, null=True)
+	
+	@property
+	def total_social_fund(self):
+	results = Saving.objects.filter(date__range=(
+		startdate, enddate), name=self.id).aggregate(totals=models.Sum("amount"))
+		if (results['totals']):
+			x = (results["totals"]*2)
+			return x
+		else:
+			return 0
+		def __str__(self):
+			return self.full_name
 
 class Attendance(models.Model):
 	today = datetime.now()

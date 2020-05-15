@@ -14,7 +14,7 @@ class MemberForm(forms.ModelForm):
 class SocialFundForm(forms.ModelForm):
     class Meta:
         model = SocialFund
-        fields = ('full_name','amount', 'date')
+        fields = ('full_name','social_fund', 'date')
 
 class CyclesForm(forms.ModelForm):
     class Meta:

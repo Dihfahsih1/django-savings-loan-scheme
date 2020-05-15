@@ -136,9 +136,9 @@ def make_attendence(request):
         for i in tostate:
             status_id = i
             member_id=CustomUser.objects.filter(id=status_id)
-            for i in member_id:
+            for j in member_id:
                 tostatus='Present'
-                tofullname = str(i.first_name )+ " " + str(i.last_name)
+                tofullname = str(j.first_name )+ " " + str(j.last_name)
                 Attendance.objects.create(date=todate, status=tostatus, full_name=tofullname)
         return redirect('attendence-history')
     all_members = CustomUser.objects.all()
@@ -393,13 +393,13 @@ def record_social_fund(request):
             member_id = CustomUser.objects.filter(id=status_id)
             for j in member_id:
                 toAmount = 1000
-                tofullname =j.id 
-                Attendance.objects.create(date=todate, amount=toAmount, full_name=tofullname)
-        return redirect('record-social-fund')
+                tofullname = str(j.first_name) + " " + str(j.last_name)
+                SocialFund.objects.create(date=todate, social_fund=toAmount, full_name=tofullname)
+        return redirect('social-fund-list')
     all_members = CustomUser.objects.all()
     context={'all_members':all_members}
     return render(request,'record_social_fund.html',context)
-    
+
 def social_fund_list(request):
     all_social_fund = SocialFund.objects.all()
     context={'all_social_fund':all_social_fund}
