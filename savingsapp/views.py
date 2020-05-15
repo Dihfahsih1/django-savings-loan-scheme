@@ -146,6 +146,7 @@ def make_attendence(request):
                 tostatus='Present'
                 tofullname = str(j.first_name )+ " " + str(j.last_name)
                 Attendance.objects.create(date=todate, status=tostatus, full_name=tofullname)
+                messages.success(request, f'Attendance has been succefully recorded')
         return redirect('attendence-history')
     all_members = CustomUser.objects.all()
     context={'all_members':all_members}
@@ -178,7 +179,9 @@ def make_saving(request):
         print(form.errors)
         if form.is_valid:
             form.save()
+            messages.success(request, f'Savings of the member has been Recorded')
             return redirect('make-saving')
+            
     current_cycle = Cycle.objects.filter(is_active=True)
     for i in current_cycle:
         startdate = i.cycle_period_start
@@ -253,6 +256,7 @@ def give_loan(request):
             print(form.errors)
             loan = form.save(commit=False)
             loan.save() 
+            messages.success(request, f'Member Loan Application has been recorded')
             return redirect('loan-list')
     current_cycle=Cycle.objects.get(is_active=True)
     context['current_cycle']=current_cycle
@@ -306,6 +310,7 @@ def pay_loan(request, pk):
         form = PayingLoanForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Member Loan Repayment has been recorded')
             return redirect('loan-list')
     else:
         form = LoanForm(instance=items)
@@ -386,6 +391,7 @@ def list_lookup_details(request):
     return render(request,'list_lookup_details.html', context)        
 
 def record_social_fund(request):
+    current_cycle = Cycle.objects.get(is_active=True)
     if request.method == 'POST':
         todate = request.POST.get('date')
         tostate = request.POST.getlist('status')
@@ -396,9 +402,10 @@ def record_social_fund(request):
                 toAmount = 1000
                 tofullname = str(j.first_name) + " " + str(j.last_name)
                 SocialFund.objects.create(date=todate, social_fund=toAmount, full_name=tofullname)
+        messages.success(request, f'Member Social Fund Contributions have been recorded')
         return redirect('social-fund-list')
     all_members = CustomUser.objects.all()
-    context={'all_members':all_members}
+    context={'all_members':all_members, 'current_cycle':current_cycle}
     return render(request,'record_social_fund.html',context)
 
 def social_fund_list(request):
