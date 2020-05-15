@@ -34,6 +34,20 @@ class CustomUser(AbstractUser):
 				return 0 
 
 	@property
+	def total_social_fund(self):
+		cycles = Cycle.objects.filter(is_active=True)
+		for i in cycles:
+			if (self.first_name != None and self.last_name != None):
+				name = (self.first_name + " " + self.last_name)
+				startdate = i.cycle_period_start
+				enddate = i.cycle_period_end
+				results = SocialFund.objects.filter(date__range=(
+						startdate, enddate), full_name=name).aggregate(totals=models.Sum("social_fund"))
+				if (results['totals']):
+					return results["totals"]
+				else:
+					return 0
+	@property
 	def maximum_loan_amount(self):
 		cycles = Cycle.objects.filter(is_active=True)
 		for i in cycles:
@@ -54,18 +68,8 @@ class SocialFund(models.Model):
 	full_name = models.CharField(max_length=220, blank=True, null=True)
 	date = models.DateField(max_length=100, blank=True, null=True)
 	social_fund = models.IntegerField(default=0, blank=True, null=True)
-	
-	@property
-	def total_social_fund(self):
-	results = Saving.objects.filter(date__range=(
-		startdate, enddate), name=self.id).aggregate(totals=models.Sum("amount"))
-		if (results['totals']):
-			x = (results["totals"]*2)
-			return x
-		else:
-			return 0
-		def __str__(self):
-			return self.full_name
+	def __str__(self):
+		return self.full_name
 
 class Attendance(models.Model):
 	today = datetime.now()

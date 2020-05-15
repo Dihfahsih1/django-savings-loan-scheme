@@ -16,19 +16,20 @@
             width="100%">
             <thead>
                 <tr style="font-weight: bolder;">
-                    <td>Date</td>
                     <td>Name</td>
                     <td>Amount</td>
                     <td>Action</td>
                 </tr>
             </thead>
             <tbody>
-                {% for details in all_social_fund %}
+                {% for details in all_members %}
                 <tr>
-                    <td>{{details.date}}</td>
                     <td>{{details.full_name}}</td>
-                    <td>{{details.social_fund|intcomma}}</td>
-                    <td>Take Action</td>
+                    <td>{{details.total_social_fund|intcomma}}</td>
+                    <td><div class="mb-4">
+                        <a href="#" class="btn btn-info btn-sm"><span class="fa fa-list"> View Routine</span></a>
+                        </div>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

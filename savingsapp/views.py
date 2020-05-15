@@ -401,6 +401,6 @@ def record_social_fund(request):
     return render(request,'record_social_fund.html',context)
 
 def social_fund_list(request):
-    all_social_fund = SocialFund.objects.all()
-    context={'all_social_fund':all_social_fund}
+    all_members=CustomUser.objects.all()
+    context={'all_members':all_members}
     return render(request, 'social_fund_list.html', context)
