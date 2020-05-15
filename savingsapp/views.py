@@ -26,13 +26,19 @@ def index(request):
 
 #record member
 def add_member(request):
+    all_members = CustomUser.objects.all()
     if request.method=="POST":
+        fname=request.POST.get('first_name')
+        lname = request.POST.get('last_name')
         form=MemberForm(request.POST, request.FILES,)
+        print(form)
         if form.is_valid():
+            for i in all_members:
+                if(i.first_name == fname and i.last_name == lname):
+                    return HttpResponse('Member With those Names Already Exists')
             form.save()
             messages.success(request, f'Member has been successfully added to the system')
             return redirect('add-member')
-    all_members = CustomUser.objects.all()
     form=MemberForm()
     context={'form':form, 'all_members':all_members}
     return render(request,'add_member.html',context)
