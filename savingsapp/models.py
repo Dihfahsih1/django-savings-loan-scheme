@@ -14,7 +14,6 @@ class CustomUser(AbstractUser):
 	username = models.CharField(max_length=30, unique=True, blank=True, null=True)
 	application_fee = models.IntegerField(default=10000, blank=True, null=True)
 	Role = models.CharField(max_length=250, choices=roles)
-	social_fund = models.IntegerField(default=0, blank=True, null=True)
 	is_active = models.BooleanField(default=True)   # can login
 	is_staff = models.BooleanField(default=False)  # staff user non superuser
 	is_superuser = models.BooleanField(default=False)
@@ -51,6 +50,14 @@ class CustomUser(AbstractUser):
 	def full_name(self):
 		return str(self.first_name) + ' ' + str(self.last_name)
 
+class SocialFund(models.Model):
+	full_name=models.ForeignKey(CustomUser, on_delete=models.CASCADE, max_length=220, blank=True, null=True)
+	date = models.DateField(max_length=100, blank=True, null=True)
+	amount = models.IntegerField(default=0, blank=True, null=True)
+	def __str__(self):
+		return self.full_name
+    
+
 class Attendance(models.Model):
 	today = datetime.now()
 	years=today.year
@@ -60,7 +67,6 @@ class Attendance(models.Model):
 	attendance_year = models.CharField(max_length=255, blank=True, null=True, default=years)
 	attendance_month = models.CharField(max_length=255, blank=True, null=True)
 	attendance_day = models.CharField(max_length=255, blank=True, null=True)
-
 
 class Cycle(models.Model):
 	cycle_name =  models.CharField( max_length=220, null=True, blank=True, unique=True)

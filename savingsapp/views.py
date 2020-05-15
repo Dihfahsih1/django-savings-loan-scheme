@@ -383,3 +383,24 @@ def list_lookup_details(request):
     'all_lookups_details':all_lookups_details
     }
     return render(request,'list_lookup_details.html', context)        
+
+def record_social_fund(request):
+    if request.method == 'POST':
+        todate = request.POST.get('date')
+        tostate = request.POST.getlist('status')
+        for i in tostate:
+            status_id = i
+            member_id = CustomUser.objects.filter(id=status_id)
+            for j in member_id:
+                toAmount = 1000
+                tofullname =j.id 
+                Attendance.objects.create(date=todate, amount=toAmount, full_name=tofullname)
+        return redirect('record-social-fund')
+    all_members = CustomUser.objects.all()
+    context={'all_members':all_members}
+    return render(request,'record_social_fund.html',context)
+    
+def social_fund_list(request):
+    all_social_fund = SocialFund.objects.all()
+    context={'all_social_fund':all_social_fund}
+    return render(request, 'social_fund_list.html', context)
