@@ -28,7 +28,7 @@ def index(request):
 def add_member(request):
     all_members = CustomUser.objects.all()
     if request.method=="POST":
-        fname=request.POST.get('first_name')
+        fname = request.POST.get('first_name')
         lname = request.POST.get('last_name')
         form=MemberForm(request.POST, request.FILES,)
         print(form)

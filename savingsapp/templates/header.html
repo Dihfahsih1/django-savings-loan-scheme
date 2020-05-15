@@ -106,6 +106,21 @@
                     <!-- Nav End -->
                 </div>
             </nav>
+
         </div>
     </div>
+    <!--fade up notification upon successful redirect-->
+    {% if messages %}
+    <div class="col-lg-6" style="float: right">
+        <div class="alert alert-info" id="success-alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <ul>
+                {% for message in messages %}
+                <h1 style="font-weight: bolder" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                </h1>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
 </div>
