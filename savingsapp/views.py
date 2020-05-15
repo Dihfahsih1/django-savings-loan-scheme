@@ -154,7 +154,7 @@ def attendence_history(request):
     if request.method == 'POST':
         years = request.POST['attendance_year']
         a_month = request.POST['attendance_month']
-        a_day = request.POST['attendance_day']
+        # a_day = request.POST['attendance_day']
         all_attendance = Attendance.objects.filter(date__month=a_month, date__year=years)
         mth=int(a_month)
         month=calendar.month_name[mth]
