@@ -2,9 +2,9 @@
 {% load humanize %}
 {% block content %}
 
-<p><a href="{% url 'index' %}">Home</a> / Social Funds</p>
+<p><a href="{% url 'social-fund-list' %}">Member Contribution</a> | {{get_member}}</p>
 <h4>Social Funds Contributions for the cycle of {{current_cycle}}</h4>
-<p>All contributions made by<b style="color: red">{{get_member}}</b></p>
+<p>All contributions made by <b style="color: red"> {{get_member}}</b></p>
 <section class="page-news-details-area">
     <div class="container">
         <div class="row">
