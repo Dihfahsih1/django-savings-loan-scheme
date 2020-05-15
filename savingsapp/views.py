@@ -405,27 +405,29 @@ def social_fund_list(request):
 #display social fund contrbution routine
 def social_fund_routine(request, pk):
     get_member = CustomUser.objects.get(id=pk)
+    name=(get_member.first_name + " " + get_member.last_name)
     get_all_members = CustomUser.objects.all()
     current_cycle = Cycle.objects.get(is_active=True)
+    
     cycles = Cycle.objects.filter(is_active=True)
     for i in cycles:
         startdate = i.cycle_period_start
-        enddate = i.cycle_period_end
-    if (self.first_name != None and self.last_name != None):
-        name = (self.first_name + " " + self.last_name)
-        get_contributions = SocialFund.objects.filter(full_name=name, date__range=(startdate, enddate))
-        all_contributions = get_contributions.aggregate(totals=models.Sum("social_fund"))
-        total_amount = all_contributions["totals"]
-        paginator = Paginator(get_all_members, 10)  # 10 members on each page
-        page = request.GET.get('page')
-        try:
-            members_list = paginator.page(page)
-        except PageNotAnInteger:
-            # If page is not an integer deliver the first page
-            members_list = paginator.page(1)
-        except EmptyPage:
-            # If page is out of range deliver last page of results
-            members_list = paginator.page(paginator.num_pages)
-        context = {'current_cycle': current_cycle, 'total_amount': total_amount,
-                   'get_contributions': get_contributions, 'get_member': get_member, 'page': page, 'members_list': members_list}
-        return render(request, 'social_funds_routine.html', context)
+        enddate = i.cycle_period_end  
+
+    get_contributions = SocialFund.objects.filter(full_name=name, date__range=(startdate, enddate))
+    all_contributions = get_contributions.aggregate(totals=models.Sum("social_fund"))
+    total_amount = all_contributions["totals"]
+
+    paginator = Paginator(get_all_members, 10)  # 10 members on each page
+    page = request.GET.get('page')
+    try:
+        members_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        members_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        members_list = paginator.page(paginator.num_pages)
+    context = {'current_cycle': current_cycle, 'total_amount': total_amount,
+                'get_contributions': get_contributions, 'get_member': get_member, 'page': page, 'members_list': members_list}
+    return render(request, 'social_funds_routine.html', context)
