@@ -1,11 +1,14 @@
 <!-- Top Header Area -->
 
 {% load static %}
+<div class="row">
 <div class="top-header">
     <div class="container h-100">
         <div class="row h-100">
             <div class="col-12 h-100">
+               
                 <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
+                    {% if request.get_full_path == "/" %}
                     <!-- Top Headline -->
                     <div class="top-headline">
                         <p style="font-size: 200%">Welcome to <span>Kisajja Kikulu</span></p>
@@ -14,11 +17,18 @@
                     <div class="login-faq-earn-money">
                         <p><a href="#">Login </a> | <a href="#"> Register</a></p>
                     </div>
+
+                    {% else %}
+                    <div class="top-headline">
+                        <p style="font-size: 200%">{{request.get_full_path}}<span> Module</span></p>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Navbar Area -->
 <div class="cryptos-main-menu" style=" background-color: #ced4da">
@@ -77,7 +87,7 @@
                             </li>
                             <li><a href="#">Cycles</a>
                                 <ul class="dropdown">
-                                    <li><a href="{% url 'add-cycle' %}">Add Cycle</a></li>
+                                    <li><a href="{% url 'add-cycle' %}">Manage Cycles</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">Look Ups</a>
@@ -109,4 +119,5 @@
         </div>
     </div>
     {% endif %}
+</div>
 </div>

@@ -7,11 +7,8 @@
 {% endblock stylesheets %}
 
 {% block content %}
-
-    <section class="hero-area">
-        <!--form area-->
-        <p><a href="{% url 'members-list' %}" class="btn btn-info">Members List</a> | Add Member</p>
-        <h3>Membership Registration for  <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
+        <p style="text-align: center;"><a href="{% url 'members-list' %}" class="btn btn-info">Members List</a> | Add Member</p>
+        <h3 style="text-align: center;">Membership Registration for  <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
         <hr />
         <div class="container-fluid">
             <div class="row">
@@ -85,7 +82,6 @@
             </div>
           </div>
         </div>
-    </section>
     {% endblock content %}
 
     {% block javascripts %}
