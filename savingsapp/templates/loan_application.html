@@ -9,10 +9,11 @@
 {% block content %}
 {% load crispy_forms_tags %}
 {% load humanize %}
+<p><a href="{% url 'loan-list' %}">Loan List</a> | Loan Application</p>
     <section class="hero-area">
         <div class="container">
-            <p><a href="{% url 'loan-list' %}">Loan List</a> | Loan Application</p>
             <h3>Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
+            <hr/>
             <div class="row">
                 <div class="col-lg-7">
                     <h2><b>Loan Legibility </b></h2>

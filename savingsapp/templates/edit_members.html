@@ -7,12 +7,11 @@
 {% endblock stylesheets %}
 
 {% block content %}
-
+<p><a href="{% url 'members-list' %}">List Of Members</a> | Edit Member</p>
     <section class="hero-area">
-        <!--form area-->
-
         <div class="container">
-            <p><a href="{% url 'index' %}">Home</a> / Edit Member</p>
+            <h3>Membership Registration for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
+            <hr />
             <h2> Edit Member Details</h2>
             <div class="row">
             <div class="col-lg-6 align-items-center">

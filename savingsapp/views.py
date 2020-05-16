@@ -26,6 +26,7 @@ def index(request):
 
 #record member
 def add_member(request):
+    current_cycle = Cycle.objects.get(is_active=True)
     all_members = CustomUser.objects.all()
     if request.method=="POST":
         fname = request.POST.get('first_name')
@@ -40,11 +41,12 @@ def add_member(request):
             messages.success(request, f'Member has been successfully added to the system')
             return redirect('add-member')
     form=MemberForm()
-    context={'form':form, 'all_members':all_members}
+    context={'form':form, 'all_members':all_members, 'current_cycle':current_cycle}
     return render(request,'add_member.html',context)
 
 #edit member
 def edit_member(request, pk):
+    current_cycle = Cycle.objects.get(is_active=True)
     item = get_object_or_404(CustomUser, pk=pk)
     if request.method == "POST":
         form = MemberForm(request.POST,request.FILES, instance=item)
@@ -54,7 +56,8 @@ def edit_member(request, pk):
             return redirect('members-list')
     else:
         form = MemberForm(instance=item)
-    return render(request, 'edit_members.html', {'form': form})
+    context = {'form': form, 'current_cycle': current_cycle}
+    return render(request, 'edit_members.html', context)
 
 #delete Member
 def delete_member(request, pk):
@@ -65,16 +68,18 @@ def delete_member(request, pk):
         return redirect("members-list")
 
 def members_list(request):
+    current_cycle = Cycle.objects.get(is_active=True)
     all_members=CustomUser.objects.all()
     context = {
-    'all_members':all_members
+        'all_members': all_members, 'current_cycle': current_cycle
     }
     return render(request,'members_list.html', context)
 
 def view_member(request, pk):
+    current_cycle = Cycle.objects.get(is_active=True)
     member_details=CustomUser.objects.filter(id=pk)
     context = {
-    'member_details':member_details
+        'member_details': member_details, 'current_cycle': current_cycle
     }
     return render(request,'view_member.html', context)
 
@@ -298,12 +303,13 @@ def delete_loan(request, pk):
         return redirect("loan-list")
 
 def list_loans(request):
-    current_cycle = Cycle.objects.filter(is_active=True)
-    for i in current_cycle:
+    cycle = Cycle.objects.filter(is_active=True)
+    for i in cycle:
         startdate = i.cycle_period_start
         enddate = i.cycle_period_end
     loan_list = Loan.objects.filter(date__range=(startdate, enddate))
-    context={'loan_list':loan_list}
+    current_cycle = Cycle.objects.get(is_active=True)
+    context={'loan_list':loan_list, 'current_cycle':current_cycle}
     return render(request, 'list_loans.html', context)
 
 def pay_loan(request, pk):
@@ -323,6 +329,7 @@ def pay_loan(request, pk):
 
 #view single loan repayments        
 def view_loan_repaymnets(request, pk):
+    cu
     context = {}
     al=CustomUser.objects.all()
     get_loan_id=PayingLoan.objects.filter(loan_id=pk)
