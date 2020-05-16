@@ -31,7 +31,6 @@
                    {% if member.first_name != None and member.last_name != None %}
                      <tr> <td>{{member.id}}</td>
                          <td>{{member.full_name}}
-                          <!-- <input type="hidden" id="{{member.id}}" name="full_name" value="{{member.full_name}}"> -->
                          </td>
                          <td><input type="checkbox" id="{{member.id}}" name="status" value="{{member.id}}"></td>
                      </tr>
