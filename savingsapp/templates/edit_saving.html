@@ -7,9 +7,11 @@
 {% endblock stylesheets %}
 {% block content %}
     <section class="hero-area">
-        <div class="container">
-            <p><a href="{% url 'index' %}">Home</a> / Edit Saving</p>
-            <h2> Edit Savings Details for <b style="color:red">{{form.name}}</b></h2>
+        <div class="container-fluid">
+            <p><a href="{% url 'index' %}"  class="btn btn-info">List of Savings</a> | Edit Saving</p>
+            <h3>Saving Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
+            <hr />
+            <h5> Edit Savings Details for <b style="color:red">{{form.name}}</b></h5>
             <div class="row">
             <div class="col-lg-4 align-items-center">
 

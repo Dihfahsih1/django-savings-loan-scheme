@@ -7,9 +7,9 @@
 {% endblock stylesheets %}
 
 {% block content %}
-<p><a href="{% url 'members-list' %}">List Of Members</a> | Edit Member</p>
+<p><a href="{% url 'members-list' %}" class="btn btn-info">List Of Members</a> Edit Member <a href="{% url 'add-member' %}" class="btn btn-info">Add Member</a></p>
     <section class="hero-area">
-        <div class="container">
+        <div class="container-fluid">
             <h3>Membership Registration for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
             <hr />
             <h2> Edit Member Details</h2>

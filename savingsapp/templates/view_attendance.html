@@ -8,9 +8,8 @@
 {% endblock stylesheets %}
 
 {% block content %}
-      <div class="container-fluid">
-          <p><a href="{% url 'make-attendence' %}">Make Attendance</a> | Attendance History</p>
-          <h3>Member Attendance History for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
+          <p style="text-align: center;"><a href="{% url 'make-attendence' %}" class="btn btn-info">Make Attendance</a> Attendance History</p>
+          <h3 style="text-align: center;">Member Attendance History for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
           <hr />
           <form  method="POST" enctype="multipart/form-data" >
           {% csrf_token %}
@@ -112,5 +111,5 @@
                   {% endfor %}
                 </tbody>
               </table>
-            </div>
+</section>
 {% endblock content %}

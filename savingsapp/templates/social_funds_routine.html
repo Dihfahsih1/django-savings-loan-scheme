@@ -2,10 +2,11 @@
 {% load humanize %}
 {% block content %}
 
-<p><a href="{% url 'social-fund-list' %}">Member Contribution</a> | {{get_member}}</p>
-<h4>Social Funds Contributions for the cycle of <b style="color: slateblue;">{{current_cycle}}</b></h4>
-<p>All contributions made by <b style="color: red"> {{get_member}}</b></p>
+<p style="text-align: center;"><a href="{% url 'social-fund-list' %}" class="btn btn-info">Member Contribution</a> {{get_member}} <a href="{% url 'record-social-fund' %}" class="btn btn-info">Record Social Fund</a></p>
+<h3 style="text-align: center;">Social Funds Contributions for the cycle of <b style="color: slateblue;">{{current_cycle}}</b></h3>
+<hr />
 <section class="page-news-details-area">
+    <p>All contributions made by <b style="color: red"> {{get_member}}</b></p>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12 col-sm-12 col-12">

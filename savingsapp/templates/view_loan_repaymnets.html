@@ -2,7 +2,9 @@
 {% load humanize %}
 {% block content %}
 
-<p><a href="{% url 'index' %}">Home</a> / Loan</p>
+<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn btn-info">Loan List</a> {{name}} <a href="{% url 'give-loan' %}" class="btn btn-info">Loan Application</a></p>
+    <h3 style="text-align: center;">Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
+    <hr />
 <h4>Loan Repayment of <b style="color: red">{{name}}</b>.  </h4>
 <h5>Amount Loaned is {{loaned_amount|intcomma}}</h5>
 <section class="page-news-details-area">

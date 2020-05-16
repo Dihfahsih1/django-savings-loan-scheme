@@ -8,9 +8,11 @@
 
 {% block content %}
 
-<div class="container">
-  <p><a href="{% url 'index'%}">Home</a> / Member-List</p>
-  <h3>Member Details</h3>
+<section class="hero-area">
+  <p><a href="{% url 'add-member' %}" class="btn btn-info">Add Member</a> Members Details</p>
+  <h3>Membership Registration for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
+  <hr />
+  <h5>Member Details</h5>
   <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
       <thead>
         <tr style="font-weight: bolder;">
@@ -39,7 +41,7 @@
       {% endfor %}
       </tbody>
   </table>
-</div>
+</section>
 
         {% endblock content %}
         {% block javascripts %}

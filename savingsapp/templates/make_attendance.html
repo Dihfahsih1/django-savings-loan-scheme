@@ -7,9 +7,8 @@
 {% endblock stylesheets %}
 
 {% block content %}
-      <div class="container">
-          <p><a href="{% url 'attendence-history' %}">Attendance History</a> | Make Attendance </p>
-          <h3>Member Attendance for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
+          <p style="text-align: center;"><a href="{% url 'attendence-history' %}" class="btn btn-info">Attendance History</a> Make Attendance </p>
+          <h3 style="text-align: center;">Member Attendance for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
           <hr/>
            <h5>Record Members' Attendance</h5>
 
@@ -42,5 +41,4 @@
              </table>
                 <button type="submit" class="btn btn-primary" >Submit</button>
             </form>
-        </div>
         {% endblock content %}

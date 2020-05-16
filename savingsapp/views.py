@@ -279,6 +279,7 @@ def give_loan(request):
     
     return render(request,'loan_application.html', context)
 def edit_loan(request, pk):
+    current_cycle = Cycle.objects.get(is_active=True)
     item = get_object_or_404(Loan, pk=pk)
     if request.method == "POST":
         form = EditLoanForm(request.POST,request.FILES, instance=item)
@@ -292,7 +293,8 @@ def edit_loan(request, pk):
         date = item.date
         period = item.loan_period
         amount = item.amount
-        context={'form':form, 'amount':amount, 'rate':rate, 'date':date, 'period':period}
+        context = {'form': form, 'amount': amount, 'rate': rate,
+                   'date': date, 'period': period, 'current_cycle': current_cycle}
         return render(request, 'edit_loan.html', context)
 #deleting cycle
 def delete_loan(request, pk):
@@ -313,6 +315,7 @@ def list_loans(request):
     return render(request, 'list_loans.html', context)
 
 def pay_loan(request, pk):
+    current_cycle=Cycle.objects.get(is_active=True)
     items = get_object_or_404(Loan,pk=pk)
     if request.method == "POST":
         form = PayingLoanForm(request.POST)
@@ -324,13 +327,14 @@ def pay_loan(request, pk):
         form = LoanForm(instance=items)
         name=(items.name)
         loan_id=(items.id)
-        context={'form':form, 'name':name, 'loan_id':loan_id}
+        context = {'form': form, 'name': name,
+                   'loan_id': loan_id, 'current_cycle': current_cycle}
         return render(request,'pay_loan.html',context)
 
 #view single loan repayments        
 def view_loan_repaymnets(request, pk):
-    cu
     context = {}
+    current_cycle=Cycle.objects.get(is_active=True)
     al=CustomUser.objects.all()
     get_loan_id=PayingLoan.objects.filter(loan_id=pk)
     sum_repayments = get_loan_id.aggregate(totals=models.Sum("amount"))
@@ -350,6 +354,7 @@ def view_loan_repaymnets(request, pk):
     context['members_list'] = members_list
     context['get_loan_id'] = get_loan_id
     context['total_amount'] = total_amount
+    context['current_cycle'] = current_cycle
     for i in al:
         if(i.first_name !=None and i.last_name !=None):
             nam = i.first_name + " " + i.last_name

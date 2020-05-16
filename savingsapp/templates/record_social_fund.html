@@ -7,9 +7,9 @@
 {% endblock stylesheets %}
 
 {% block content %}
-<div class="container">
-    <p><a href="{% url 'social-fund-list' %}"> Social Fund List</a> | Record Social Fund</p>
-    <h3>Record Members' Social Fund for <b style="color: slateblue;">{{current_cycle}}</b> Cycle</h3>
+    <p style="text-align: center;"><a href="{% url 'social-fund-list' %}" class="btn btn-info"> Social Fund List</a> Record Social Fund</p>
+    <h3 style="text-align: center;">Record Members' Social Fund for <b style="color: slateblue;">{{current_cycle}}</b> Cycle</h3>
+    <hr />
     <p>Tick only those who paid 1000 as the contribution to the fund</p>
 
     <form method="POST" enctype="multipart/form-data" name="atte">
@@ -42,5 +42,5 @@
         </table>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-</div>
+</section>
 {% endblock content %}

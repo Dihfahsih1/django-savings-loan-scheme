@@ -9,9 +9,8 @@
 {% block content %}
 {% load crispy_forms_tags %}
 {% load humanize %}
-<p><a href="{% url 'loan-list' %}">Loan List</a> | Loan Application</p>
+<p><a href="{% url 'loan-list' %}"  class="btn btn-info">Loan List</a> | Loan Application</p>
     <section class="hero-area">
-        <div class="container">
             <h3>Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
             <hr/>
             <div class="row">

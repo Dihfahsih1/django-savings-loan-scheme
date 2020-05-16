@@ -7,8 +7,8 @@
 {% endblock stylesheets %}
 
 {% block content %}
-      <div class="container">
-        <p><a href="{% url 'add-member' %}" class="success">Add Member</a> | Members List</p>
+      <section class="hero-area">
+        <p><a href="{% url 'add-member' %}"  class="btn btn-info">Add Member</a> Members List</p>
         <h3>Membership Registration for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
         <hr />
         <h5>List Of Registered Members</h5>
@@ -40,9 +40,7 @@
             {% endfor %}
             </tbody>
         </table>
-      </div>
-    </div>
-  </div>
+      </section>
 
         {% endblock content %}
         {% block javascripts %}

@@ -2,8 +2,10 @@
 {% load humanize %}
 {% block content %}
 
-  <p><a href="{% url 'index' %}">Home</a> / Savings</p>
-  <h4>All Savings of <b style="color: red">{{get_member}}</b> for the cyle of {{current_cycle}}</h4>
+  <p style="text-align: center;"><a href="{% url 'index' %}" class="btn btn-info">List of Savings</a> {{get_member}} <a href="{% url 'make-saving' %}" class="btn btn-info"> Record Savings</a></p>
+  <h3 style="text-align: center;">Saving Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
+  <hr />
+  <h5>All Savings of <b style="color: red">{{get_member}}</b></h5>
    <section class="page-news-details-area">
         <div class="container">
             <div class="row">                

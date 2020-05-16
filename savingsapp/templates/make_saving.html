@@ -9,9 +9,8 @@
 {% load humanize %}
 {% block content %}
 {% load crispy_forms_tags %}
-      <div class="container">
-        <p><a href="{% url 'savings-list' %}">Savings List</a> | Record Savings</p>
-        <h3>Saving Scheme for <b style="color: slateblue;">{{cycle}}</b> cycle</h3>
+        <p style="text-align: center;"><a href="{% url 'savings-list' %}" class="btn btn-info">Savings List</a> Record Savings</p>
+        <h3 style="text-align: center;">Saving Scheme for <b style="color: slateblue;">{{cycle}}</b> cycle</h3>
         <hr/>
         <div class="row">
             <div class="col-lg-4 align-items-center">
@@ -65,9 +64,6 @@
             </div>    
                 
         </div>
-
-
-    </div>
         {% endblock content %}
 
         {% block javascripts %}
