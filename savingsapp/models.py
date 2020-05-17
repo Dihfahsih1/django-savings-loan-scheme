@@ -3,6 +3,7 @@ from django.db import models
 from datetime import datetime
 from django.db.models import Sum
 
+
 class CustomUser(AbstractUser):
 	roles =(('Admin','Admin'),('Ordinary','Ordinary'))
 	atte = (('Present', 'Present'), ('Absent', 'Absent'))
