@@ -11,17 +11,18 @@
     <hr />
 <h4>Loan Repayment of <b style="color: red">{{name}}</b>.  </h4>
 <h5>Amount Loaned is {{loaned_amount|intcomma}}</h5>
+<b style="color: red">(Total Repayment:{{total_amount|intcomma}})</b>
 <section class="page-news-details-area">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+            <div class="col-lg-10">
                 <div class="page-news-details">
                     <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap"
                         cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <td>Date</td>
-                                <td>Payment.<b style="color: red">(Total Repayment:{{total_amount|intcomma}})</b></td>
+                                <td>Payment.</td>
                                 <td>Actions</td>
                             </tr>
                         </thead>
@@ -31,14 +32,17 @@
                                 <td>{{details.date}}</td>
                                 <td>{{details.amount|intcomma}}</td>
                                 <td><a href="{% url 'edit-loan-repayment' details.id %}" class="btn btn-warning btn-sm"><span class="fa fa-edit">
-                                        Edit</span></a></td>
+                                        Edit</span></a>
+                                <a href="{% url 'pay-loan' details.loan_id %}" class="btn btn-info btn-sm"><span class="fa fa-dollar"> Pay Loan</span></a>
+                                </td>
+
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-lg-4 offset-lg-0 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-12" style='border-left: 3px solid royalblue;'>
+            <div class="col-lg-2 offset-lg-0 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-12" style='border-left: 3px solid royalblue;'>
                 <h2 class="sidebar-title"><u>All People Loaned</u></h2>
                 <div class="sidebar">
                     <div class="sidebar-widget">

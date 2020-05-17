@@ -421,6 +421,7 @@ def view_loan_repaymnets(request, pk):
                     loaned_amount = get_loan.amount
                     context['loaned_amount'] = loaned_amount
                     context['name']=name
+                    
     return render(request, 'view_loan_repaymnets.html', context)
 
 #add new lookup
