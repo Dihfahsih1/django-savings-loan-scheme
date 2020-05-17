@@ -125,6 +125,7 @@ def activate_cycle(request, pk):
         Cycle.objects.filter(id=pk).update(is_active=True)
         messages.success(request, f'New Cycle has been Activated')
         return redirect('add-cycle')
+        
 #archive the saving at exactly the end    
 def archiving_cycle(request):
     all_cycle=Cycle.objects.all()
@@ -305,6 +306,7 @@ def edit_loan(request, pk):
         context = {'form': form, 'amount': amount, 'rate': rate, 'name': name,
                    'date': date, 'period': period, 'current_cycle': current_cycle}
         return render(request, 'edit_loan.html', context)
+
 #deleting cycle
 def delete_loan(request, pk):
     item= get_object_or_404(Loan, id=pk)
@@ -368,6 +370,7 @@ def edit_loan_repayment(request, pk):
         name=item.name
         context = {'form': form,'current_cycle': current_cycle, 'name':name}
         return render(request, 'edit_loan_repayment.html', context)
+
 #view single loan repayments        
 def view_loan_repaymnets(request, pk):
     context = {}
@@ -441,6 +444,7 @@ def list_lookup_details(request):
     }
     return render(request,'list_lookup_details.html', context)        
 
+#RECORDING SOCIAL FUND
 def record_social_fund(request):
     current_cycle = Cycle.objects.get(is_active=True)
     if request.method == 'POST':
@@ -464,8 +468,6 @@ def social_fund_list(request):
     all_members = CustomUser.objects.all()
     context = {'all_members': all_members, 'current_cycle': current_cycle}
     return render(request, 'social_fund_list.html', context)
-
- 
 
 #display social fund contrbution routine
 def social_fund_routine(request, pk):
@@ -534,6 +536,5 @@ def sacco_account(request):
             total_loan_given = 0
         total_amount = (total_registration + total_savings + total_social + total_repayments) - total_loan_given
         context = {'total_registration': total_registration, 'total_savings': total_savings,
-                    'total_social': total_social, 'total_repayments': total_repayments, 'total_loan_given': total_loan_given, 'total_amount':total_amount}
-        
+                    'total_social': total_social, 'total_repayments': total_repayments, 'total_loan_given': total_loan_given, 'total_amount':total_amount}   
     return render(request, 'sacco_account.html', context)
