@@ -22,7 +22,7 @@
                </div>
                  <thead>
                    <tr style="font-weight: bolder;">
-                    <td>id</td>
+                    <td>#SL</td>
                      <td>Name</td>
                      <td>Present?</td>
                    </tr>
@@ -30,7 +30,7 @@
                  <tbody>
                    {% for member in all_members %}
                    {% if member.first_name != None and member.last_name != None %}
-                     <tr> <td>{{member.id}}</td>
+                     <tr> <td>{{forloop.counter}}</td>
                          <td>{{member.full_name}}
                          </td>
                          <td><input type="checkbox" id="{{member.id}}" name="status" value="{{member.id}}"></td>
