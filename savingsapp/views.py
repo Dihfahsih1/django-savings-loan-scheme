@@ -334,7 +334,7 @@ def all_loans_given(request):
     context = {'loan_list': loan_list, 'current_cycle': current_cycle}
     return render(request, 'all_loans_given.html', context)
 
-    
+
 def pay_loan(request, pk):
     current_cycle=Cycle.objects.get(is_active=True)
     items = get_object_or_404(Loan,pk=pk)
@@ -352,6 +352,22 @@ def pay_loan(request, pk):
                    'loan_id': loan_id, 'current_cycle': current_cycle}
         return render(request,'pay_loan.html',context)
 
+#Edit Loan Repayment 
+def edit_loan_repayment(request, pk):
+    current_cycle = Cycle.objects.get(is_active=True)
+    item = get_object_or_404(PayingLoan, pk=pk)
+    name = item.name
+    if request.method == "POST":
+        form = PayingLoanForm(request.POST, request.FILES, instance=item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Loan Repayment Details have been updated')
+            return redirect('loan-list')
+    else:
+        form = PayingLoanForm(instance=item)
+        name=item.name
+        context = {'form': form,'current_cycle': current_cycle, 'name':name}
+        return render(request, 'edit_loan_repayment.html', context)
 #view single loan repayments        
 def view_loan_repaymnets(request, pk):
     context = {}

@@ -22,6 +22,7 @@
                             <tr>
                                 <td>Date</td>
                                 <td>Payment.<b style="color: red">(Total Repayment:{{total_amount|intcomma}})</b></td>
+                                <td>Actions</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +30,8 @@
                             <tr>
                                 <td>{{details.date}}</td>
                                 <td>{{details.amount|intcomma}}</td>
+                                <td><a href="{% url 'edit-loan-repayment' details.id %}" class="btn btn-warning btn-sm"><span class="fa fa-edit">
+                                        Edit</span></a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
