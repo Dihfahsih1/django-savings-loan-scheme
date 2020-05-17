@@ -111,6 +111,7 @@ def edit_cycle(request, pk):
     if request.method == "POST":
         form = CyclesForm(request.POST,request.FILES, instance=item)
         if form.is_valid():
+            Cycle.objects.update(is_active=False)
             form.save()
             messages.success(request, f'Cycle Information has been updated')
             return redirect('add-cycle')

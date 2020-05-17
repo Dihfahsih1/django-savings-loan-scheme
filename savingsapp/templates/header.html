@@ -23,7 +23,7 @@
                         <p style="font-size: 200%;" >{{request.get_full_path}}<span> Module</span></p>
                     </div>
                     <div class="login-faq-earn-money">
-                        <p><a href="#">Active Cycle: {{currentCycle}}</a><br>
+                        <p><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}</a><br>
                         {{today}}
                     </div>
                     {% endif %}
@@ -39,14 +39,14 @@
     <div class="classy-nav-container breakpoint-off">
         <div class="container-fluid">
             <!-- Menu -->
-            <nav class="classy-navbar" id="cryptosNav">
+            <nav class="classy-navbar" id="cryptosNav" >
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
                 </div>
 
                 <!-- Menu -->
-                <div class="classy-menu">
+                <div class="classy-menu" >
 
                     <!-- close btn -->
                     <div class="classycloseIcon">
@@ -54,7 +54,7 @@
                     </div>
 
                     <!-- Nav Start -->
-                    <div class="classynav">
+                    <div class="classynav" >
                         <ul>
                             <li><a href="{% url 'index' %}">Home</a></li>
                             <li><a href="#">Members</a>
