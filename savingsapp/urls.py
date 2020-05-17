@@ -5,7 +5,8 @@ from savingsapp import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('Add-Member', views.add_member, name='add-member'),
+    path('Sacco-Account', views.sacco_account, name='sacco-account'),
+    path('Add-Member', views.add_member, name='add-member'), 
     path('Edit-Member/(?P<pk>\d+)', views.edit_member, name='edit-member'),
     path('Member-Details/(?P<pk>\d+)', views.view_member, name='view-member'),
     path('Edit-Savings/(?P<pk>\d+)', views.edit_saving, name='edit-saving'),

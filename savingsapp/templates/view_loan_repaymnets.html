@@ -2,7 +2,7 @@
 {% load humanize %}
 {% block content %}
 
-<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn btn-info">Loan List</a> {{name}} <a href="{% url 'give-loan' %}" class="btn btn-info">Loan Application</a></p>
+<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info">Loan List</a><a href="#" class="btn-sm btn-defualt">{{name}}</a>  <a href="{% url 'give-loan' %}" class="btn-sm btn-info">Loan Application</a></p>
     <h3 style="text-align: center;">Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
     <hr />
 <h4>Loan Repayment of <b style="color: red">{{name}}</b>.  </h4>
