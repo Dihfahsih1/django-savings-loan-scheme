@@ -2,7 +2,7 @@ from .models import *
 from .views import *
 def cycle_processor(request):
     today = today = datetime.now()
-    currentCycle = Cycle.objects.get(is_active=True)
+    currentCycle = 0
     context = {
         'currentCycle': currentCycle,
         'today':today

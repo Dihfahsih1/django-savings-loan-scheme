@@ -60,11 +60,10 @@
 
                       <td> <div class="mb-4">
                             {% if list.is_active == True %}
+                            <i class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok"></span> Active</i>
                             <a href="{% url 'edit-cycle' pk=list.id %}"class="btn btn-info btn-sm"><span class="fa fa-edit"> Edit</span></a>
-                            <a href="#" class="btn btn-warning btn-sm">
-                              <span class="glyphicon glyphicon-ok"></span> Active</a>
+                            
                               {% else %}
-                              <a href="{% url 'edit-cycle' pk=list.id %}" class="btn btn-info btn-sm"><span class="fa fa-edit"> Edit</span></a>
                             <a href="{% url 'activate-cycle' list.id %}" class="btn btn-danger btn-sm">
                               <span class="glyphicon glyphicon-king"></span> Activate</a>
                             {% endif %}
