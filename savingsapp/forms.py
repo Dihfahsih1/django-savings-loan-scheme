@@ -20,7 +20,13 @@ class CyclesForm(forms.ModelForm):
     class Meta:
         model=Cycle
         fields=('cycle_name','cycle_period_start','cycle_period_end','rate','is_active')
-        
+
+
+class EditCycleForm(forms.ModelForm):
+    class Meta:
+        model = Cycle
+        fields = ('cycle_name', 'cycle_period_start',
+                  'cycle_period_end', 'rate')
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model=Attendance

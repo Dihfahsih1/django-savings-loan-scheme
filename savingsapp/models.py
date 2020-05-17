@@ -88,9 +88,7 @@ class Cycle(models.Model):
 	cycle_period_end = models.DateField(max_length=255, blank=False, null=False, unique=True)
 	is_active = models.BooleanField(default=True) 
 	def __str__(self):
-		x=self.cycle_period_start.year
-		y=self.cycle_period_end.year
-		return str(x) + "/" + str(y)
+		return str(self.cycle_period_start.year) + "/" + str(self.cycle_period_end.year)
 
 class Saving(models.Model):
 	date = models.DateField(max_length=100, blank=True, null=True)

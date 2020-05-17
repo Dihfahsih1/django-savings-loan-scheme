@@ -109,13 +109,13 @@ def delete_cycle(request, pk):
 def edit_cycle(request, pk):
     item = get_object_or_404(Cycle, pk=pk)
     if request.method == "POST":
-        form = CyclesForm(request.POST,request.FILES, instance=item)
+        form = EditCycleForm(request.POST, request.FILES, instance=item)
         if form.is_valid():
             form.save()
             messages.success(request, f'Cycle Information has been updated')
             return redirect('add-cycle')
     else:
-        form = CyclesForm(instance=item)
+        form = EditCycleForm(instance=item)
     return render(request, 'edit_cycle.html', {'form': form})
 
 #Activate a cycle
