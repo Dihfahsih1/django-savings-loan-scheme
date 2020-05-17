@@ -323,7 +323,7 @@ def list_loan_repayment(request):
     loan_list = PayingLoan.objects.filter(date__range=(startdate, enddate))
     current_cycle = Cycle.objects.get(is_active=True)
     context={'loan_list':loan_list, 'current_cycle':current_cycle}
-    return render(request, 'list_loans.html', context)
+    return render(request, 'loan_repayments_list.html', context)
 
 
 def all_loans_given(request):
@@ -338,6 +338,7 @@ def all_loans_given(request):
 
 #Loan Repayment
 def pay_loan(request, pk):
+    context={}
     current_cycle=Cycle.objects.get(is_active=True)
     items = get_object_or_404(Loan,pk=pk)
     if request.method == "POST":
@@ -358,7 +359,8 @@ def pay_loan(request, pk):
                 Toloan_status = 'RUNNING'
             PayingLoan.objects.filter(loan_id=pk).update(
                 total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
-    
+            context['toTotalPaid'] = toTotalPaid
+            context['toBalance'] = toBalance
             form.save()
             messages.success(request, f'Member Loan Repayment has been recorded')
             return redirect('loan-list')
@@ -366,8 +368,10 @@ def pay_loan(request, pk):
         form = LoanForm(instance=items)
         name=(items.name)
         loan_id=(items.id)
-        context = {'form': form, 'name': name,
-                   'loan_id': loan_id, 'current_cycle': current_cycle}
+        context['form'] = form
+        context['name'] = name
+        context['loan_id'] = loan_id
+        context['current_cycle'] = current_cycle
         return render(request,'pay_loan.html',context)
 
 #Edit Loan Repayment 
@@ -415,12 +419,16 @@ def view_loan_repaymnets(request, pk):
         if(i.first_name !=None and i.last_name !=None):
             nam = i.first_name + " " + i.last_name
             for k in get_loan_id:
+               
                 name = k.name
                 if (name == nam):
                     get_loan = Loan.objects.get(id=k.loan_id)
+                    x=get_loan.id
                     loaned_amount = get_loan.amount
                     context['loaned_amount'] = loaned_amount
                     context['name']=name
+                    
+                    context['loan_p'] = x
                     
     return render(request, 'view_loan_repaymnets.html', context)
 

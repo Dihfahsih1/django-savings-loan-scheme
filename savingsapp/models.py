@@ -121,6 +121,21 @@ class PayingLoan(models.Model):
 	total_paid = models.IntegerField(null=True, blank=True, default=0)
 	balance = models.IntegerField(null=True, blank=True, default=0)
 	loan_status = models.CharField(max_length=100, choices=status, default='RUNNING', null=True, blank=True)
+	@property
+	def total_repayment(self):
+		get_all_loans = Loan.objects.all()
+		for j in get_all_loans:
+			cycle = Cycle.objects.filter(is_active=True)
+			for i in cycle:
+				startdate = i.cycle_period_start
+				enddate = i.cycle_period_end
+			results = PayingLoan.objects.filter(date__range=(
+				startdate, enddate), loan_id=j.id).aggregate(totals=models.Sum("total_paid"))
+			if (results['totals']):
+				x=(results["totals"])
+				return x
+			else:
+				return 0
 	def __str__(self):
 		return str(self.date)
 

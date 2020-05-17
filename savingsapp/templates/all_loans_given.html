@@ -7,8 +7,8 @@
 {% endblock stylesheets %}
 {% load humanize %}
 {% block content %}
-<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info btn-sm"> Loans Details</a>
-    <a href="#" class="btn-sm btn-default btn-sm"> All Loans Given</a>
+<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info btn-sm"> Loan Repayments</a>
+    <a href="#" class="btn-sm btn-default btn-sm"> Loan Details</a>
     <a href="{% url 'give-loan' %}" class="btn-sm btn-info btn-sm"> Loan Application</a>
 </p>
 <h3 style="text-align: center;">Loaning Scheme for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>

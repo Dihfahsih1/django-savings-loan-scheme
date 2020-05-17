@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% block content %}
-<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info "> Loan Details</a>
-    <a href="{% url 'all-loans' %}" class="btn-sm btn-info "> All Loans Given</a>
+<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info "> Loan Repayments</a>
+    <a href="{% url 'all-loans' %}" class="btn-sm btn-info "> Loan Details</a>
     <a href="{% url 'give-loan' %}" class="btn-sm btn-info "> Loan Application</a>
     <a href="#" class="btn-sm btn-defualt">{{name}}</a>
 </p>
@@ -12,6 +12,7 @@
 <h4>Loan Repayment of <b style="color: red">{{name}}</b>.  </h4>
 <h5>Amount Loaned is {{loaned_amount|intcomma}}</h5>
 <b style="color: red">(Total Repayment:{{total_amount|intcomma}})</b>
+<p style="color: red">(Remaining Balance:{{toBalance|intcomma}})</p>
 <section class="page-news-details-area">
     <div class="container">
         <div class="row">
@@ -23,7 +24,9 @@
                             <tr>
                                 <td>Date</td>
                                 <td>Payment.</td>
-                                <td>Actions</td>
+                                <td>Actions : <a href="{% url 'pay-loan' loan_p %}" class="btn btn-info btn-sm"><span class="fa fa-dollar"> Pay
+                                        Loan</span></a>
+                                     </td>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,10 +35,7 @@
                                 <td>{{details.date}}</td>
                                 <td>{{details.amount|intcomma}}</td>
                                 <td><a href="{% url 'edit-loan-repayment' details.id %}" class="btn btn-warning btn-sm"><span class="fa fa-edit">
-                                        Edit</span></a>
-                                <a href="{% url 'pay-loan' details.loan_id %}" class="btn btn-info btn-sm"><span class="fa fa-dollar"> Pay Loan</span></a>
-                                </td>
-
+                                        Edit</span></a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

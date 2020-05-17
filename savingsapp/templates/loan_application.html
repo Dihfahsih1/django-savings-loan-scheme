@@ -9,8 +9,8 @@
 {% block content %}
 {% load crispy_forms_tags %}
 {% load humanize %}
-<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info btn-sm"> Loan Details</a>
-    <a href="{% url 'all-loans' %}" class="btn-sm btn-info btn-sm"> All Loans Given</a>
+<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info btn-sm"> Loan Repayments</a>
+    <a href="{% url 'all-loans' %}" class="btn-sm btn-info btn-sm"> Loan Details</a>
 <a href="#" class="btn-sm btn-default btn-sm"> Loan Application</a>
 </p>
             <h3 style="text-align: center;">Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
