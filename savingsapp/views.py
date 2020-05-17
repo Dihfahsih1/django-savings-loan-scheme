@@ -285,9 +285,11 @@ def give_loan(request):
     context['all_members']=all_members
     
     return render(request,'loan_application.html', context)
+
 def edit_loan(request, pk):
     current_cycle = Cycle.objects.get(is_active=True)
     item = get_object_or_404(Loan, pk=pk)
+    name=item.name
     if request.method == "POST":
         form = EditLoanForm(request.POST,request.FILES, instance=item)
         if form.is_valid():
@@ -300,7 +302,7 @@ def edit_loan(request, pk):
         date = item.date
         period = item.loan_period
         amount = item.amount
-        context = {'form': form, 'amount': amount, 'rate': rate,
+        context = {'form': form, 'amount': amount, 'rate': rate, 'name': name,
                    'date': date, 'period': period, 'current_cycle': current_cycle}
         return render(request, 'edit_loan.html', context)
 #deleting cycle

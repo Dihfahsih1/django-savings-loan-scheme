@@ -19,11 +19,12 @@
                 <div class="row">
                     <div class="col-lg-4"></div>
                     <div class="col-lg-5">
-                        <h2> Edit Loan Details</h2>
-                        <div class="form-group">
+                        <h2> Edit Loan Details for {{name}}</h2>
+                        {{form.date|as_crispy_field}}
+                        <!-- <div class="form-group">
                             <label for="date">Date:</label>
                             <input type="date" class="form-control" id="date" name="date" value={{date}} >
-                        </div>
+                        </div> -->
                         {{form.name|as_crispy_field}}
                         <div class="form-group">
                             <label for="rate">Rate:</label>
@@ -37,12 +38,13 @@
                             <label for="amount">Amount:</label>
                             <input type="number" class="form-control" id="amount" name="amount" value={{amount}}>
                         </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         <!-- {{form.loan_status|as_crispy_field}} -->
                         
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" >Update</button>
+            
         </form>
     </section>
     <script type="text/javascript">

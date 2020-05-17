@@ -27,6 +27,9 @@ class EditCycleForm(forms.ModelForm):
         model = Cycle
         fields = ('cycle_name', 'cycle_period_start',
                   'cycle_period_end', 'rate')
+        widgets = {
+            'date': TextInput(attrs={'placeholder': 'Date(YYY-MM-DD)'})
+        }
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model=Attendance
@@ -43,6 +46,7 @@ class LoanForm(forms.ModelForm):
         model=Loan
         fields = ('name', 'date', 'amount', 'interest_rate',
                   'loan_period', 'recorded_by', 'loan_status')
+                  
 class PayingLoanForm(forms.ModelForm):
     class Meta:
         model=PayingLoan
@@ -53,7 +57,9 @@ class EditLoanForm(forms.ModelForm):
         model=Loan
         fields = ('name', 'date', 'amount', 'interest_rate',
                   'loan_period', 'loan_status')
-
+        labels = {
+            'date': 'Date (YYY-MM-DD)'
+        }
 class LookupForm(forms.ModelForm):
     class Meta:
         model=LookUp
