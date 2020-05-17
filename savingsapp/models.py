@@ -109,41 +109,18 @@ class Loan(models.Model):
 	loan_period = models.IntegerField(default=0, null=True, blank=True)
 	loan_status = models.CharField(max_length=100,choices=status, default='RUNNING', null=True, blank=True)
 	recorded_by =models.CharField(max_length=220, blank=True, null=True)
-	@property
-	def Loan_Paid(self):
-		results = PayingLoan.objects.filter(loan_id=self.id).aggregate(totals=models.Sum("amount"))
-		if (results['totals']):
-			return results["totals"]
-		else:
-			return 0
-	@property
-	def balance(self):
-		#Rate=self.interest_rate(0.01), 
-		#I =R*P*T
-		#P = self.amount
-		#T = self.loan_period
-		interest=((self.interest_rate /100)* self.loan_period * self.amount)
-		bala = (self.amount + interest) - self.Loan_Paid
-		return bala
-	@property
-	def status(self):
-		if (self.Loan_Paid > self.amount):
-			self.loan_status = 'SETTLED'
-			self.loan_status
-			return self.loan_status
-		else:
-			self.loan_status = 'RUNNING'
-			return self.loan_status
 	def __str__(self):
 		return self.name
 
 class PayingLoan(models.Model):
+	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))
 	loan_id = models.CharField(max_length=100, blank=True, null=True)
 	date = models.DateField(max_length=100, blank=True, null=True)
 	name = models.CharField(max_length=100, null=True, blank=True)
 	amount = models.IntegerField(null=True, blank=True, default=0)
 	total_paid = models.IntegerField(null=True, blank=True, default=0)
 	balance = models.IntegerField(null=True, blank=True, default=0)
+	loan_status = models.CharField(max_length=100, choices=status, default='RUNNING', null=True, blank=True)
 	def __str__(self):
 		return str(self.date)
 

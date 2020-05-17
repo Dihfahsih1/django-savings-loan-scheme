@@ -125,7 +125,7 @@ def activate_cycle(request, pk):
         Cycle.objects.filter(id=pk).update(is_active=True)
         messages.success(request, f'New Cycle has been Activated')
         return redirect('add-cycle')
-        
+
 #archive the saving at exactly the end    
 def archiving_cycle(request):
     all_cycle=Cycle.objects.all()
@@ -272,7 +272,7 @@ def give_loan(request):
             loan = form.save(commit=False)
             loan.save() 
             messages.success(request, f'Member Loan Application has been recorded')
-            return redirect('loan-list')
+            return redirect('all-loans')
     current_cycle=Cycle.objects.get(is_active=True)
     context['current_cycle']=current_cycle
     if current_cycle:
@@ -320,7 +320,7 @@ def list_loan_repayment(request):
     for i in cycle:
         startdate = i.cycle_period_start
         enddate = i.cycle_period_end
-    loan_list = Loan.objects.filter(date__range=(startdate, enddate))
+    loan_list = PayingLoan.objects.filter(date__range=(startdate, enddate))
     current_cycle = Cycle.objects.get(is_active=True)
     context={'loan_list':loan_list, 'current_cycle':current_cycle}
     return render(request, 'list_loans.html', context)
@@ -343,6 +343,22 @@ def pay_loan(request, pk):
     if request.method == "POST":
         form = PayingLoanForm(request.POST)
         if form.is_valid():
+            amount_paid=request.POST.get('amount')
+            results = PayingLoan.objects.filter(loan_id=items.id).aggregate(totals=models.Sum("amount"))
+            if (results['totals'])!=None:
+                totalPaid = results["totals"]
+            else:
+                totalPaid = 0
+            toTotalPaid = totalPaid + int(amount_paid)
+            interest = ((items.interest_rate / 100) *items.loan_period * items.amount)
+            toBalance = (items.amount + interest) - items.Loan_Paid
+            if (toTotalPaid > items.amount):
+                Toloan_status = 'SETTLED'
+            else:
+                Toloan_status = 'RUNNING'
+            PayingLoan.objects.filter(loan_id=pk).update(
+                total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
+    
             form.save()
             messages.success(request, f'Member Loan Repayment has been recorded')
             return redirect('loan-list')

@@ -10,10 +10,6 @@ class CustomUser(admin.ModelAdmin):
                     'maximum_loan_amount', 'total_social_fund')
 
 admin.site.register(Loan)
-class Loan(admin.ModelAdmin):
-    list_display = ('Loan_Paid', 'balance', 'status')
-
-
 admin.site.register(SocialFund)
 admin.site.register(Attendance)
 admin.site.register(Cycle)

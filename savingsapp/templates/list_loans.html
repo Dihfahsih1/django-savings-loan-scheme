@@ -17,10 +17,7 @@
         <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
             <thead>
               <tr style="font-weight: bolder;">
-                <td>Date</td>
                 <td>Name</td>
-                <!-- <td>Period</td> -->
-                <td>Rate</td>
                 <td>Principal</td>
                 <td>Paid</td>
                 <td>Balance</td>
@@ -31,16 +28,11 @@
             <tbody>
               {% for details in loan_list %}
                 <tr>
-                  <td>{{details.date}}</td>
                   <td><a href="{% url 'loan-repayments' details.id %}">{{details.name}} </a></td>
-                  <!-- <td>{{details.loan_period}} Months</td> -->
-                  <td>{{details.interest_rate}}%</td>
                   <td>{{details.amount|intcomma}}</td>
-                  <td>{{details.Loan_Paid|intcomma}}</td>
-                  
+                  <td>{{details.total_paid|intcomma}}</td>
                   <td>{{details.balance|intcomma}}</td>
-                  <td>{{details.status}}</td>
-
+                  <td>{{details.loan_status}}</td>
                   <td>
                     {% if details.balance > 0 %}
                       <div class="mb-4">
