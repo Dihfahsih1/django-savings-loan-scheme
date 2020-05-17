@@ -8,16 +8,18 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-<p><a href="{% url 'loan-list' %}" class="btn btn-info">Loan List</a> | {{name}}</p>
-<h3>Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
+<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info">Loan List</a>
+     {{name}} <a href="{% url 'give-loan' %}" class="btn-sm btn-info">Loan Application</a> </p>
+<h3 style="text-align: center;">Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
 <hr />
-    <section class="hero-area">
-        <!--form area-->
+
         <form action="#" method="POST">
             {% csrf_token %}
-                <h2> Edit Loan Details</h2>
+                
                 <div class="row">
+                    <div class="col-lg-4"></div>
                     <div class="col-lg-5">
+                        <h2> Edit Loan Details</h2>
                         <div class="form-group">
                             <label for="date">Date:</label>
                             <input type="date" class="form-control" id="date" name="date" value={{date}} >

@@ -9,7 +9,9 @@
 {% block content %}
 {% load crispy_forms_tags %}
 {% load humanize %}
-<p style="text-align: center;">Loan Application <a href="{% url 'loan-list' %}" class="btn-sm btn-info btn-sm">Loan List</a></p>
+<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info btn-sm"> List of Loans</a>
+<a href="#" class="btn-sm btn-default btn-sm"> Loan Application</a>
+</p>
             <h3 style="text-align: center;">Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
             <hr/>
             <div class="row">
