@@ -313,7 +313,7 @@ def delete_loan(request, pk):
         messages.success(request, "Loan successfully deleted!")
         return redirect("loan-list")
 
-def list_loans(request):
+def list_loan_repayment(request):
     cycle = Cycle.objects.filter(is_active=True)
     for i in cycle:
         startdate = i.cycle_period_start
@@ -323,6 +323,18 @@ def list_loans(request):
     context={'loan_list':loan_list, 'current_cycle':current_cycle}
     return render(request, 'list_loans.html', context)
 
+
+def all_loans_given(request):
+    cycle = Cycle.objects.filter(is_active=True)
+    for i in cycle:
+        startdate = i.cycle_period_start
+        enddate = i.cycle_period_end
+    loan_list = Loan.objects.filter(date__range=(startdate, enddate))
+    current_cycle = Cycle.objects.get(is_active=True)
+    context = {'loan_list': loan_list, 'current_cycle': current_cycle}
+    return render(request, 'all_loans_given.html', context)
+
+    
 def pay_loan(request, pk):
     current_cycle=Cycle.objects.get(is_active=True)
     items = get_object_or_404(Loan,pk=pk)
