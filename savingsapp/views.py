@@ -334,7 +334,7 @@ def all_loans_given(request):
     context = {'loan_list': loan_list, 'current_cycle': current_cycle}
     return render(request, 'all_loans_given.html', context)
 
-
+#Loan Repayment
 def pay_loan(request, pk):
     current_cycle=Cycle.objects.get(is_active=True)
     items = get_object_or_404(Loan,pk=pk)
