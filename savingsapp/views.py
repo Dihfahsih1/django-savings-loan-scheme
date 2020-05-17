@@ -119,6 +119,15 @@ def edit_cycle(request, pk):
         form = CyclesForm(instance=item)
     return render(request, 'edit_cycle.html', {'form': form})
 
+#Activate a cycle
+
+
+def activate_cycle(request, pk):
+    if request.method == "GET":
+        Cycle.objects.update(is_active=False)
+        Cycle.objects.filter(id=pk).update(is_active=True)
+        messages.success(request, f'New Cycle has been Activated')
+        return redirect('add-cycle')
 #archive the saving at exactly the end    
 def archiving_cycle(request):
     all_cycle=Cycle.objects.all()

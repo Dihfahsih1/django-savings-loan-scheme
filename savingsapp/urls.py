@@ -24,6 +24,7 @@ urlpatterns = [
     path('Cycle-List', views.cycle_list, name='cycle-list'),
     path('archiving-cycles', views.archiving_cycle, name='archive-cycle'),
     path('Edit-Cycle/(?P<pk>\d+)', views.edit_cycle, name='edit-cycle'),
+    path('Activate-Cycle/(?P<pk>\d+)', views.activate_cycle, name='activate-cycle'),
     path('Savings-delete-cycle/(?P<pk>\d+)', views.delete_cycle, name='delete-cycle'),
     path('All-Loans', views.list_loans, name='loan-list'),
     path('Paying-Loan/(?P<pk>\d+)', views.pay_loan, name='pay-loan'),
