@@ -476,28 +476,36 @@ def sacco_account(request):
         startdate = i.cycle_period_start
         enddate = i.cycle_period_end
         results_registration = CustomUser.objects.filter(date_joined__range=(startdate, enddate)).aggregate(totals=models.Sum("application_fee"))
-        results_savings = Saving.objects.filter(date__range=(startdate, enddate)).aggregate(totals=models.Sum("amount"))
-        results_social = SocialFund.objects.filter(date__range=(startdate, enddate)).aggregate(totals=models.Sum("social_fund"))
-        results_repayments = PayingLoan.objects.filter(date__range=(startdate, enddate)).aggregate(totals=models.Sum("amount"))
-        results_loan_given = Loan.objects.filter(date__range=(startdate, enddate)).aggregate(totals=models.Sum("amount"))
-        if 'NoneType':
-            total_savings = 0
-            total_registration = 0
-            total_social = 0
-            total_repayments = 0
-            total_loan_given = 0
-            total_amount = 0
-            context = {'total_registration': total_registration, 'total_savings': total_savings,
-                       'total_social': total_social, 'total_repayments': total_repayments, 'total_loan_given': total_loan_given, 'total_amount': total_amount}
-           
-        else:
+        if (results_registration["totals"])!=None:
             total_registration = results_registration["totals"]
+        else:
+            total_registration = 0
+
+        results_savings = Saving.objects.filter(date__range=(startdate, enddate)).aggregate(totals=models.Sum("amount"))
+        if (results_savings["totals"]) != None:
             total_savings = results_savings["totals"]
+        else:
+            total_savings = 0
+
+        results_social = SocialFund.objects.filter(date__range=(startdate, enddate)).aggregate(totals=models.Sum("social_fund"))
+        if (results_social["totals"]) != None:
             total_social = results_social["totals"]
+        else:
+            total_social = 0
+
+        results_repayments = PayingLoan.objects.filter(date__range=(startdate, enddate)).aggregate(totals=models.Sum("amount"))
+        if (results_repayments["totals"]) != None:
             total_repayments = results_repayments["totals"]
+        else:
+            total_repayments = 0
+
+        results_loan_given = Loan.objects.filter(date__range=(startdate, enddate)).aggregate(totals=models.Sum("amount"))
+        if (results_loan_given["totals"]) != None:
             total_loan_given = results_loan_given["totals"]
-            total_amount = (total_registration + total_savings + total_social + total_repayments) - total_loan_given
-            context = {'total_registration': total_registration, 'total_savings': total_savings,
-                       'total_social': total_social, 'total_repayments': total_repayments, 'total_loan_given': total_loan_given, 'total_amount':total_amount}
-            
+        else:
+            total_loan_given = 0
+        total_amount = (total_registration + total_savings + total_social + total_repayments) - total_loan_given
+        context = {'total_registration': total_registration, 'total_savings': total_savings,
+                    'total_social': total_social, 'total_repayments': total_repayments, 'total_loan_given': total_loan_given, 'total_amount':total_amount}
+        
     return render(request, 'sacco_account.html', context)
