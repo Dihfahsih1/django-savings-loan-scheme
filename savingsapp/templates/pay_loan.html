@@ -9,13 +9,14 @@
 
 {% block content %}
     <section class="hero-area">
-            <p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn btn-info">Loan List</a> {{name}} <a href="{% url 'give-loan' %}" class="btn btn-info">Loan Application</a></p>
-            <p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn btn-info">Loan List</a> {{name}} <a href="{% url 'give-loan' %}" class="btn btn-info">Loan Application</a></p>
-            <h3 >Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
-            <hr />
-            <h2> Member Loan Payment Form</h2>
+            <p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info">Loan List</a> {{name}} <a href="{% url 'give-loan' %}" class="btn-sm btn-info">Loan Application</a></p>
+            <h3 style="text-align: center;" >Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
+            <hr/>
+            
             <div class="row">
-            <div class="col-lg-6 align-items-center">
+              <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+              <h2> Member Loan Payment Form</h2>
                 <form action="#" method="POST">
                   {% csrf_token %}
                   <div class="form-group" id='loan_id'>
