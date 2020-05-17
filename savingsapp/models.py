@@ -127,10 +127,6 @@ class Loan(models.Model):
 		return bala
 	@property
 	def status(self):
-		# if(self.Loan_Paid > self.amount):
-		# 	self.loan_status = 'SETTLED'
-		# 	super(Loan, self).save(*args, **kwargs)
-		# print("else")	
 		if (self.Loan_Paid > self.amount):
 			self.loan_status = 'SETTLED'
 			self.loan_status
@@ -146,6 +142,8 @@ class PayingLoan(models.Model):
 	date = models.DateField(max_length=100, blank=True, null=True)
 	name = models.CharField(max_length=100, null=True, blank=True)
 	amount = models.IntegerField(null=True, blank=True, default=0)
+	total_paid = models.IntegerField(null=True, blank=True, default=0)
+	balance = models.IntegerField(null=True, blank=True, default=0)
 	def __str__(self):
 		return str(self.date)
 
