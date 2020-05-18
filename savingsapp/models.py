@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta
+from dateutil.relativedelta import *
 from django.db.models import Sum
 
 
@@ -131,6 +132,8 @@ class Loan(models.Model):
 
 	@property
 	def deadline(self):
+		end_date = (self.date)+relativedelta(months=+self.loan_period)
+		return end_date
 		
 class PayingLoan(models.Model):
 	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))
