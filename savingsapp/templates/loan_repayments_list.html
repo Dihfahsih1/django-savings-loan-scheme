@@ -18,8 +18,10 @@
             <thead>
               <tr style="font-weight: bolder;">
                 <td>Name</td>
+                <td>Principal</td>
                 <td>Paid</td>
                 <td>Balance</td>
+                <td>Deadline</td>
                 <td>Status</td>
                 <td>Action</td>
               </tr>
@@ -27,10 +29,12 @@
             <tbody>
               {% for details in loan_list %}
                 <tr>
-                  <td><a href="{% url 'loan-repayments' details.id %}">{{details.name}} </a></td>
+                  <td><a href="{% url 'loan-repayments' details.id %}"></a>{{details.name}} </a></td>
+                  <td>{{details.amount|intcomma}}</td>
                   <td>{{details.total_repayments|intcomma}}</td>
                   <td>{{details.balance|intcomma}}</td>
-                  <td>{{details.loan_status}}</td>
+                  <td>{{details.deadline}}</td>
+                  <td>{{details.status}}</td>
                   <td>
                     {% if details.balance > 0 %}
                       <div class="mb-4">
