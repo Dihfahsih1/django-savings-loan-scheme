@@ -111,6 +111,11 @@ class Loan(models.Model):
 	recorded_by =models.CharField(max_length=220, blank=True, null=True)
 	def __str__(self):
 		return self.name
+	@property
+	def total_repayments(self):
+		get_loan=PayingLoan.objects.filter(loan_id=self.id)
+		for i in get_loan:
+			return i.total_paid	
 
 class PayingLoan(models.Model):
 	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))

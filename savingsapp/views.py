@@ -320,7 +320,7 @@ def list_loan_repayment(request):
     for i in cycle:
         startdate = i.cycle_period_start
         enddate = i.cycle_period_end
-    loan_list = PayingLoan.objects.filter(date__range=(startdate, enddate))
+    loan_list = Loan.objects.filter(date__range=(startdate, enddate))
     current_cycle = Cycle.objects.get(is_active=True)
     context={'loan_list':loan_list, 'current_cycle':current_cycle}
     return render(request, 'loan_repayments_list.html', context)
