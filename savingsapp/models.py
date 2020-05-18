@@ -131,9 +131,7 @@ class Loan(models.Model):
 
 	@property
 	def deadline(self):
-		print(self.date.month)
-		print(self.loan_period)
-
+		
 class PayingLoan(models.Model):
 	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))
 	loan_id = models.CharField(max_length=100, blank=True, null=True)
