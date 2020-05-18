@@ -134,6 +134,12 @@ class Loan(models.Model):
 	def deadline(self):
 		end_date = (self.date)+relativedelta(months=+self.loan_period)
 		return end_date
+
+	@property
+	def repayment(self):
+		interest = ((self.interest_rate / 100) * self.loan_period * self.amount)
+		loan_repayment = interest + self.amount
+		return loan_repayment
 		
 class PayingLoan(models.Model):
 	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))
