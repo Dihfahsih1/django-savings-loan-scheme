@@ -353,7 +353,7 @@ def pay_loan(request, pk):
             toTotalPaid = totalPaid + int(amount_paid)
             interest = ((items.interest_rate / 100) *items.loan_period * items.amount)
             toBalance = (items.amount + interest) - toTotalPaid
-            if (toTotalPaid > items.amount):
+            if (toBalance == 0):
                 Toloan_status = 'SETTLED'
             else:
                 Toloan_status = 'RUNNING'
