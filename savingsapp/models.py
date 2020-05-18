@@ -140,6 +140,11 @@ class Loan(models.Model):
 		interest = ((self.interest_rate / 100) * self.loan_period * self.amount)
 		loan_repayment = interest + self.amount
 		return loan_repayment
+
+	@property
+	def loan_interest(self):
+		interest = ((self.interest_rate / 100) * self.loan_period * self.amount)
+		return interest
 		
 class PayingLoan(models.Model):
 	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))

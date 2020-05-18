@@ -296,7 +296,7 @@ def edit_loan(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, f'Loan Details have been updated')
-            return redirect('loan-list')
+            return redirect('all-loans')
     else:
         form = EditLoanForm(instance=item)
         rate = item.interest_rate
@@ -368,6 +368,8 @@ def pay_loan(request, pk):
         form = LoanForm(instance=items)
         name=(items.name)
         loan_id=(items.id)
+        loan_balance=Loan.objects.filter(id=pk)
+        context['loan_balance'] = loan_balance
         context['form'] = form
         context['name'] = name
         context['loan_id'] = loan_id
