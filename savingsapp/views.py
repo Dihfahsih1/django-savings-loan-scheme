@@ -322,7 +322,7 @@ def list_loan_repayment(request):
         enddate = i.cycle_period_end
     loan_list = Loan.objects.filter(date__range=(startdate, enddate))
     current_cycle = Cycle.objects.get(is_active=True)
-    context={'loan_list':loan_list, 'current_cycle':current_cycle}
+    context={'loan_list':loan_list}
     return render(request, 'loan_repayments_list.html', context)
 
 
@@ -332,11 +332,12 @@ def all_loans_given(request):
         startdate = i.cycle_period_start
         enddate = i.cycle_period_end
     loan_list = Loan.objects.filter(date__range=(startdate, enddate))
-    current_cycle = Cycle.objects.get(is_active=True)
-    context = {'loan_list': loan_list, 'current_cycle': current_cycle}
+    for i in loan_list:
+        print(i.date)
+    context = {'loan_list': loan_list}
     return render(request, 'all_loans_given.html', context)
 
-#Loan Repayment
+#Loan Repayments
 def pay_loan(request, pk):
     context={}
     current_cycle=Cycle.objects.get(is_active=True)
@@ -400,7 +401,9 @@ def view_loan_repaymnets(request, pk):
     if PayingLoan.objects.filter(loan_id=pk).exists():
         get_loan_id = PayingLoan.objects.filter(loan_id=pk)
     else:
-        return render(request,'no_payments_made.html')    
+        get_loan_details = Loan.objects.get(id=pk)
+        context = {'get_loan_details': get_loan_details}
+        return render(request,'no_repayments_made.html', context)    
     sum_repayments = get_loan_id.aggregate(totals=models.Sum("amount"))
     total_amount = sum_repayments["totals"]
     loan_list = Loan.objects.all()
