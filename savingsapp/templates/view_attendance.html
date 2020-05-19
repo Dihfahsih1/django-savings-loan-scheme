@@ -8,7 +8,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-          <p style="text-align: center;"><a href="{% url 'make-attendence' %}" class="btn btn-info">Make Attendance</a> Attendance History</p>
+          <p style="text-align: center;"><a href="{% url 'make-attendence' %}" class="btn-sm btn-info">Make Attendance</a> Attendance History</p>
           <h3 style="text-align: center;">Member Attendance History for <b style="color: slateblue;">{{ current_cycle }}</b> cycle</h3>
           <hr />
           <form  method="POST" enctype="multipart/form-data" >
