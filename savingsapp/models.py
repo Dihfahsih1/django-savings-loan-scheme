@@ -69,9 +69,12 @@ class CustomUser(AbstractUser):
 
 	@property
 	def loan_status(self):
-		get_state=Loan.objects.filter(name=self.id)
-		for i in get_state:
-			return i.loan_status		
+		get_loans=Loan.objects.all()
+		for i in get_loans:
+			filtering=PayingLoan.objects.filter(loan_id=i.id, name=self.full_name)
+			for j in filtering:
+				print(j.loan_status)
+				return j.loan_status
 
 
 class SocialFund(models.Model):

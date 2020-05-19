@@ -355,9 +355,11 @@ def pay_loan(request, pk):
             toBalance = (items.amount + interest) - toTotalPaid
             if (toBalance == 0):
                 Toloan_status = 'SETTLED'
+                PayingLoan.objects.filter(loan_id=pk).update(
+                    total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
             else:
                 Toloan_status = 'RUNNING'
-            PayingLoan.objects.filter(loan_id=pk).update(
+                PayingLoan.objects.filter(loan_id=pk).update(
                 total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
             context['toTotalPaid'] = toTotalPaid
             context['toBalance'] = toBalance
