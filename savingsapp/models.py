@@ -73,7 +73,11 @@ class CustomUser(AbstractUser):
 		for i in get_loans:
 			filtering=PayingLoan.objects.filter(loan_id=i.id, name=self.full_name)
 			for j in filtering:
-				print(j.loan_status)
+				if j.loan_status == 'SETTLED':
+					return 'No Running Loan'
+				else:
+					return 'Running Loan'	
+				
 				return j.loan_status
 
 

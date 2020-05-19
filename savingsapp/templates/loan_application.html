@@ -18,6 +18,7 @@
             <div class="row">
                 <div class="col-lg-9">
                     <h2><b>Loan Legibility </b></h2>
+                    <p class="text"><b style="color: crimson;">NB</b> Consider the Following before giving the Loan</p>
                     <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                         <thead>
                         <tr style="font-weight: bolder;">
@@ -34,7 +35,11 @@
                                 <td>{{member.full_name}}</td>
                                 <td>{{member.total_saving|intcomma}}</td>
                                 <td>{{member.maximum_loan_amount|intcomma}}</td>
-                                <td>{{member.loan_status}}</td>
+                                <td>{% if member.loan_status == None %}Never Loaned
+                                 {% elif member.loan_status == 'Running Loan' %}<b style='color: crimson;'>Running Loan</b>
+                                {% else %}
+                                <b style='color:green;'>{{member.loan_status}}</b>
+                                {% endif %}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -43,34 +48,56 @@
             
                 <div class="col-lg-3" style='border-left: 3px solid royalblue;'>
                     <h2><b> Loan Application Form</b></h2>
-                    <!--form area-->
-                    <form action="#" method="POST">
-                    {% csrf_token %}
-                        <div class="form-group">
-                            <label for="date">Date:</label>
-                            <input type="date" class="form-control" id="date" name="date" >
-                        </div> 
-                        {{form.name|as_crispy_field}}
-                        <div class="form-group">
-                            <label for="amount">Amount(Principal):</label>
-                            <input type="number" class="form-control" id="amount" name="amount">
-                        </div>
-                        <div class="form-group">
-                            <label for="rate">Interest Rate:</label>
-                            <input type="number" class="form-control" id="interest_rate" name="interest_rate" value='{{rate}}'>
-                        </div>
-                        <div class="form-group">
-                            <label for="loan_period">Loan Period(Number of Months):</label>
-                            <input type="number" class="form-control" id="loan_period" name="loan_period">
-                        </div>
+                    <p class="text"><b style="color: crimson;">Caution</b>: Give Loan only if Member is Legible</p>
+                    <button class="btn btn-default" data-toggle="modal" data-target="#date"
+                        style="padding: 30px; margin-left:20px">GIVE LOAN</button>
 
-                        <div class="form-group">
-                            <label for="recorded_by">Recorded by:</label>
-                            <input type="text" class="form-control" id="recorded_by" readonly="True" name="recorded_by" value="logged in user">
-                        </div>
-                        {{form.loan_status|as_crispy_field }}
-                        <button type="submit" class="btn btn-primary" >Submit</button>
-                    </form>
+                            <!-- date Modal -->
+                            <div class="modal fade" id="date" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Kisajja Kikulu Savings</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4 class="text-danger"><b>Loan Application Form</b></h4>
+                                            <!--form area-->
+                                            <form action="#" method="POST">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label for="date">Date:</label>
+                                                    <input type="date" class="form-control" id="date" name="date">
+                                                </div>
+                                                {{form.name|as_crispy_field}}
+                                                <div class="form-group">
+                                                    <label for="amount">Amount(Principal):</label>
+                                                    <input type="number" class="form-control" id="amount" name="amount">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="rate">Interest Rate:</label>
+                                                    <input type="number" class="form-control" id="interest_rate" name="interest_rate" value='{{rate}}'>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="loan_period">Loan Period(Number of Months):</label>
+                                                    <input type="number" class="form-control" id="loan_period" name="loan_period">
+                                                </div>
+                                            
+                                                <div class="form-group">
+                                                    <label for="recorded_by">Recorded by:</label>
+                                                    <input type="text" class="form-control" id="recorded_by" readonly="True" name="recorded_by"
+                                                        value="logged in user">
+                                                </div>
+                                                {{form.loan_status|as_crispy_field }}
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                   
                 </div>
             </div>
         </div>        

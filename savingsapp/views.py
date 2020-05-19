@@ -353,11 +353,12 @@ def pay_loan(request, pk):
             toTotalPaid = totalPaid + int(amount_paid)
             interest = ((items.interest_rate / 100) *items.loan_period * items.amount)
             toBalance = (items.amount + interest) - toTotalPaid
-            if (toBalance == 0):
+            if toBalance == 0:
                 Toloan_status = 'SETTLED'
-                PayingLoan.objects.filter(loan_id=pk).update(
-                    total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
+                PayingLoan.objects.filter(loan_id=pk).update( total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
+                
             else:
+                print('this is an error')
                 Toloan_status = 'RUNNING'
                 PayingLoan.objects.filter(loan_id=pk).update(
                 total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
