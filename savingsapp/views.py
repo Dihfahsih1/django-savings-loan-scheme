@@ -332,8 +332,6 @@ def all_loans_given(request):
         startdate = i.cycle_period_start
         enddate = i.cycle_period_end
     loan_list = Loan.objects.filter(date__range=(startdate, enddate))
-    for i in loan_list:
-        print(i.date)
     context = {'loan_list': loan_list}
     return render(request, 'all_loans_given.html', context)
 

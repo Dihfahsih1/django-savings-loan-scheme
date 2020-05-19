@@ -22,7 +22,7 @@ class CustomUser(AbstractUser):
 	USERNAME_FIELD = 'username'
 	REQUIRED_FILEDS = []
 	def __str__(self):
-		return str(self.first_name)  + ' ' + str(self.last_name)
+		return '%s %s' % (self.last_name, self.first_name)
 	@property 
 	def total_saving(self):
 		cycles = Cycle.objects.filter(is_active=True)
