@@ -8,19 +8,22 @@
 {% block content %}
     <section class="hero-area">
         <div class="container-fluid">
-            <p><a href="{% url 'index' %}"  class="btn btn-info">List of Savings</a> | Edit Saving</p>
-            <h3>Saving Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
+            <p style="text-align: center;"><a href="{% url 'savings-list' %}"  class="btn-sm btn-info">List of Savings</a> Edit Saving
+            <a href="{% url 'make-saving' %}" class="btn-sm btn-info"> Record Savings</a>
+            </p>
+            <h3 style="text-align: center;">Saving Scheme for <b style="color: slateblue;">{{currentCycle}}</b> cycle</h3>
             <hr />
-            <h5> Edit Savings Details for <b style="color:red">{{form.name}}</b></h5>
+            <h5 style="text-align: center;"> Edit Savings Details for <b style="color:red">{{name}}</b></h5>
             <div class="row">
-            <div class="col-lg-4 align-items-center">
-
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
               {% load crispy_forms_tags %}
                 <form method="POST" enctype="multipart/form-data" >
                     {% csrf_token %}
+                  {{form.name|as_crispy_field}}
                   {{ form.date|as_crispy_field}}
                   {{ form.amount|as_crispy_field}}
-                  {{form.name|as_crispy_field}}          
+                           
 
                   <button type="submit" class="btn btn-primary" >Update</button>
                 </form>

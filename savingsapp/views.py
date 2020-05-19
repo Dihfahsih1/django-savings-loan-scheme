@@ -260,7 +260,8 @@ def edit_saving(request, pk):
             return redirect('make-saving')
     else:
         form = SavingsForm(instance=item)
-        context={'form':form}
+        name=item.name
+        context={'form':form, 'name':name}
         return render(request, 'edit_saving.html', context)
     
 def give_loan(request):
