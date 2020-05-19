@@ -397,12 +397,7 @@ def edit_loan_repayment(request, pk):
 def view_loan_repaymnets(request, pk):
     context = {}
     current_cycle=Cycle.objects.get(is_active=True)
-    if request.method == 'GET':
-        gtid = request.GET.get(pk)
-        if gtid is None:
-            return HttpResponse('Member Has not Yet Made any Repayment !!!!!')
-        else:
-            get_loan_id = PayingLoan.objects.filter(loan_id=pk)
+    get_loan_id = PayingLoan.objects.filter(loan_id=pk)
     sum_repayments = get_loan_id.aggregate(totals=models.Sum("amount"))
     total_amount = sum_repayments["totals"]
     loan_list = Loan.objects.all()

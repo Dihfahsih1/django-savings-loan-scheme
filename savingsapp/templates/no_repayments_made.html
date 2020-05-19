@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block content %}
+<p style="text-align: center;"><a href="{% url 'loan-list' %}" class="btn-sm btn-info "> Loan Repayments</a>
+    <a href="{% url 'all-loans' %}" class="btn-sm btn-info "> Loan Details</a>
+    <a href="{% url 'give-loan' %}" class="btn-sm btn-info "> Loan Application</a>
+    <a href="#" class="btn-sm btn-defualt">No Repayments</a>
+</p>
+
+<h3 style="text-align: center;">Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
+<hr />
+<h4>Loan Repayments Made. </h4>
+<!-- <p style="color: red">(Remaining Balance:{{toBalance|intcomma}})</p> -->
+<section class="page-news-details-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="page-news-details">
+                    <h3>The Member has not yet made any Repayments!!!</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+{% endblock javascripts %}
