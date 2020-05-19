@@ -64,7 +64,7 @@ class CustomUser(AbstractUser):
 				return 0
 	@property
 	def full_name(self):
-		return str(self.first_name) + ' ' + str(self.last_name)
+		return '%s %s' % (self.last_name, self.first_name)
 
 class SocialFund(models.Model):
 	full_name = models.CharField(max_length=220, blank=True, null=True)
