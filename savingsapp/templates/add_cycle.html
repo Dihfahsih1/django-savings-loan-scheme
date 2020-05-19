@@ -40,7 +40,7 @@
                 <thead>
                   <tr style="font-weight: bolder;">
                     <td>Cycle Name</td>
-                    <td>Lending Rate(%)</td>
+                    <td>Lending Rate</td>
                     <td>Cycle Start</td>
                     <td>Cycle End</td>
                     <td>Is Active?</td>
@@ -51,7 +51,7 @@
                   {% for list in all_cycle %}
                     <tr>
                       <td>{{list.cycle_name}}</td>
-                      <td>{{list.rate}}</td>
+                      <td>{{list.rate}}%</td>
                       <td>{{list.cycle_period_start}}</td>
                       <td>{{list.cycle_period_end}}</td>
                       <td>{{list.is_active}}</td>

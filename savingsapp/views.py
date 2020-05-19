@@ -46,7 +46,6 @@ def add_member(request):
 
 #edit member
 def edit_member(request, pk):
-    current_cycle = Cycle.objects.get(is_active=True)
     item = get_object_or_404(CustomUser, pk=pk)
     if request.method == "POST":
         form = MemberForm(request.POST,request.FILES, instance=item)
@@ -56,7 +55,8 @@ def edit_member(request, pk):
             return redirect('members-list')
     else:
         form = MemberForm(instance=item)
-    context = {'form': form, 'current_cycle': current_cycle}
+        name=item.first_name +' '+ item.last_name
+    context = {'form': form, 'name':name}
     return render(request, 'edit_members.html', context)
 
 #delete Member
