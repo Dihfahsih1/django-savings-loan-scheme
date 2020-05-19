@@ -397,8 +397,12 @@ def edit_loan_repayment(request, pk):
 def view_loan_repaymnets(request, pk):
     context = {}
     current_cycle=Cycle.objects.get(is_active=True)
-    al=CustomUser.objects.all()
-    get_loan_id=PayingLoan.objects.filter(loan_id=pk)
+    if request.method == 'GET':
+        gtid = request.GET.get(pk)
+        if gtid is None:
+            return HttpResponse('Member Has not Yet Made any Repayment !!!!!')
+        else:
+            get_loan_id = PayingLoan.objects.filter(loan_id=pk)
     sum_repayments = get_loan_id.aggregate(totals=models.Sum("amount"))
     total_amount = sum_repayments["totals"]
     loan_list = Loan.objects.all()
@@ -417,11 +421,12 @@ def view_loan_repaymnets(request, pk):
     context['get_loan_id'] = get_loan_id
     context['total_amount'] = total_amount
     context['current_cycle'] = current_cycle
+
+    al = CustomUser.objects.all()
     for i in al:
         if(i.first_name !=None and i.last_name !=None):
             nam = i.first_name + " " + i.last_name
             for k in get_loan_id:
-               
                 name = k.name
                 if (name == nam):
                     get_loan = Loan.objects.get(id=k.loan_id)
@@ -429,7 +434,6 @@ def view_loan_repaymnets(request, pk):
                     loaned_amount = get_loan.amount
                     context['loaned_amount'] = loaned_amount
                     context['name']=name
-                    
                     context['loan_p'] = x
                     
     return render(request, 'view_loan_repaymnets.html', context)
