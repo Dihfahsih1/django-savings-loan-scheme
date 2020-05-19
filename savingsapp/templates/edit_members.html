@@ -26,13 +26,11 @@
                     {{ form.telephone|as_crispy_field}}
                     {{ form.Role|as_crispy_field}} 
                     {{ form.is_active|as_crispy_field}} 
-                    {{ form.application_fee|as_crispy_field}}          
-
+                    {{ form.application_fee|as_crispy_field}} 
                     <button type="submit" class="btn btn-primary" >Update</button>
                   </form>
-
               </div>
-          </div>
+            </div>
     {% endblock content %}
 
     {% block javascripts %}

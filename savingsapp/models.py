@@ -62,9 +62,17 @@ class CustomUser(AbstractUser):
 				return x
 			else:
 				return 0
+
 	@property
 	def full_name(self):
 		return '%s %s' % (self.last_name, self.first_name)
+
+	@property
+	def loan_status(self):
+		get_state=Loan.objects.filter(name=self.id)
+		for i in get_state:
+			return i.loan_status		
+
 
 class SocialFund(models.Model):
 	full_name = models.CharField(max_length=220, blank=True, null=True)
