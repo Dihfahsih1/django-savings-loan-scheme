@@ -21,8 +21,9 @@
                 <td>Principal</td>
                 <td>Paid</td>
                 <td>Balance</td>
-                <td>LDate</td>
                 <td>Deadline</td>
+                <td>Graceful</td>
+                <td>Penalties</td>
                 <td>Status</td>
                 <td>Action</td>
               </tr>
@@ -34,8 +35,9 @@
                   <td>{{details.amount|intcomma}}</td>
                   <td>{{details.total_repayments|intcomma}}</td>                  
                   <td>{{details.balance|intcomma}}</td>
-                  <td>{{details.date}}</td>
                   <td>{{details.deadline}}</td>
+                  <td>{{details.grace_period}}</td>
+                  <td>{{details.penalties}}</td>
                   <td>{{details.status}}</td>
                   <td>
                     {% if details.total_repayments >= details.repayment %}

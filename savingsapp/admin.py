@@ -15,7 +15,7 @@ admin.site.register(Loan)
 
 class Loan(admin.ModelAdmin):
     list_display = ('total_repayments', 'status', 'balance',
-                    'deadline', 'repayments', 'loan_interest')
+                    'deadline', 'repayments', 'loan_interest','penalties','grace_period')
 admin.site.register(PayingLoan)
 admin.site.register(SocialFund)
 admin.site.register(Attendance)

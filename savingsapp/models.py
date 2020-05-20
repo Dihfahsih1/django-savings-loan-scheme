@@ -149,12 +149,28 @@ class Loan(models.Model):
 	def deadline(self):
 		end_date = (self.date)+relativedelta(months=+self.loan_period)
 		return end_date
-
+   
 	@property
 	def repayment(self):
 		interest = ((self.interest_rate / 100) * self.loan_period * self.amount)
 		loan_repayment = interest + self.amount
 		return loan_repayment
+
+	@property
+	def grace_period(self):
+		grace_date = (self.date)+relativedelta(months=+(self.loan_period + 1))
+		return grace_date
+	
+	@property
+	def penaties(self):
+		today=date.now()
+		if today > self.grace_period:
+			return (self.repayment/2)
+		else:
+			return 0	
+		
+
+	
 
 	@property
 	def loan_interest(self):
