@@ -64,8 +64,8 @@ class CustomUser(AbstractUser):
 
 	@property
 	def full_name(self):
-		#return '%s %s' % (self.last_name, self.first_name)
-		return (str(self.last_name )+ ' '+ str(self.first_name))
+		return '%s %s' % (self.last_name, self.first_name)
+		# return (str(self.last_name )+ ' '+ str(self.first_name))
 
 	@property
 	def loan_status(self):
@@ -97,7 +97,9 @@ class Attendance(models.Model):
 	attendance_year = models.CharField(max_length=255, blank=True, null=True, default=years)
 	attendance_month = models.CharField(max_length=255, blank=True, null=True)
 	attendance_day = models.CharField(max_length=255, blank=True, null=True)
-
+	def __str__(self):
+		return self.full_name
+    
 class Cycle(models.Model):
 	cycle_name =  models.CharField( max_length=220, null=True, blank=True, unique=True)
 	rate = models.IntegerField(default=15, null=True, blank=True)
