@@ -363,7 +363,7 @@ def pay_loan(request, pk):
             context['toBalance'] = toBalance
             form.save()
             messages.success(request, f'Member Loan Repayment has been recorded')
-            return redirect('loan-list')
+            return redirect('loan-repayments', pk=pk)
     else:
         form = LoanForm(instance=items)
         name=(items.name)
