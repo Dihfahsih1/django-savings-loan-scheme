@@ -13,6 +13,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import *
 from .serializers import StockSerializer
+from django.contrib.auth.decorators import login_required
 
 class StockList(APIView):
     def get(self, request):
@@ -38,6 +39,7 @@ def index(request):
     return render(request,'index.html')
 
 #record member
+@login_required
 def add_member(request):
     current_cycle = Cycle.objects.get(is_active=True)
     all_members = CustomUser.objects.all()
@@ -58,6 +60,7 @@ def add_member(request):
     return render(request,'add_member.html',context)
 
 #edit member
+@login_required
 def edit_member(request, pk):
     item = get_object_or_404(CustomUser, pk=pk)
     if request.method == "POST":
@@ -73,6 +76,7 @@ def edit_member(request, pk):
     return render(request, 'edit_members.html', context)
 
 #delete Member
+@login_required
 def delete_member(request, pk):
     item= get_object_or_404(CustomUser, id=pk)
     if request.method == "GET":
@@ -80,6 +84,8 @@ def delete_member(request, pk):
         messages.success(request, "Member successfully deleted!")
         return redirect("members-list")
 
+
+@login_required
 def members_list(request):
     current_cycle = Cycle.objects.get(is_active=True)
     all_members=CustomUser.objects.all()
@@ -88,6 +94,8 @@ def members_list(request):
     }
     return render(request,'members_list.html', context)
 
+
+@login_required
 def view_member(request, pk):
     current_cycle = Cycle.objects.get(is_active=True)
     member_details=CustomUser.objects.filter(id=pk)
@@ -97,6 +105,7 @@ def view_member(request, pk):
     return render(request,'view_member.html', context)
 
 #add new cycle
+@login_required
 def add_cycle(request):
     if request.method=="POST":
         form=CyclesForm(request.POST, request.FILES,)
@@ -111,6 +120,7 @@ def add_cycle(request):
         return render(request,'add_cycle.html',context)
 
 #deleting cycle
+@login_required
 def delete_cycle(request, pk):
     item= get_object_or_404(Cycles, id=pk)
     if request.method == "GET":
@@ -119,6 +129,7 @@ def delete_cycle(request, pk):
         return redirect("add-cycle")
 
 #editting cycle
+@login_required
 def edit_cycle(request, pk):
     item = get_object_or_404(Cycle, pk=pk)
     if request.method == "POST":
@@ -132,6 +143,7 @@ def edit_cycle(request, pk):
     return render(request, 'edit_cycle.html', {'form': form})
 
 #Activate a cycle
+@login_required
 def activate_cycle(request, pk):
     if request.method == "GET":
         Cycle.objects.update(is_active=False)
@@ -139,7 +151,8 @@ def activate_cycle(request, pk):
         messages.success(request, f'New Cycle has been Activated')
         return redirect('add-cycle')
 
-#archive the saving at exactly the end    
+#archive the saving at exactly the end 
+@login_required
 def archiving_cycle(request):
     all_cycle=Cycle.objects.all()
     today = date.today()
@@ -151,7 +164,8 @@ def archiving_cycle(request):
             return redirect('cycle-list')
         return redirect('cycle-list')   
 
-#list of cycles          
+#list of cycles
+@login_required
 def cycle_list(request):
     all_cycle=Cycle.objects.all()
     context = {
@@ -161,6 +175,7 @@ def cycle_list(request):
 
 
 #record member attendance
+@login_required
 def make_attendence(request):
     current_cycle = Cycle.objects.get(is_active=True)
     if request.method == 'POST':
@@ -180,6 +195,7 @@ def make_attendence(request):
     return render(request,'make_attendance.html',context)
 
 #attendance history
+@login_required
 def attendence_history(request):
     current_cycle = Cycle.objects.get(is_active=True)
     today = datetime.now()
@@ -201,6 +217,7 @@ def attendence_history(request):
     return render(request, "view_attendance.html", context)
 
 #record member savings
+@login_required
 def make_saving(request):
     if request.method == 'POST':
         form = SavingsForm(request.POST or None, request.FILES or None)
@@ -221,6 +238,7 @@ def make_saving(request):
     return render(request,'make_saving.html', context)
 
 #list of all member savings
+@login_required
 def savings_list(request):    
     try: 
         all_members=CustomUser.objects.all()
@@ -239,6 +257,9 @@ def savings_list(request):
         return render(request,'savings_list.html',context)
 
  #savings for a single member       
+
+
+@login_required
 def view_savings(request,pk):
     get_member = CustomUser.objects.get(id=pk)
     get_all_members=CustomUser.objects.all()
@@ -263,6 +284,8 @@ def view_savings(request,pk):
     context={'current_cycle':current_cycle,'total_amount':total_amount,'get_savings':get_savings, 'get_member':get_member, 'page':page, 'members_list': members_list}
     return render (request, 'view_savings.html', context)
 
+
+@login_required
 def edit_saving(request, pk):
     item = get_object_or_404(Saving, pk=pk)
     if request.method == "POST":
@@ -278,6 +301,7 @@ def edit_saving(request, pk):
         return render(request, 'edit_saving.html', context)
 
 #Loan Application    
+@login_required
 def give_loan(request):
     context={}
     if request.method == 'POST':
@@ -301,6 +325,8 @@ def give_loan(request):
     context['all_members']=all_members
     return render(request,'loan_application.html', context)
 
+
+@login_required
 def edit_loan(request, pk):
     current_cycle = Cycle.objects.get(is_active=True)
     item = get_object_or_404(Loan, pk=pk)
@@ -322,6 +348,7 @@ def edit_loan(request, pk):
         return render(request, 'edit_loan.html', context)
 
 #deleting cycle
+@login_required
 def delete_loan(request, pk):
     item= get_object_or_404(Loan, id=pk)
     if request.method == "GET":
@@ -329,6 +356,8 @@ def delete_loan(request, pk):
         messages.success(request, "Loan successfully deleted!")
         return redirect("loan-list")
 
+
+@login_required
 def list_loan_repayment(request):
     cycle = Cycle.objects.filter(is_active=True)
     for i in cycle:
@@ -339,6 +368,7 @@ def list_loan_repayment(request):
     return render(request, 'loan_repayments_list.html', context)
 
 
+@login_required
 def all_loans_given(request):
     cycle = Cycle.objects.filter(is_active=True)
     for i in cycle:
@@ -348,6 +378,8 @@ def all_loans_given(request):
     context = {'loan_list': loan_list}
     return render(request, 'all_loans_given.html', context)
 
+
+@login_required
 #Loan Repayments
 def pay_loan(request, pk):
     context={}
@@ -401,6 +433,8 @@ def pay_loan(request, pk):
         context['current_cycle'] = current_cycle
         return render(request,'pay_loan.html',context)
 
+
+@login_required
 #Edit Loan Repayment 
 def edit_loan_repayment(request, pk):
     current_cycle = Cycle.objects.get(is_active=True)
@@ -418,6 +452,8 @@ def edit_loan_repayment(request, pk):
         context = {'form': form,'current_cycle': current_cycle, 'name':name}
         return render(request, 'edit_loan_repayment.html', context)
 
+
+@login_required
 #view single loan repayments        
 def view_loan_repaymnets(request, pk):
     context = {}
@@ -464,6 +500,8 @@ def view_loan_repaymnets(request, pk):
     context['total_amount'] = total_amount
     return render(request, 'view_loan_repaymnets.html', context)
 
+
+@login_required
 #add new lookup
 def add_lookup(request):
     if request.method == "POST":
@@ -479,6 +517,8 @@ def add_lookup(request):
         context = {'form': form, 'all_lookups':all_lookups}
         return render(request,'add_lookup.html',context)
 
+
+@login_required
 #add new lookup Details
 def add_lookup_details(request):
     if request.method=="POST":
@@ -493,6 +533,8 @@ def add_lookup_details(request):
         context = {'form': form, 'all_lookups_details':all_lookups_details}
         return render(request,'add_lookup_details.html',context)        
 
+
+@login_required
 #list of cycles          
 def list_lookup_details(request):
     all_lookups_details=LookupDetail.objects.all()
@@ -501,6 +543,8 @@ def list_lookup_details(request):
     }
     return render(request,'list_lookup_details.html', context)        
 
+
+@login_required
 #RECORDING SOCIAL FUND
 def record_social_fund(request):
     current_cycle = Cycle.objects.get(is_active=True)
@@ -520,12 +564,16 @@ def record_social_fund(request):
     context={'all_members':all_members, 'current_cycle':current_cycle}
     return render(request,'record_social_fund.html',context)
 
+
+@login_required
 def social_fund_list(request):
     current_cycle = Cycle.objects.get(is_active=True)
     all_members = CustomUser.objects.all()
     context = {'all_members': all_members, 'current_cycle': current_cycle}
     return render(request, 'social_fund_list.html', context)
 
+
+@login_required
 #display social fund contrbution routine
 def social_fund_routine(request, pk):
     get_member = CustomUser.objects.get(id=pk)
@@ -556,6 +604,8 @@ def social_fund_routine(request, pk):
                 'get_contributions': get_contributions, 'get_member': get_member, 'page': page, 'members_list': members_list}
     return render(request, 'social_funds_routine.html', context)
 
+
+@login_required
 #Total money in the sacco
 def sacco_account(request):
     current_cycle = Cycle.objects.filter(is_active=True)
