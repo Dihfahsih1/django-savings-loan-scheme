@@ -341,33 +341,38 @@ def pay_loan(request, pk):
     current_cycle=Cycle.objects.get(is_active=True)
     items = get_object_or_404(Loan,pk=pk)
     if request.method == "POST":
+        amount_paid = request.POST.get('amount')
+        results = PayingLoan.objects.filter(loan_id=items.id).aggregate(totals=models.Sum("amount"))
+        if (results['totals'])!=None:
+            totalPaid = results["totals"]
+        else:
+            totalPaid = 0
+        toTotalPaid = totalPaid + int(amount_paid)
+        interest = ((items.interest_rate / 100) *items.loan_period * items.amount)
+        toBalance = (items.amount + interest) - toTotalPaid
+        if toBalance == 0:
+            Toloan_status = 'SETTLED'
+            #PayingLoan.objects.filter(loan_id=pk).update( total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
+            items = PayingLoan.objects.filter(loan_id=pk)
+            for i in items:
+                i.total_paid = toTotalPaid
+                i.balance = toBalance
+                i.loan_status = Toloan_status
+                i.save()
+        else:
+            Toloan_status = 'RUNNING'
+            items=PayingLoan.objects.filter(loan_id=pk)
+            for i in items:
+                i.total_paid = toTotalPaid
+                i.balance = toBalance
+                i.loan_status = Toloan_status
+                i.save()
+            # update(total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
+            
+        context['toTotalPaid'] = toTotalPaid
+        context['toBalance'] = toBalance
         form = PayingLoanForm(request.POST)
         if form.is_valid():
-            amount_paid=request.POST.get('amount')
-            results = PayingLoan.objects.filter(loan_id=items.id).aggregate(totals=models.Sum("amount"))
-            if (results['totals'])!=None:
-                totalPaid = results["totals"]
-            else:
-                totalPaid = 0
-            toTotalPaid = totalPaid + int(amount_paid)
-            interest = ((items.interest_rate / 100) *items.loan_period * items.amount)
-            toBalance = (items.amount + interest) - toTotalPaid
-            if toBalance == 0:
-                Toloan_status = 'SETTLED'
-                PayingLoan.objects.filter(loan_id=pk).update( total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
-                
-            else:
-                Toloan_status = 'RUNNING'
-                items=PayingLoan.objects.filter(loan_id=pk)
-                for i in items:
-                    i.total_paid = toTotalPaid
-                    i.balance = toBalance
-                    i.loan_status = Toloan_status
-                    i.save()
-                # update(total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
-                
-            context['toTotalPaid'] = toTotalPaid
-            context['toBalance'] = toBalance
             form.save()
             messages.success(request, f'Member Loan Repayment has been recorded')
             return redirect('loan-repayments', pk=pk)
@@ -406,6 +411,9 @@ def view_loan_repaymnets(request, pk):
     al = CustomUser.objects.all()
     if PayingLoan.objects.filter(loan_id=pk).exists():
         get_loan_id = PayingLoan.objects.filter(loan_id=pk).order_by('-date')
+        for p in get_loan_id:
+            repayment_balance=p.balance
+            context['repayment_balance']=repayment_balance
         for i in al:
             if(i.first_name != None and i.last_name != None):
                 nam = i.first_name + " " + i.last_name
