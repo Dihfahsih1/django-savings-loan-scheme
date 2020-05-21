@@ -22,8 +22,8 @@
                         cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <td>name</td>
                                 <td>Date</td>
+                                <td>name</td>
                                 <td>Payment.</td>
                                 <td>Actions</td>
                             </tr>
@@ -31,8 +31,8 @@
                         <tbody>
                             {% for details in get_loan_id %}
                             <tr>
-                                <td>{{details.name}}</td>
                                 <td>{{details.date}}</td>
+                                <td>{{details.name}}</td>
                                 <td>{{details.amount|intcomma}}</td>
                                 <td><a href="{% url 'edit-loan-repayment' details.id %}" class="btn btn-warning btn-sm"><span class="fa fa-edit">
                                         Edit</span></a></td>

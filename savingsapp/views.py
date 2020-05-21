@@ -358,7 +358,14 @@ def pay_loan(request, pk):
                 
             else:
                 Toloan_status = 'RUNNING'
-                PayingLoan.objects.filter(loan_id=pk).update(total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
+                items=PayingLoan.objects.filter(loan_id=pk)
+                for i in items:
+                    i.total_paid = toTotalPaid
+                    i.balance = toBalance
+                    i.loan_status = Toloan_status
+                    i.save()
+                # update(total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
+                
             context['toTotalPaid'] = toTotalPaid
             context['toBalance'] = toBalance
             form.save()
@@ -398,7 +405,7 @@ def view_loan_repaymnets(request, pk):
     context = {}
     al = CustomUser.objects.all()
     if PayingLoan.objects.filter(loan_id=pk).exists():
-        get_loan_id = PayingLoan.objects.filter(loan_id=pk)
+        get_loan_id = PayingLoan.objects.filter(loan_id=pk).order_by('-date')
         for i in al:
             if(i.first_name != None and i.last_name != None):
                 nam = i.first_name + " " + i.last_name
@@ -420,7 +427,7 @@ def view_loan_repaymnets(request, pk):
         startdate = i.cycle_period_start
         enddate = i.cycle_period_end
     loan_list = Loan.objects.filter(date__range=(startdate, enddate))
-    paginator = Paginator(loan_list, 10)  # 10 loanees on each page
+    paginator = Paginator(loan_list, 10)  #items per page
     page = request.GET.get('page')
     try:
         members_list = paginator.page(page)
