@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^MemberAccountRegister/', views.MemberAccountRegister,
         name='MemberAccountRegister'),
+    url(r'^Logout/', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^Login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^Sacco-Account', views.sacco_account, name='sacco-account'),
     url(r'^Add-Member', views.add_member, name='add-member'), 
