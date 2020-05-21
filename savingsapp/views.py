@@ -396,11 +396,18 @@ def edit_loan_repayment(request, pk):
 #view single loan repayments        
 def view_loan_repaymnets(request, pk):
     context = {}
-    current_cycle=Cycle.objects.get(is_active=True)
+    al = CustomUser.objects.all()
     if PayingLoan.objects.filter(loan_id=pk).exists():
         get_loan_id = PayingLoan.objects.filter(loan_id=pk)
-        for i in get_loan_id:
-            print(i.loan_id)
+        for i in al:
+            if(i.first_name != None and i.last_name != None):
+                nam = i.first_name + " " + i.last_name
+                for k in get_loan_id:
+                    name = k.name
+                    get_loan = Loan.objects.get(id=k.loan_id)
+                    loaned_amount = get_loan.amount
+                    context['name'] = name
+                    context['loaned_amount'] = loaned_amount                        
     else:
         get_loan_details = Loan.objects.get(id=pk)
         context = {'get_loan_details': get_loan_details}
@@ -427,21 +434,6 @@ def view_loan_repaymnets(request, pk):
     context['members_list'] = members_list
     context['get_loan_id'] = get_loan_id
     context['total_amount'] = total_amount
-    context['current_cycle'] = current_cycle
-
-    al = CustomUser.objects.all()
-    for i in al:
-        if(i.first_name !=None and i.last_name !=None):
-            nam = i.first_name + " " + i.last_name
-            for k in get_loan_id:
-                name = k.name
-                if (name == nam):
-                    get_loan = Loan.objects.get(id=k.loan_id)
-                    x=get_loan.id
-                    loaned_amount = get_loan.amount
-                    context['loaned_amount'] = loaned_amount
-                    context['name']=name
-                    context['loan_p'] = x
     return render(request, 'view_loan_repaymnets.html', context)
 
 #add new lookup

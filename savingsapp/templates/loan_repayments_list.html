@@ -31,7 +31,7 @@
             <tbody>
               {% for details in loan_list %}
                 <tr>
-                  <td><a href="#">{{details.name}} </a></td>
+                  <td><a href="{% url 'loan-repayments' details.id %}">{{details.name}} </a></td>
                   <td>{{details.amount|intcomma}}</td>
                   <td>{{details.total_repayments|intcomma}}</td>                  
                   <td>{{details.balance|intcomma}}</td>

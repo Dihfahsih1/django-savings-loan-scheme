@@ -7,7 +7,7 @@
     <a href="#" class="btn-sm btn-defualt">{{name}}</a>
 </p>
 
-    <h3 style="text-align: center;">Loaning Scheme for <b style="color: slateblue;">{{current_cycle}}</b> cycle</h3>
+    <h3 style="text-align: center;">Loaning Scheme for <b style="color: slateblue;">{{currentCycle}}</b> cycle</h3>
     <hr />
 <h4>Loan Repayment of <b style="color: red">{{name}}</b>.  </h4>
 <h5>Amount Loaned is {{loaned_amount|intcomma}}</h5>
@@ -22,16 +22,16 @@
                         cellspacing="0" width="100%">
                         <thead>
                             <tr>
+                                <td>name</td>
                                 <td>Date</td>
                                 <td>Payment.</td>
-                                <td>Actions : <a href="{% url 'pay-loan' loan_p %}" class="btn btn-info btn-sm"><span class="fa fa-dollar"> Pay
-                                        Loan</span></a>
-                                     </td>
+                                <td>Actions</td>
                             </tr>
                         </thead>
                         <tbody>
                             {% for details in get_loan_id %}
                             <tr>
+                                <td>{{details.name}}</td>
                                 <td>{{details.date}}</td>
                                 <td>{{details.amount|intcomma}}</td>
                                 <td><a href="{% url 'edit-loan-repayment' details.id %}" class="btn btn-warning btn-sm"><span class="fa fa-edit">
