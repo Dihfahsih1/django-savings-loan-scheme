@@ -21,6 +21,19 @@ class StockList(APIView):
         return Response(serializer.data)
 
 
+def MemberAccountRegister(request):
+    members = CustomUser.objects.all()
+    if request.method == 'POST':
+        form = MembershipAccountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(
+                request, f'Account has been created successfully!, You can now login')
+            return redirect('login')
+    else:
+        form = MembershipAccountForm()
+        return render(request, 'membershipaccount.html', {'form': form, 'members': members})
 def index(request):
     return render(request,'index.html')
 

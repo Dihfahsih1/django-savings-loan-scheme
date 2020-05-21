@@ -2,9 +2,15 @@ from django.conf.urls import url
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from savingsapp import views
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import *
+from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^MemberAccountRegister/', user_views.MemberAccountRegister,
+        name='MemberAccountRegister'),
+    url(r'^Login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^Sacco-Account', views.sacco_account, name='sacco-account'),
     url(r'^Add-Member', views.add_member, name='add-member'), 
     url(r'^Edit-Member/(?P<pk>\d+)', views.edit_member, name='edit-member'),
