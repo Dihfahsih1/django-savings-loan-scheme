@@ -31,19 +31,19 @@
             <tbody>
               {% for details in loan_list %}
                 <tr>
-                  <td><a href="{% url 'loan-repayments' details.id %}">{{details.name}} </a></td>
+                  <td><a href="#">{{details.name}} </a></td>
                   <td>{{details.amount|intcomma}}</td>
                   <td>{{details.total_repayments|intcomma}}</td>                  
                   <td>{{details.balance|intcomma}}</td>
                   <td>{{details.deadline}}</td>
                   <td>{{details.grace_period}}</td>
-                  <td>{{details.penalties}}</td>
+                  <td>{{details.penalties|intcomma}}</td>
                   <td>{{details.status}}</td>
                   <td>
                     {% if details.total_repayments >= details.repayment %}
                       <div class="mb-4">
                         <i class="btn btn-success btn-sm"><span class="fa fa-home"> Fully Paid</span></i>
-                        <a href="{% url 'give-loan' %}" class="btn btn-primary btn-sm"><span class="fa fa-share"> Get New Loan</span></a>
+                        <a href="{% url 'give-loan' %}" class="btn btn-primary btn-sm"><span class="fa fa-share">New Loan</span></a>
                         <a href="{% url 'edit-loan' details.id %}"class="btn btn-warning btn-sm"><span class="fa fa-edit"> Edit</span></a> 
                         <!-- <a href="{% url 'delete-loan' details.id %}"class="btn btn-danger btn-sm"><span class="fa fa-trash"> Delete</span></a>
                       -->

@@ -1,9 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from datetime import datetime, timedelta
+from datetime import datetime, date, timedelta
 from dateutil.relativedelta import *
 from django.db.models import Sum
-
 
 class CustomUser(AbstractUser):
 	roles =(('Admin','Admin'),('Ordinary','Ordinary'))
@@ -22,7 +21,7 @@ class CustomUser(AbstractUser):
 	USERNAME_FIELD = 'username'
 	REQUIRED_FILEDS = []
 	def __str__(self):
-		return '%s %s' % (self.last_name, self.first_name)
+		return str(self.last_name) + ' '+ str(self.first_name)
 	@property 
 	def total_saving(self):
 		cycles = Cycle.objects.filter(is_active=True)
@@ -65,7 +64,8 @@ class CustomUser(AbstractUser):
 
 	@property
 	def full_name(self):
-		return '%s %s' % (self.last_name, self.first_name)
+		#return '%s %s' % (self.last_name, self.first_name)
+		return (str(self.last_name )+ ' '+ str(self.first_name))
 
 	@property
 	def loan_status(self):
@@ -118,32 +118,41 @@ class Saving(models.Model):
 class Loan(models.Model):
 	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))
 	date = models.DateField(max_length=100, blank=True, null=True)
-	name = models.ForeignKey(
-		CustomUser, on_delete=models.CASCADE, max_length=100, null=True, blank=True)
+	name = models.ForeignKey(CustomUser, on_delete=models.CASCADE, max_length=100, null=True, blank=True)
 	amount = models.IntegerField(default=0, null=True, blank=True)
 	interest_rate = models.IntegerField(default=0)
 	loan_period = models.IntegerField(default=0, null=True, blank=True)
 	loan_status = models.CharField(max_length=100,choices=status, default='RUNNING', null=True, blank=True)
 	recorded_by =models.CharField(max_length=220, blank=True, null=True)
 	def __str__(self):
-		return self.name
+		return str(self.name)
+
 	@property
 	def total_repayments(self):
-		get_loan=PayingLoan.objects.filter(loan_id=self.id)
-		for i in get_loan:
-			return i.total_paid	
+		if PayingLoan.objects.filter(loan_id=self.id).exists():
+			get_loan = PayingLoan.objects.filter(loan_id=self.id)
+			for i in get_loan:
+				return i.total_paid
+		else:
+			return 0
+
 
 	@property
 	def balance(self):
-		get_loan = PayingLoan.objects.filter(loan_id=self.id)
-		for i in get_loan:
-			return i.balance
-
+		if PayingLoan.objects.filter(loan_id=self.id).exists():
+			get_loan = PayingLoan.objects.filter(loan_id=self.id)
+			for i in get_loan:
+				return i.balance
+		else:
+			return self.amount
 	@property
 	def status(self):
-		get_loan = PayingLoan.objects.filter(loan_id=self.id)
-		for i in get_loan:
-			return i.loan_status
+		if PayingLoan.objects.filter(loan_id=self.id).exists():
+			get_loan = PayingLoan.objects.filter(loan_id=self.id)
+			for i in get_loan:
+				return i.loan_status
+		else:
+			return 'RUNNING'
 
 	@property
 	def deadline(self):
@@ -162,15 +171,14 @@ class Loan(models.Model):
 		return grace_date
 	
 	@property
-	def penaties(self):
-		today=date.now()
-		if today > self.grace_period:
+	def penalties(self):
+		pen_date=date.today()
+		if pen_date >= self.grace_period and self.status == 'RUNNING':
 			return (self.repayment/2)
+		elif pen_date >= self.grace_period and self.status == 'SETTLED':
+			return 'Not Penalized'
 		else:
-			return 0	
-		
-
-	
+			return 'No Penalty Yet'
 
 	@property
 	def loan_interest(self):
@@ -183,8 +191,8 @@ class PayingLoan(models.Model):
 	date = models.DateField(max_length=100, blank=True, null=True)
 	name = models.CharField(max_length=100, null=True, blank=True)
 	amount = models.IntegerField(null=True, blank=True, default=0)
-	total_paid = models.IntegerField(null=True, blank=True, default=0)
-	balance = models.IntegerField(null=True, blank=True, default=0)
+	total_paid = models.IntegerField(blank=True, default=0)
+	balance = models.IntegerField(blank=True, default=0)
 	loan_status = models.CharField(max_length=100, choices=status, default='RUNNING', null=True, blank=True)
 	@property
 	def total_repayment(self):
@@ -202,7 +210,7 @@ class PayingLoan(models.Model):
 			else:
 				return 0
 	def __str__(self):
-		return str(self.date)
+		return str(self.name)
 
 class Stock(models.Model):
 	ticker = models.CharField(max_length=10)

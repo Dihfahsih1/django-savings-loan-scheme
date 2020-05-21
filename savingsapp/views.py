@@ -263,7 +263,8 @@ def edit_saving(request, pk):
         name=item.name
         context={'form':form, 'name':name}
         return render(request, 'edit_saving.html', context)
-    
+
+#Loan Application    
 def give_loan(request):
     context={}
     if request.method == 'POST':
@@ -285,7 +286,6 @@ def give_loan(request):
     context['form']=form
     all_members=CustomUser.objects.all()
     context['all_members']=all_members
-    
     return render(request,'loan_application.html', context)
 
 def edit_loan(request, pk):
@@ -322,7 +322,6 @@ def list_loan_repayment(request):
         startdate = i.cycle_period_start
         enddate = i.cycle_period_end
     loan_list = Loan.objects.filter(date__range=(startdate, enddate))
-    current_cycle = Cycle.objects.get(is_active=True)
     context={'loan_list':loan_list}
     return render(request, 'loan_repayments_list.html', context)
 
@@ -358,10 +357,8 @@ def pay_loan(request, pk):
                 PayingLoan.objects.filter(loan_id=pk).update( total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
                 
             else:
-                print('this is an error')
                 Toloan_status = 'RUNNING'
-                PayingLoan.objects.filter(loan_id=pk).update(
-                total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
+                PayingLoan.objects.filter(loan_id=pk).update(total_paid=toTotalPaid, balance=toBalance, loan_status=Toloan_status)
             context['toTotalPaid'] = toTotalPaid
             context['toBalance'] = toBalance
             form.save()
@@ -402,6 +399,8 @@ def view_loan_repaymnets(request, pk):
     current_cycle=Cycle.objects.get(is_active=True)
     if PayingLoan.objects.filter(loan_id=pk).exists():
         get_loan_id = PayingLoan.objects.filter(loan_id=pk)
+        for i in get_loan_id:
+            print(i.loan_id)
     else:
         get_loan_details = Loan.objects.get(id=pk)
         context = {'get_loan_details': get_loan_details}
@@ -409,6 +408,11 @@ def view_loan_repaymnets(request, pk):
     sum_repayments = get_loan_id.aggregate(totals=models.Sum("amount"))
     total_amount = sum_repayments["totals"]
     loan_list = Loan.objects.all()
+    cycle = Cycle.objects.filter(is_active=True)
+    for i in cycle:
+        startdate = i.cycle_period_start
+        enddate = i.cycle_period_end
+    loan_list = Loan.objects.filter(date__range=(startdate, enddate))
     paginator = Paginator(loan_list, 10)  # 10 loanees on each page
     page = request.GET.get('page')
     try:
@@ -438,7 +442,6 @@ def view_loan_repaymnets(request, pk):
                     context['loaned_amount'] = loaned_amount
                     context['name']=name
                     context['loan_p'] = x
-                    
     return render(request, 'view_loan_repaymnets.html', context)
 
 #add new lookup
