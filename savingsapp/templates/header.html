@@ -16,7 +16,7 @@
                     <!-- Top Login & Faq & Earn Monery btn -->
                         {% if user.is_authenticated %}
                         <div class="login-faq-earn-money">
-                            <p><a href="{% url 'logout' %}">Logout</a></p>
+                            <p>{{request.user.username}} <a href="{% url 'logout' %}"> | Logout</a></p>
                         </div>
                         {% else %}
                         <div class="login-faq-earn-money">
