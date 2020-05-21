@@ -12,7 +12,7 @@ class MembershipAccountForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = [ 'username', 'Role']
+        fields = [ 'username', 'Role', 'email']
         # 'roles'
         labels = {
             'username': 'Username',
