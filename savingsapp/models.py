@@ -135,8 +135,6 @@ class Loan(models.Model):
 				return i.total_paid
 		else:
 			return 0
-
-
 	@property
 	def balance(self):
 		if PayingLoan.objects.filter(loan_id=self.id).exists():
