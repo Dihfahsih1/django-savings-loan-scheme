@@ -174,6 +174,9 @@ class Loan(models.Model):
 	def penalties(self):
 		pen_date=date.today()
 		if pen_date >= self.grace_period and self.status == 'RUNNING':
+			penalted=(self.amount) + (self.repayment/2)
+			self.amount=penalted
+			self.save() 
 			return (self.repayment/2)
 		elif pen_date >= self.grace_period and self.status == 'SETTLED':
 			return 'Not Penalized'
