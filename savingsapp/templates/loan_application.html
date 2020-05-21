@@ -69,20 +69,20 @@
                                                 {% csrf_token %}
                                                 <div class="form-group">
                                                     <label for="date">Date:</label>
-                                                    <input type="date" class="form-control" id="date" name="date">
+                                                    <input type="date" class="form-control" id="date" name="date" required='True'>
                                                 </div>
                                                 {{form.name|as_crispy_field}}
                                                 <div class="form-group">
                                                     <label for="amount">Amount(Principal):</label>
-                                                    <input type="number" class="form-control" id="amount" name="amount">
+                                                    <input type="number" class="form-control" id="amount" name="amount" required='True'>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="rate">Interest Rate:</label>
-                                                    <input type="number" class="form-control" id="interest_rate" name="interest_rate" value='{{rate}}'>
+                                                    <input type="number" class="form-control" id="interest_rate" name="interest_rate" value='{{rate}}' required='True'>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="loan_period">Loan Period(Number of Months):</label>
-                                                    <input type="number" class="form-control" id="loan_period" name="loan_period">
+                                                    <input type="number" class="form-control" id="loan_period" name="loan_period" required='True'>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="recorded_by">Recorded by:</label>
