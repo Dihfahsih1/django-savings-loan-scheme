@@ -1,6 +1,10 @@
 
+import environ
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
+
+env = environ.Env()
+env.read_env(env.str('ENV_PATH', 'C:/Users/User/innovations/savings_project/.env'))
 import django
 from datetime import timedelta
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -107,3 +111,11 @@ DATE_FORMAT = 'M j, Y'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
+
+EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'dihfahsihm@gmail.com'
+EMAIL_HOST_PASSWORD = 'egukpkjpesrinmpe'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
