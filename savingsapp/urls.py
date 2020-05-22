@@ -12,6 +12,8 @@ urlpatterns = [
         name='MemberAccountRegister'),
     url(r'^Logout/', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^Login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    url(r'^Password-Reset/', auth_views.PasswordResetView.as_view(template_name='password_reset.html'),
+     name='password_reset'),
     url(r'^Sacco-Account', views.sacco_account, name='sacco-account'),
     url(r'^Add-Member', views.add_member, name='add-member'), 
     url(r'^Edit-Member/(?P<pk>\d+)', views.edit_member, name='edit-member'),

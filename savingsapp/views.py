@@ -36,6 +36,7 @@ def MemberAccountRegister(request):
         form = MembershipAccountForm()
         return render(request, 'membershipaccount.html', {'form': form, 'members': members})
 def index(request):
+    #messages.success(request, f'Welcome to Kisajja Kikulu Savings Sacco')
     return render(request,'index.html')
 
 #record member
