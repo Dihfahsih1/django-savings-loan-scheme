@@ -1,15 +1,6 @@
-/* [Master Stylesheet v1.0] */
-/* :: :: 1.0 Import Fonts */
+
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900|Open+Sans:400,600,700");
-/* :: 2.0 Import All CSS */
-/* @import url(css/bootstrap.min.css);
-@import url(css/owl.carousel.min.css);
-@import url(css/animate.css);
-@import url(css/magnific-popup.css);
-@import url(css/font-awesome.min.css);
-@import url(css/custom-icon.css);
-@import url(css/classy-nav.min.css); */
-/* :: 3.0 Base CSS */
+
 * {
   margin: 0;
   padding: 0; }
