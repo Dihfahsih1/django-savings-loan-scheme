@@ -1,11 +1,5 @@
 
-import environ
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
-
-env = environ.Env()
-env.read_env(env.str('ENV_PATH', 'C:/Users/User/innovations/savings_project/.env'))
-import django
 from datetime import timedelta
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '9innrqw6-#7w$8#dkbyqj1m(f=52l-f9&12yw42#g7-*so#lci'
