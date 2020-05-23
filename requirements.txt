@@ -21,8 +21,8 @@ tqdm==4.45.0
 twine==3.1.1
 urllib3==1.25.9
 webencodings==0.5.1
-rest_framework
+rest-framework
 bootstrap4
-widget_tweaks
-crispy_forms
-bootstrap_datepicker_plus
+django-widget-tweaks
+django-crispy-forms
+django-bootstrap-datepicker-plus
