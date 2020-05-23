@@ -1,4 +1,4 @@
-
+import django_heroku
 import os
 from datetime import timedelta
 
