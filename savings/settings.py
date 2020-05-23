@@ -1,7 +1,7 @@
 
 import os
 from datetime import timedelta
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 SECRET_KEY = '9innrqw6-#7w$8#dkbyqj1m(f=52l-f9&12yw42#g7-*so#lci'
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -21,6 +21,14 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'psycopg2',
 ]
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATIC_URL = '/static/'
+
+
+
+
 DATE_INPUT_FORMATS = ['%Y-%-m-%d', ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -41,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 ROOT_URLCONF = 'savings.urls'
-PROJECT_ROOT = BASE_DIR
+
 TEMPLATES = [
     {
          'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -88,12 +96,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-STATIC_ROOT = ''
-STATIC_URL = '/static/'
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
