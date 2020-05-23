@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'bootstrap_datepicker_plus',
+    'psycopg2',
 ]
 DATE_INPUT_FORMATS = ['%Y-%-m-%d', ]
 REST_FRAMEWORK = {
