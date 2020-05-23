@@ -21,7 +21,7 @@ tqdm==4.45.0
 twine==3.1.1
 urllib3==1.25.9
 webencodings==0.5.1
-rest-framework
+django-rest-framework
 bootstrap4
 django-widget-tweaks
 django-crispy-forms
