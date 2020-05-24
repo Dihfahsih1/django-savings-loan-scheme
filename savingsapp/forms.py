@@ -35,9 +35,9 @@ class MembershipAccountForm(forms.ModelForm):
 
 class MemberForm(forms.ModelForm):
     class Meta:
-        model=CustomUser
+        model=Member
         fields = ('status', 'email', 'telephone', 'first_name', 'last_name',
-                  'application_fee', 'is_active', 'is_staff', 'is_superuser', 'Role',)
+                  'application_fee', 'is_active',  'Role',)
 
 
 class SocialFundForm(forms.ModelForm):

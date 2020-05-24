@@ -5,8 +5,24 @@ from dateutil.relativedelta import *
 from django.db.models import Sum
 
 class CustomUser(AbstractUser):
-	roles =(('Admin','Admin'),('Ordinary','Ordinary'))
+	roles = (('Admin', 'Admin'), ('Ordinary', 'Ordinary'))
+	Role = models.CharField(max_length=250, choices=roles, blank=True, null=True)
+	full_name = models.ForeignKey('Member',on_delete=models.CASCADE, blank=True, null= True)
+	username = models.CharField(max_length=30, unique=True, blank=True, null=True)
+	is_active = models.BooleanField(default=True)   # can login
+	is_staff = models.BooleanField(default=False)  # staff user non superuser
+	is_superuser = models.BooleanField(default=False)
+	email = models.EmailField(max_length=255, blank=True, null=True, default='sacco@gmail.com')
+	USERNAME_FIELD = 'username'
+	REQUIRED_FILEDS = []
+	def __str__(self):
+		return self.full_name
+
+class Member(models.Model):
+	is_active = models.BooleanField(default=True)   # can login
+	roles = (('Admin', 'Admin'), ('Ordinary', 'Ordinary'))
 	atte = (('Present', 'Present'), ('Absent', 'Absent'))
+	joining_date =models.DateTimeField(auto_now_add=True, blank=True)
 	status = models.CharField(max_length=30,choices=atte,default='Absent', blank=True, null=True)
 	email = models.EmailField(max_length=255, blank=True, null=True)
 	telephone = models.IntegerField(default=0, blank=True, null=True)
@@ -15,13 +31,9 @@ class CustomUser(AbstractUser):
 	username = models.CharField(max_length=30, unique=True, blank=True, null=True)
 	application_fee = models.IntegerField(default=10000, blank=True, null=True)
 	Role = models.CharField(max_length=250, choices=roles)
-	is_active = models.BooleanField(default=True)   # can login
-	is_staff = models.BooleanField(default=False)  # staff user non superuser
-	is_superuser = models.BooleanField(default=False)
-	USERNAME_FIELD = 'username'
-	REQUIRED_FILEDS = []
+	
 	def __str__(self):
-		return str(self.last_name) + ' '+ str(self.first_name)
+		return str(self.last_name) + ' ' + str(self.first_name)
 	@property 
 	def total_saving(self):
 		cycles = Cycle.objects.filter(is_active=True)
@@ -112,7 +124,7 @@ class Cycle(models.Model):
 class Saving(models.Model):
 	date = models.DateField(max_length=100, blank=True, null=True)
 	name = models.ForeignKey(
-		CustomUser, on_delete=models.CASCADE, max_length=100, null=True, blank=True)
+		Member, on_delete=models.CASCADE, max_length=100, null=True, blank=True)
 	amount = models.IntegerField(default=0, null=True, blank=True)
 	def __str__(self):
 		return self.name
@@ -120,7 +132,8 @@ class Saving(models.Model):
 class Loan(models.Model):
 	status = (("RUNNING", "RUNNING"), ("SETTLED", "SETTLED"))
 	date = models.DateField(max_length=100, blank=True, null=True)
-	name = models.ForeignKey(CustomUser, on_delete=models.CASCADE, max_length=100, null=True, blank=True)
+	name = models.ForeignKey(Member, on_delete=models.CASCADE,
+	                     max_length=100, null=True, blank=True)
 	amount = models.IntegerField(default=0, null=True, blank=True)
 	interest_rate = models.IntegerField(default=0)
 	loan_period = models.IntegerField(default=0, null=True, blank=True)
