@@ -4,7 +4,7 @@ from datetime import timedelta
 
 SECRET_KEY = '9innrqw6-#7w$8#dkbyqj1m(f=52l-f9&12yw42#g7-*so#lci'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://savings-svheme.herokuapp.com/']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
