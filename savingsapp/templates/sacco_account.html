@@ -16,19 +16,19 @@
 
             <tbody>
                 <tr><i style="color: crimson;">
-                    <td><b>Registration Fees</b> : <i style="color: crimson;">Shs.{{total_registration|intcomma}}</i></td>
+                    <td><b><a href="{% url 'give-loan' %}">Registration Fees</a></b> : <i style="color: crimson;">Shs.{{total_registration|intcomma}}</i></td>
                 </tr>
                 <tr>
-                    <td><b>Total Social Fund</b>: <i style="color: crimson;">Shs.{{total_social|intcomma}}</i></td>
+                    <td><b><a href="{% url 'social-fund-list' %}">Total Social Fund</a></b>: <i style="color: crimson;">Shs.{{total_social|intcomma}}</i></td>
                 </tr>
                 <tr>
-                    <td><b>Total Savings</b>: <i style="color: crimson;">Shs.{{total_savings|intcomma}}</i></td>
+                    <td><b><a href="{% url 'savings-list' %}">Total Savings</a></b>: <i style="color: crimson;">Shs.{{total_savings|intcomma}}</i></td>
                 </tr>
                 <tr>
-                    <td><b>Loans Taken</b>: <i style="color: crimson;">Shs.{{total_loan_given|intcomma}}</i></td>
+                    <td><b><a href="{% url 'all-loans' %}">Loans Taken</a></b>: <i style="color: crimson;">Shs.{{total_loan_given|intcomma}}</i></td>
                 </tr>
                 <tr>
-                    <td><b>Loan Repayments</b>: <i style="color: crimson;">Shs.{{total_repayments|intcomma}}</i></td>
+                    <td><b><a href="{% url 'loan-list' %}">Loan Repayments</a></b>: <i style="color: crimson;">Shs.{{total_repayments|intcomma}}</i></td>
                 </tr>
                 
                 <tr>
