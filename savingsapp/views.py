@@ -48,7 +48,6 @@ def add_member(request):
         fname = request.POST.get('first_name')
         lname = request.POST.get('last_name')
         form=MemberForm(request.POST, request.FILES,)
-        print(form)
         if form.is_valid():
             for i in all_members:
                 if(i.first_name == fname and i.last_name == lname):
@@ -222,7 +221,6 @@ def attendence_history(request):
 def make_saving(request):
     if request.method == 'POST':
         form = SavingsForm(request.POST or None, request.FILES or None)
-        print(form.errors)
         if form.is_valid:
             form.save()
             messages.success(request, f'Savings of the member has been Recorded')
@@ -308,7 +306,6 @@ def give_loan(request):
     if request.method == 'POST':
         form = LoanForm(request.POST, request.FILES)
         if form.is_valid:
-            print(form.errors)
             loan = form.save(commit=False)
             loan.save() 
             messages.success(request, f'Member Loan Application has been recorded')
