@@ -16,7 +16,9 @@
                     <!-- Top Login & Faq & Earn Monery btn -->
                         {% if user.is_authenticated %}
                         <div class="login-faq-earn-money">
-                            <p>{{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></p>
+                            
+                            <p><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}</a><br>
+                            {{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></p>
                         </div>
                         {% else %}
                         <div class="login-faq-earn-money">
