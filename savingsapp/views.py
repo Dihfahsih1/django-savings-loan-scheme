@@ -43,7 +43,7 @@ def index(request):
 @login_required
 def add_member(request):
     current_cycle = Cycle.objects.get(is_active=True)
-    all_members = Member.objects.all()
+    all_members = Member.objects.filter(is_active=True)
     if request.method=="POST":
         fname = request.POST.get('first_name')
         lname = request.POST.get('last_name')
@@ -89,7 +89,7 @@ def delete_member(request, pk):
 @login_required
 def members_list(request):
     current_cycle = Cycle.objects.get(is_active=True)
-    all_members=Member.objects.all()
+    all_members=Member.objects.filter(is_active=True)
     context = {
         'all_members': all_members, 'current_cycle': current_cycle
     }
