@@ -20,7 +20,6 @@
                 <td>Name</td>
                 <td>Principal</td>
                 <td>Paid</td>
-                <td>Balance</td>
                 <td>Deadline</td>
                 <td>Graceful</td>
                 <td>Penalties</td>
@@ -33,8 +32,7 @@
                 <tr>
                   <td><a href="{% url 'loan-repayments' details.id %}">{{details.name}} </a></td>
                   <td>{{details.amount|intcomma}}</td>
-                  <td>{{details.total_repayments|intcomma}}</td>                  
-                  <td>{{details.balance|intcomma}}</td>
+                  <td>{{details.total_repayments|intcomma}}</td> 
                   <td>{{details.deadline}}</td>
                   <td>{{details.grace_period}}</td>
                   <td>{{details.penalties|intcomma}}</td>

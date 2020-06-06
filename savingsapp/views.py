@@ -79,7 +79,7 @@ def edit_member(request, pk):
 @login_required
 def delete_member(request, pk):
     if request.method == "GET":
-        item= Member.objects.get(is_active=True, id=pk)
+        item = Member.objects.get(is_active=True, id=pk)
         item.is_active='False'
         item.save()
         messages.success(request, "Member successfully deleted!")
