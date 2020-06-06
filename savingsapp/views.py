@@ -80,7 +80,8 @@ def edit_member(request, pk):
 def delete_member(request, pk):
     item= get_object_or_404(Member, id=pk)
     if request.method == "GET":
-        item.delete()
+        set_to_false=item.is_active
+        set_to_false.save()
         messages.success(request, "Member successfully deleted!")
         return redirect("members-list")
 
