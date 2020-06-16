@@ -9,11 +9,9 @@
                
                 <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
                     {% if request.get_full_path == "/"  %}
-                    <!-- Top Headline -->
                     <div class="top-headline">
                         <p style="font-size: 200%">Welcome to <span>Kisajja Kikulu</span></p>
                     </div>
-                    <!-- Top Login & Faq & Earn Monery btn -->
                         {% if user.is_authenticated %}
                         <div class="login-faq-earn-money">
                             
@@ -30,10 +28,10 @@
 
                     {% else %}
                     <div class="top-headline" >
-                        <p style="font-size: 200%;" >{{request.get_full_path}}<span> Module</span></p>
+                        <h2>{{request.get_full_path}}<span> Module</span></h2>
                     </div>
                     <div class="login-faq-earn-money">
-                        <p><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}</a><br>
+                        <!-- <p><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}</a><br> -->
                         <span><i class="fa fa-user"></i> {{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></span>
                     </div>
                     {% endif %}
