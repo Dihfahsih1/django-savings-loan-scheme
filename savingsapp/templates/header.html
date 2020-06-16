@@ -9,15 +9,12 @@
                
                 <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
                     {% if request.get_full_path == "/"  %}
-                    <!-- Top Headline -->
                     <div class="top-headline">
                         <p  style="font-size:4vw">Welcome to <span>Kisajja Kikulu</span></p>
                     </div>
-                    <!-- Top Login & Faq & Earn Monery btn -->
                         {% if user.is_authenticated %}
                         <div class="login-faq-earn-money">
-                            
-                            <p  style="font-size:3vw"><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}</a><br>
+                            <p  style="font-size:3vw"><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}.</a>
                             {{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></p>
                         </div>
                         {% else %}
