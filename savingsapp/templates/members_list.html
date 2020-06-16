@@ -16,8 +16,6 @@
               <tr style="font-weight: bolder;">
                 <td>Name</td>
                 <td>Telephone</td>
-                <td>Email</td>
-                <td>Status</td>
                 <td>Action</td>
               </tr>
             </thead>
@@ -26,8 +24,6 @@
                 <tr>
                   <td>{{member.last_name}} {{member.first_name}} </td>
                   <td>{{member.telephone}}</td>
-                  <td>{{member.email}}</td>
-                  <td>{{member.is_active}}</td>
                   <td> <div class="mb-4">
                        <a href="{% url 'view-member' pk=member.id %}"class="btn btn-success btn-sm"><span class="fa fa-eye"> View</span></a>
                         <a href="{% url 'edit-member' pk=member.id %}"class="btn btn-info btn-sm"><span class="fa fa-edit"> Edit</span></a>
