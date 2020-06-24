@@ -14,7 +14,7 @@
                     </div>
                         {% if user.is_authenticated %}
                         <div class="login-faq-earn-money">
-                            <p  style="font-size:3vw"><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}.</a>
+                            <p><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}.</a>
                             {{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></p>
                         </div>
                         {% else %}
@@ -22,14 +22,14 @@
                             <p><a href="{% url 'login' %}">Login </a> | <a href="{% url 'MemberAccountRegister' %}"> Register</a></p>
                         </div>
                         {% endif %}
-
                     {% else %}
                     <div class="top-headline" >
-                        <p>{{request.get_full_path}}<span> Module</span></p>
+                        <p style="font-size:3vw">{{request.get_full_path}}<span> Module</span></p>
                     </div>
                     <div class="login-faq-earn-money">
-                        <p  style="font-size:3vw"><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}.</a>
-                        <span><i class="fa fa-user"></i> {{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></span></p>
+                        <p>
+                            <a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}.</a>
+                        <i class="fa fa-user"></i> {{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></p>
                     </div>
                     {% endif %}
                 </div>
@@ -52,7 +52,6 @@
 
                 <!-- Menu -->
                 <div class="classy-menu" >
-
                     <!-- close btn -->
                     <div class="classycloseIcon">
                         <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
