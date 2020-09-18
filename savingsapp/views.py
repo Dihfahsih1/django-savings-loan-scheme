@@ -21,7 +21,6 @@ class StockList(APIView):
         serializer = StockSerializer(stocks, many=True)
         return Response(serializer.data)
 
-
 def MemberAccountRegister(request):
     members = CustomUser.objects.all()
     if request.method == 'POST':

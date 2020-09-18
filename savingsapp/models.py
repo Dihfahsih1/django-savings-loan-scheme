@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import datetime, date, timedelta
 # from dateutil.relativedelta import *
+from dateutil.relativedelta import relativedelta
 from django.db.models import Sum
 
 class CustomUser(AbstractUser):
