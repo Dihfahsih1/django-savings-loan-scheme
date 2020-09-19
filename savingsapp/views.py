@@ -84,7 +84,7 @@ def delete_member(request, pk):
         messages.success(request, "Member successfully deleted!")
         return redirect("members-list")
 
-
+#list of members in the current cycle.
 @login_required
 def members_list(request):
     current_cycle = Cycle.objects.get(is_active=True)
