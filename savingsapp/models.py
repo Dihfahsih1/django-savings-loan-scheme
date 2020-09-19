@@ -5,6 +5,7 @@ from datetime import datetime, date, timedelta
 from dateutil.relativedelta import relativedelta
 from django.db.models import Sum
 
+#table for the custom user other than the default user.
 class CustomUser(AbstractUser):
 	roles = (('Admin', 'Admin'), ('Ordinary', 'Ordinary'))
 	Role = models.CharField(max_length=250, choices=roles, blank=True, null=True)
@@ -19,6 +20,7 @@ class CustomUser(AbstractUser):
 	def __str__(self):
 		return self.full_name
 
+#table for members of the sacco.
 class Member(models.Model):
 	is_active = models.BooleanField(default=True)   # can login
 	roles = (('Admin', 'Admin'), ('Ordinary', 'Ordinary'))
@@ -35,6 +37,8 @@ class Member(models.Model):
 	
 	def __str__(self):
 		return str(self.last_name) + ' ' + str(self.first_name)
+
+	#decoratiing the member model with a wtrapper.
 	@property 
 	def total_saving(self):
 		cycles = Cycle.objects.filter(is_active=True)
