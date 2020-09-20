@@ -14,6 +14,8 @@ from rest_framework import status
 from .models import *
 from .serializers import StockSerializer
 from django.contrib.auth.decorators import login_required
+from .tokens import account_activation_token  
+from django.core.mail import EmailMessage
 
 class StockList(APIView):
     def get(self, request):
@@ -26,11 +28,24 @@ def MemberAccountRegister(request):
     if request.method == 'POST':
         form = MembershipAccountForm(request.POST)
         if form.is_valid():
-            form.save()
+            member = form.save(commit=False)
+            member.save()
+            current_site = get_current_site(request)  
+            mail_subject = 'Activate your account.'  
+            message = render_to_string('acc_active_email.html', {  
+                'member': member,  
+                'domain': current_site.domain,  
+                'uid': urlsafe_base64_encode(force_bytes(member.pk)),  
+                'token': account_activation_token.make_token(member),  
+                }) 
+            to_email = form.cleaned_data.get('Email')  
+            email = EmailMessage(  
+                mail_subject, message, to=[to_email]  
+            )  
+            email.send()
             username = form.cleaned_data.get('username')
-            messages.success(
-                request, f'Account has been created successfully!, You can now login')
-            return redirect('login')
+            context={'member':member}
+            return render(request, 'activation_email_sent.html', context) 
     else:
         form = MembershipAccountForm()
         return render(request, 'membershipaccount.html', {'form': form, 'members': members})
