@@ -105,6 +105,8 @@
                                     <li><a href="{% url 'add-lookup-details' %}">Look Up Details</a></li>
                                 </ul>
                             </li>
+                            {% else %}
+                            <li>Log in to view more functionalities</li>
                             {% endif %}
                            <li><a href="{% url 'sacco-account' %}">Sacco Account</a></li>
                         </ul>
