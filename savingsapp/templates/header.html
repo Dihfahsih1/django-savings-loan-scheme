@@ -60,12 +60,14 @@
                     <div class="classynav" >
                         <ul>
                             <li><a href="{% url 'index' %}">Home</a></li>
+                            {% if request.user.is_authenticated %}
                             <li><a href="#">Members</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'add-member' %}">Add</a></li>
                                     <li><a href="{% url 'members-list' %}">View List</a></li>
                                 </ul>
                             </li>
+                            
                             <li><a href="#">Attendance</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'make-attendence' %}">Record</a></li>
@@ -103,6 +105,7 @@
                                     <li><a href="{% url 'add-lookup-details' %}">Look Up Details</a></li>
                                 </ul>
                             </li>
+                            {% endif %}
                            <li><a href="{% url 'sacco-account' %}">Sacco Account</a></li>
                         </ul>
 
