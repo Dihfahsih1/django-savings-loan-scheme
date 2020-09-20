@@ -126,4 +126,3 @@ EMAIL_HOST_PASSWORD = 'egukpkjpesrinmpe'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 django_heroku.settings(locals())
 
-SECURE_SSL_REDIRECT = True
