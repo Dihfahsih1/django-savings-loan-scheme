@@ -16,6 +16,10 @@ from .serializers import StockSerializer
 from django.contrib.auth.decorators import login_required
 from .tokens import account_activation_token  
 from django.core.mail import EmailMessage
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode 
+from django.utils.encoding import force_bytes, force_text    
 
 class StockList(APIView):
     def get(self, request):
@@ -27,6 +31,7 @@ def MemberAccountRegister(request):
     members = CustomUser.objects.all()
     if request.method == 'POST':
         form = MembershipAccountForm(request.POST)
+        print(form.errors)
         if form.is_valid():
             member = form.save(commit=False)
             member.save()
@@ -38,7 +43,7 @@ def MemberAccountRegister(request):
                 'uid': urlsafe_base64_encode(force_bytes(member.pk)),  
                 'token': account_activation_token.make_token(member),  
                 }) 
-            to_email = form.cleaned_data.get('Email')  
+            to_email = form.cleaned_data.get('email')  
             email = EmailMessage(  
                 mail_subject, message, to=[to_email]  
             )  
@@ -49,6 +54,22 @@ def MemberAccountRegister(request):
     else:
         form = MembershipAccountForm()
         return render(request, 'membershipaccount.html', {'form': form, 'members': members})
+
+
+#activate your email address
+def activate_email(request, uidb64, token):
+    try:  
+        uid = force_text(urlsafe_base64_decode(uidb64)) 
+        member = CustomUser.objects.get(id=uid)  
+    except(TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):  
+        member = None  
+    if member is not None and account_activation_token.check_token(member, token): 
+        # member.is_active=True
+        # member.save()
+        context={'full_name':member}
+        return render(request, 'email_confirmed.html', context)  
+    else:  
+        return HttpResponse('Activation link is invalid!')
 def index(request):
     #messages.success(request, f'Welcome to Kisajja Kikulu Savings Sacco')
     return render(request,'index.html')

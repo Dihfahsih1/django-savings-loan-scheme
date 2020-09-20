@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^Cycle-List', views.cycle_list, name='cycle-list'),
     url(r'^archiving-cycles', views.archiving_cycle, name='archive-cycle'),
     url(r'^Edit-Cycle/(?P<pk>\d+)', views.edit_cycle, name='edit-cycle'),
+    path('activate/<str:uidb64>/<str:token>/',views.activate_email, name='activate'), 
     url(r'^Activate-Cycle/(?P<pk>\d+)', views.activate_cycle, name='activate-cycle'),
     url(r'^Savings-delete-cycle/(?P<pk>\d+)', views.delete_cycle, name='delete-cycle'),
     url(r'^All-Loan-Repayments', views.list_loan_repayment, name='loan-list'),
