@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
 	Role = models.CharField(max_length=250, choices=roles, blank=True, null=True, default='Admin')
 	full_name = models.CharField(max_length=100, blank=True, null= True, default="Name")
 	username = models.CharField(max_length=30, unique=True, blank=True, null=True)
-	is_active = models.BooleanField(default=True)   # can login
+	is_active = models.BooleanField(default=False)   # can login
 	is_staff = models.BooleanField(default=False)  # staff user non superuser
 	is_superuser = models.BooleanField(default=False)
 	email = models.EmailField(max_length=255, blank=True, null=True, default='sacco@gmail.com')

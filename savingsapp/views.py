@@ -64,8 +64,8 @@ def activate_email(request, uidb64, token):
     except(TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):  
         member = None  
     if member is not None and account_activation_token.check_token(member, token): 
-        # member.is_active=True
-        # member.save()
+        member.is_active=True
+        member.save()
         context={'full_name':member}
         return render(request, 'email_confirmed.html', context)  
     else:  
