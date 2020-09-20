@@ -114,7 +114,7 @@ DATE_INPUT_FORMATS = ('%m/%d/%Y', '%Y-%m-%d', '%m/%d/%y', '%b %d %Y',
 DATE_FORMAT = 'M j, Y'
 #Loggin Redirect
 LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
 EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
