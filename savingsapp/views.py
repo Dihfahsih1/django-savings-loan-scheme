@@ -639,7 +639,6 @@ def social_fund_routine(request, pk):
     return render(request, 'social_funds_routine.html', context)
 
 
-@login_required
 #Total money in the sacco
 def sacco_account(request):
     current_cycle = Cycle.objects.filter(is_active=True)

@@ -1,11 +1,9 @@
 import django_heroku
 import os
 from datetime import timedelta
-from django.contrib.sites.shortcuts import get_current_site
+#from savingsapp.views import *
 
-current_site = get_current_site(request)
-if current_site == 'savings-sacco.herokuapp.com':
-    SECURE_SSL_REDIRECT  = True
+
 SECRET_KEY = '9innrqw6-#7w$8#dkbyqj1m(f=52l-f9&12yw42#g7-*so#lci'
 DEBUG = True
 ALLOWED_HOSTS = ['www.savings-sacco.herokuapp.com', '127.0.0.1']
@@ -68,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #'savings.context_processors.current_site',
             ],
         },
     },
@@ -130,8 +129,6 @@ EMAIL_HOST_PASSWORD = 'egukpkjpesrinmpe'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 django_heroku.settings(locals())
 
-# your_domain = Site.objects.get_current().domain
-# if your_domain == 'savings-sacco.herokuapp.com':
-#     REDIRECT_SSL = True
-
+# if current_site == 'savings-sacco.herokuapp.com':
+#     SECURE_SSL_REDIRECT  = True
 

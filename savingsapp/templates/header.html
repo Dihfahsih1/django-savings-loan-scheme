@@ -8,28 +8,33 @@
             <div class="col-12">
                 <div class="top-header-content h-100 d-flex align-items-center justify-content-between">
                     {% if request.get_full_path == "/"  %}
-                    <div class="top-headline">
-                        <p style="font-size:3vw"> Welcome to <span>Kisajja Kikulu</span></p>
-                    </div>
+                        <div class="top-headline">
+                            <p style="font-size:3vw"> Welcome to <span>Save As You Earn</span></p>
+                        </div>
+
                         {% if user.is_authenticated %}
-                        <div class="login-faq-earn-money">
-                            <p><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}.</a>
-                            {{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></p>
-                        </div>
+                            <div class="login-faq-earn-money">
+                                <p><a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}.</a>
+                                {{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></p>
+                            </div>
                         {% else %}
-                        <div class="login-faq-earn-money">
-                            <p><a href="{% url 'login' %}">Login </a> | <a href="{% url 'MemberAccountRegister' %}"> Register</a></p>
-                        </div>
+
+                            <div class="login-faq-earn-money">
+                                <p><a href="{% url 'login' %}">Login </a> | <a href="{% url 'MemberAccountRegister' %}"> Register</a></p>
+                            </div>
                         {% endif %}
-                    {% else %}
-                    <div class="top-headline" >
-                        <p style="font-size:3vw">{{request.get_full_path}}<span> Module</span></p>
-                    </div>
-                    <div class="login-faq-earn-money">
-                        <p>
-                            <a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}.</a>
-                        <i class="fa fa-user"></i> {{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></p>
-                    </div>
+
+                        {% else %}
+                            <div class="top-headline" >
+                                <p style="font-size:18px">Save, Contribute, Get loan and Invest</p>
+                            </div>
+                            {% if request.user.is_authenticated %}
+                                <div class="login-faq-earn-money">
+                                    <p>
+                                        <a href="{% url 'add-cycle' %}">Active Cycle: {{currentCycle}}.</a>
+                                    <i class="fa fa-user"></i> {{request.user.full_name}} <a href="{% url 'logout' %}"> | Logout</a></p>
+                                </div>
+                            {% endif %}
                     {% endif %}
                 </div>
             </div>
@@ -106,7 +111,7 @@
                                 </ul>
                             </li>
                             {% else %}
-                            <li>Log in to view more functionalities</li>
+                            <li>Please Log in to view more functionalities</li>
                             {% endif %}
                            <li><a href="{% url 'sacco-account' %}">Sacco Account</a></li>
                         </ul>
