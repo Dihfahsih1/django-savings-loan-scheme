@@ -86,14 +86,14 @@
                                 </ul>
                             </li>
 
-                             <li><a {% if request.get_full_path == '/Record-Savings' or request.get_full_path == '/All-Savings' %} class="active"{% endif %} href="#" class="active">Savings</a>
+                             <li><a {% if request.get_full_path == '/Record-Savings' or request.get_full_path == '/All-Savings' %} class="active"{% endif %} href="#">Savings</a>
                                  <ul class="dropdown">
                                     <li><a href="{% url 'make-saving' %}">Make Saving</a></li>
                                     <li><a href="{% url 'savings-list' %}">List Of Savings</a></li>
                                 </ul>
                             </li>
                            
-                            <li><a {% if request.get_full_path == '/Loan-Application' or request.get_full_path == '/All-Loan-Repayments' %} class="active"{% endif %} href="#">Loan</a>
+                            <li><a {% if request.get_full_path == '/Loan-Application' or request.get_full_path == '/All-Loans' %} class="active"{% endif %} href="#">Loan</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'give-loan' %}">Give Loan</a></li>
                                     <li><a href="{% url 'loan-list' %}">All Loans</a></li>

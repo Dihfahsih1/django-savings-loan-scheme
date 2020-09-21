@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^Attendance-History', views.attendence_history, name='attendence-history'),
     url(r'^Record-Savings', views.make_saving, name='make-saving'),
     url(r'^All-Savings', views.savings_list, name='savings-list'),
-    url(r'^Loan-Application', views.give_loan, name='give-loan'),
+    
     url(r'^Record-Social-Fund', views.record_social_fund, name='record-social-fund'),
     url(r'^Social-Fund-List', views.social_fund_list, name='social-fund-list'),
     url(r'^Social-Funds-Routine/(?P<pk>\d+)', views.social_fund_routine, name='social-fund-routine'),
@@ -43,12 +43,15 @@ urlpatterns = [
     path('activate/<str:uidb64>/<str:token>/',views.activate_email, name='activate'), 
     url(r'^Activate-Cycle/(?P<pk>\d+)', views.activate_cycle, name='activate-cycle'),
     url(r'^Savings-delete-cycle/(?P<pk>\d+)', views.delete_cycle, name='delete-cycle'),
+
+    url(r'^Loan-Application', views.give_loan, name='give-loan'),
     url(r'^All-Loan-Repayments', views.list_loan_repayment, name='loan-list'),
     url(r'^All-Loans', views.all_loans_given, name='all-loans'),
     url(r'^Paying-Loan/(?P<pk>\d+)', views.pay_loan,name='pay-loan'),
     url(r'^Edit-Loan-Repayment/(?P<pk>\d+)', views.edit_loan_repayment, name='edit-loan-repayment'),
     url(r'^edit-loan/(?P<pk>\d+)', views.edit_loan, name='edit-loan'),
     url(r'^delete-loan-details/(?P<pk>\d+)', views.delete_loan, name='delete-loan'),
+    
     url(r'^Add-Lookup', views.add_lookup, name='add-lookup'),
     url(r'^Lookup-Details', views.add_lookup_details, name='add-lookup-details'),
     url(r'^All-Look-Ups', views.list_lookup_details, name='list-lookup-details'),
