@@ -31,7 +31,6 @@ def MemberAccountRegister(request):
     members = CustomUser.objects.all()
     if request.method == 'POST':
         form = MembershipAccountForm(request.POST)
-        print(form.errors)
         if form.is_valid():
             member = form.save(commit=False)
             member.save()
@@ -53,7 +52,9 @@ def MemberAccountRegister(request):
             return render(request, 'activation_email_sent.html', context) 
     else:
         form = MembershipAccountForm()
-        return render(request, 'membershipaccount.html', {'form': form, 'members': members})
+        url_passed = request.path_info
+        context={'form': form, 'members': members, 'url_passed':url_passed}
+        return render(request, 'membershipaccount.html', context)
 
 
 #activate your email address
