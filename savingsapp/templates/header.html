@@ -111,7 +111,7 @@
                                 </ul>
                             </li>
                             {% else %}
-                            <li> <a hre="{% url 'login' %}" >Please Log in to access more functionalities</a></li>
+                            <li> <a href="{% url 'login' %}" >Please Log in to access more functionalities</a></li>
                             {% endif %}
                            <li><a {% if request.get_full_path == '/Sacco-Account'  %} class="active"{% endif %} href="{% url 'sacco-account' %}">Sacco Account</a></li>
                         </ul>
