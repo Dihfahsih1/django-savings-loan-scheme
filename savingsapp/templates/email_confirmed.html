@@ -18,8 +18,8 @@
         <div class="container">
             <h1>Dear <b style="color: darkgreen;"> {{full_name.full_name}} </b>,</h1>
             <hr />
-            <h3 style="text-align: center;">Thank you for confirming your email address(<b
-                    style="color: darkgreen;">{{full_name.email}}</b>), <br> You can now login and view various functionalities</h3>
+            <h3 style="text-align: center;">Thank you for confirming your email address(<b>{{full_name.email}}</b>), <br> You can now <a 
+                    style="color: darkgreen;" href="{% url 'login' %}">LOGIN</a></h3>
         </div>
     </section>
 
