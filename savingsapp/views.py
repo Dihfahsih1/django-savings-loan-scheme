@@ -131,7 +131,7 @@ def members_list(request):
     }
     return render(request,'members_list.html', context)
 
-
+#view members
 @login_required
 def view_member(request, pk):
     current_cycle = Cycle.objects.get(is_active=True)
@@ -320,7 +320,7 @@ def view_savings(request,pk):
     context={'current_cycle':current_cycle,'total_amount':total_amount,'get_savings':get_savings, 'get_member':get_member, 'page':page, 'members_list': members_list}
     return render (request, 'view_savings.html', context)
 
-
+#edit a single savings transaction
 @login_required
 def edit_saving(request, pk):
     item = get_object_or_404(Saving, pk=pk)
@@ -360,7 +360,7 @@ def give_loan(request):
     context['all_members']=all_members
     return render(request,'loan_application.html', context)
 
-
+#edit loan
 @login_required
 def edit_loan(request, pk):
     current_cycle = Cycle.objects.get(is_active=True)
@@ -391,7 +391,7 @@ def delete_loan(request, pk):
         messages.success(request, "Loan successfully deleted!")
         return redirect("loan-list")
 
-
+#list of loan repayments
 @login_required
 def list_loan_repayment(request):
     cycle = Cycle.objects.filter(is_active=True)
@@ -402,7 +402,7 @@ def list_loan_repayment(request):
     context={'loan_list':loan_list}
     return render(request, 'loan_repayments_list.html', context)
 
-
+#all loans given out
 @login_required
 def all_loans_given(request):
     cycle = Cycle.objects.filter(is_active=True)
@@ -413,9 +413,8 @@ def all_loans_given(request):
     context = {'loan_list': loan_list}
     return render(request, 'all_loans_given.html', context)
 
-
-@login_required
 #Loan Repayments
+@login_required
 def pay_loan(request, pk):
     context={}
     current_cycle=Cycle.objects.get(is_active=True)
@@ -469,8 +468,8 @@ def pay_loan(request, pk):
         return render(request,'pay_loan.html',context)
 
 
-@login_required
 #Edit Loan Repayment 
+@login_required
 def edit_loan_repayment(request, pk):
     current_cycle = Cycle.objects.get(is_active=True)
     item = get_object_or_404(PayingLoan, pk=pk)
@@ -487,9 +486,8 @@ def edit_loan_repayment(request, pk):
         context = {'form': form,'current_cycle': current_cycle, 'name':name}
         return render(request, 'edit_loan_repayment.html', context)
 
-
+#view single loan repayments    
 @login_required
-#view single loan repayments        
 def view_loan_repaymnets(request, pk):
     context = {}
     al = Member.objects.all()
@@ -535,9 +533,8 @@ def view_loan_repaymnets(request, pk):
     context['total_amount'] = total_amount
     return render(request, 'view_loan_repaymnets.html', context)
 
-
-@login_required
 #add new lookup
+@login_required
 def add_lookup(request):
     if request.method == "POST":
         form=LookupForm(request.POST, request.FILES,)
@@ -553,8 +550,8 @@ def add_lookup(request):
         return render(request,'add_lookup.html',context)
 
 
-@login_required
 #add new lookup Details
+@login_required
 def add_lookup_details(request):
     if request.method=="POST":
         form=LookupDetailsForm(request.POST, request.FILES,)
@@ -569,8 +566,8 @@ def add_lookup_details(request):
         return render(request,'add_lookup_details.html',context)        
 
 
-@login_required
-#list of cycles          
+#list of cycles  
+@login_required        
 def list_lookup_details(request):
     all_lookups_details=LookupDetail.objects.all()
     context = {
@@ -579,8 +576,8 @@ def list_lookup_details(request):
     return render(request,'list_lookup_details.html', context)        
 
 
-@login_required
 #RECORDING SOCIAL FUND
+@login_required
 def record_social_fund(request):
     current_cycle = Cycle.objects.get(is_active=True)
     if request.method == 'POST':
@@ -599,7 +596,7 @@ def record_social_fund(request):
     context={'all_members':all_members, 'current_cycle':current_cycle}
     return render(request,'record_social_fund.html',context)
 
-
+#list of social funds
 @login_required
 def social_fund_list(request):
     current_cycle = Cycle.objects.get(is_active=True)
@@ -608,8 +605,8 @@ def social_fund_list(request):
     return render(request, 'social_fund_list.html', context)
 
 
-@login_required
 #display social fund contrbution routine
+@login_required
 def social_fund_routine(request, pk):
     get_member = Member.objects.get(id=pk)
     name=(get_member.first_name + " " + get_member.last_name)
