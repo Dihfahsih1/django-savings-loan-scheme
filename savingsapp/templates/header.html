@@ -64,47 +64,47 @@
                     <!-- Nav Start -->
                     <div class="classynav" >
                         <ul>
-                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="{% url 'index' %}">HOME</a></li>
                             {% if request.user.is_authenticated %}
-                            <li><a {% if request.get_full_path == '/Add-Member' or request.get_full_path == '/All-Members' %} class="active"{% endif %} href="#">Members</a>
+                            <li><a {% if request.get_full_path == '/Add-Member' or request.get_full_path == '/All-Members' %} class="active"{% endif %} href="#">MEMBERS</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'add-member' %}">Add</a></li>
                                     <li><a href="{% url 'members-list' %}">View List</a></li>
                                 </ul>
                             </li>
                             
-                            <li><a {% if request.get_full_path == '/Record-Attendance' or request.get_full_path == '/Attendance-History' %} class="active"{% endif %} href="#">Attendance</a>
+                            <li><a {% if request.get_full_path == '/Record-Attendance' or request.get_full_path == '/Attendance-History' %} class="active"{% endif %} href="#">ATTENDANCE</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'make-attendence' %}">Record</a></li>
                                     <li><a href="{% url 'attendence-history' %}">History</a></li>
                                 </ul>
                             </li>
-                            <li><a {% if request.get_full_path == '/Record-Social-Fund' or request.get_full_path == '/Social-Fund-List' %} class="active"{% endif %} href="#">Social Fund</a>
+                            <li><a {% if request.get_full_path == '/Record-Social-Fund' or request.get_full_path == '/Social-Fund-List' %} class="active"{% endif %} href="#">SOCIAL FUND</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'record-social-fund' %}">Record</a></li>
                                     <li><a href="{% url 'social-fund-list' %}">List</a></li>
                                 </ul>
                             </li>
 
-                             <li><a {% if request.get_full_path == '/Record-Savings' or request.get_full_path == '/All-Savings' %} class="active"{% endif %} href="#">Savings</a>
+                             <li><a {% if request.get_full_path == '/Record-Savings' or request.get_full_path == '/All-Savings' %} class="active"{% endif %} href="#">SAVINGS</a>
                                  <ul class="dropdown">
                                     <li><a href="{% url 'make-saving' %}">Make Saving</a></li>
                                     <li><a href="{% url 'savings-list' %}">List Of Savings</a></li>
                                 </ul>
                             </li>
                            
-                            <li><a {% if request.get_full_path == '/Loan-Application' or request.get_full_path == '/All-Loans' %} class="active"{% endif %} href="#">Loan</a>
+                            <li><a {% if request.get_full_path == '/Loan-Application' or request.get_full_path == '/All-Loans' %} class="active"{% endif %} href="#">LOANS</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'give-loan' %}">Give Loan</a></li>
                                     <li><a href="{% url 'loan-list' %}">All Loans</a></li>
                                 </ul>
                             </li>
-                            <li><a {% if request.get_full_path == '/Manage-Cycles' or request.get_full_path == '/Cycle_List' %} class="active"{% endif %} href="#">Cycles</a>
+                            <li><a {% if request.get_full_path == '/Manage-Cycles' or request.get_full_path == '/Cycle_List' %} class="active"{% endif %} href="#">CYCLES</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'add-cycle' %}">Manage Cycles</a></li>
                                 </ul>
                             </li>
-                            <li><a {% if request.get_full_path == '/Add-Lookup' or request.get_full_path == '/All-Look-Ups' %} class="active"{% endif %} href="#">Look Ups</a>
+                            <li><a {% if request.get_full_path == '/Add-Lookup' or request.get_full_path == '/Lookup-Details' %} class="active"{% endif %} href="#">LOOK UPs</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'add-lookup' %}">Look Up</a></li>
                                     <li><a href="{% url 'add-lookup-details' %}">Look Up Details</a></li>
@@ -113,7 +113,7 @@
                             {% else %}
                             <li> <a href="{% url 'login' %}" >Please Log in to access more functionalities</a></li>
                             {% endif %}
-                           <li><a {% if request.get_full_path == '/Sacco-Account'  %} class="active"{% endif %} href="{% url 'sacco-account' %}">Sacco Account</a></li>
+                           <li><a {% if request.get_full_path == '/Sacco-Account'  %} class="active"{% endif %} href="{% url 'sacco-account' %}">SACCO ACCOUNT</a></li>
                         </ul>
 
                     </div>
