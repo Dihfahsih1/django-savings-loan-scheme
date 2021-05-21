@@ -4,7 +4,7 @@ from django.urls import include,path
 from django.contrib.auth.views import *
 from django.conf.urls import url
 from django.conf.urls.static import static
-
+#urls file
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('savingsapp.urls')),
