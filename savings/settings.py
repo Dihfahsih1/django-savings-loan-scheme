@@ -4,13 +4,14 @@ from datetime import timedelta
 import environ
 import calendar
 from datetime import datetime
+import environ
+# Initialise environment variables
 env = environ.Env()
-
 environ.Env.read_env()
 
 SECRET_KEY = env("KEY")
 DEBUG = True
-ALLOWED_HOSTS = ['www.savings-sacco.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
