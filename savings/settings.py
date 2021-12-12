@@ -5,9 +5,8 @@ import environ
 import calendar
 from datetime import datetime
 env = environ.Env()
-# reading .env file
-environ.Env.read_env()
 
+environ.Env.read_env()
 
 SECRET_KEY = env("KEY")
 DEBUG = True
@@ -70,8 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                #'savings.context_processors.current_site',
+                'django.contrib.messages.context_processors.messages', 
             ],
         },
     },
