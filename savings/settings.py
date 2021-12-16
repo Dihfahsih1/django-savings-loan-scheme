@@ -32,9 +32,7 @@ INSTALLED_APPS = [
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'savingsapp/static'),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'savingsapp/static'),)
 
 DATE_INPUT_FORMATS = ['%Y-%-m-%d', ]
 REST_FRAMEWORK = {
@@ -45,6 +43,7 @@ REST_FRAMEWORK = {
         'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
 }
+
 AUTH_USER_MODEL = "savingsapp.CustomUser"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -85,8 +84,7 @@ DATABASES = {
         'PASSWORD':env("DB_PASSWORD"),
         'HOST': env("DB_HOST"),
         'PORT':env("DB_PORT"),
-    }
-}
+    }}
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -106,7 +104,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
