@@ -4,8 +4,8 @@ from datetime import timedelta
 import environ
 import calendar
 from datetime import datetime
-import environ
-# Initialise environment variables
+
+
 env = environ.Env()
 environ.Env.read_env()
 
